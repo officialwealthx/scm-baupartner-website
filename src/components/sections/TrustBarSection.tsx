@@ -20,6 +20,9 @@ export function TrustBarSection() {
           </li>
         ))}
       </ul>
+      <p className="mt-3 text-sm text-[var(--color-soft-graphite)]">
+        Für Privatkunden, Verwaltungen, Immobilienbesitzer, Firmen und Planer.
+      </p>
     </section>
   );
 }

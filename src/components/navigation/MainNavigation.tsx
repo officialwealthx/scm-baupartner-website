@@ -21,8 +21,8 @@ export function MainNavigation() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-border-green-gray)] bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
+      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:gap-6 lg:px-8">
         <Link
           href="/"
           onClick={handleHomeClick}
@@ -46,7 +46,7 @@ export function MainNavigation() {
         </Link>
 
         <nav className="hidden lg:block" aria-label="Hauptnavigation">
-          <ul className="flex items-center gap-0.5">
+          <ul className="flex items-center gap-1">
             {navigationItems.map((item) => {
               const isActive =
                 item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
@@ -57,7 +57,7 @@ export function MainNavigation() {
                     onClick={item.href === "/" ? handleHomeClick : undefined}
                     aria-current={isActive ? "page" : undefined}
                     className={cn(
-                      "relative inline-flex items-center rounded-[var(--radius-md)] px-3.5 py-2 text-sm font-medium transition-colors",
+                      "relative inline-flex h-10 items-center rounded-[var(--radius-md)] px-3.5 text-sm font-medium leading-none transition-colors",
                       isActive
                         ? "text-[var(--color-deep-green)]"
                         : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
@@ -78,9 +78,9 @@ export function MainNavigation() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-2.5 lg:flex xl:gap-3">
           <LanguageSwitcher />
-          <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)]" />
+          <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)] xl:mx-0.5" />
           <Button href="/login" variant="ghost">
             Kundenlogin
           </Button>
