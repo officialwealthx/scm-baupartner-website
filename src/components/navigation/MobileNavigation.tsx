@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { createPortal } from "react-dom";
+import { useEffect, useState } from "react";
 import type { MouseEvent } from "react";
-import { useState } from "react";
 import { mobileNavigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -19,6 +20,25 @@ export function MobileNavigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    if (!isOpen || typeof document === "undefined") return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen]);
+
   const handleNavigationClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href === "/" && pathname === "/" && typeof window !== "undefined") {
       event.preventDefault();
@@ -28,7 +48,7 @@ export function MobileNavigation() {
   };
 
   return (
-    <div className="relative xl:hidden">
+    <div className="relative 2xl:hidden">
       <button
         type="button"
         aria-expanded={isOpen}
@@ -52,17 +72,18 @@ export function MobileNavigation() {
         <span>{isOpen ? "Schliessen" : "Menü"}</span>
       </button>
 
-      {isOpen ? (
-        <>
+      {isOpen && typeof document !== "undefined"
+        ? createPortal(
+          <>
           <button
             type="button"
             aria-label="Menü schliessen"
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-[90] bg-[rgba(10,20,15,0.24)] backdrop-blur-[1.5px]"
+            className="fixed inset-0 z-[998] bg-[rgba(10,20,15,0.24)] backdrop-blur-[1.5px]"
           />
           <div
             id="mobile-navigation-panel"
-            className="fixed inset-x-3 bottom-3 top-[76px] z-[100] overflow-hidden rounded-[28px] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_26px_70px_-28px_rgba(18,60,46,0.55)] sm:inset-x-6"
+            className="fixed inset-x-3 bottom-3 top-[76px] z-[999] overflow-hidden rounded-[28px] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_26px_70px_-28px_rgba(18,60,46,0.55)] sm:inset-x-6"
           >
             <div className="flex h-full flex-col overflow-hidden">
               <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white/85 px-5 py-4">
@@ -126,9 +147,11 @@ export function MobileNavigation() {
                 </div>
               </nav>
             </div>
-          </div>
-        </>
-      ) : null}
+           </div>
+          </>,
+          document.body,
+        )
+        : null}
     </div>
   );
 }

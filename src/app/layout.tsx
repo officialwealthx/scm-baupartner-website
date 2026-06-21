@@ -8,7 +8,7 @@ import "@/styles/globals.css";
 export const metadata: Metadata = buildMetadata({
   title: "Malerarbeiten, Gipserarbeiten und Renovation in Zürich",
   description:
-    "SCM Baupartner bietet Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovation und Ausbesserungen in Zürich und Umgebung mit sauberer Projektkommunikation.",
+    "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen, Ausbesserungen und Schutzarbeiten in Zürich und Umgebung – sauber geplant, klar offeriert und professionell ausgeführt.",
 });
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

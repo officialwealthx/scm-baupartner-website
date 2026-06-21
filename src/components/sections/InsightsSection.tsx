@@ -41,7 +41,11 @@ const imageSlots = [
 
 export function InsightsSection() {
   return (
-    <SectionShell title="Einblicke in Material, Räume und Ausführung." description="Editoriale Bildarchitektur für echte SCM-Aufnahmen." width="wide">
+    <SectionShell
+      title="Einblicke in Material, Räume und Ausführung."
+      description="Editoriale Bildarchitektur für echte SCM Baupartner Aufnahmen."
+      width="wide"
+    >
       <div data-reveal-stagger className="mt-10 grid auto-rows-min gap-4 sm:grid-cols-2 lg:grid-cols-6">
         {imageSlots.map((slot) => (
           <article

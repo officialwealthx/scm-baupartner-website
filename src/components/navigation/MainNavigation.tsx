@@ -49,12 +49,12 @@ export function MainNavigation() {
           </span>
         </Link>
 
-        <div className="hidden xl:flex xl:items-center xl:gap-3.5">
+        <div className="hidden 2xl:flex 2xl:items-center 2xl:gap-2.5">
           <nav
             aria-label="Hauptnavigation"
-            className="rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-2 py-1"
+            className="rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-1.5 py-1"
           >
-            <ul className="flex items-center gap-0.5">
+            <ul className="flex items-center gap-0">
               {desktopNavigationItems.map((item) => {
                 const normalized = normalizePath(item.href);
                 const isHashLink = item.href.includes("#");
@@ -84,7 +84,7 @@ export function MainNavigation() {
           <Button href="/login" variant="ghost">
             Login
           </Button>
-          <Button href="/offerte" variant="primaryLight" className="px-4 text-[0.82rem]">
+          <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap px-3.5 text-[0.8rem]">
             Kostenlose Offerte
           </Button>
         </div>

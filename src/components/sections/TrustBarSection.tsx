@@ -7,28 +7,31 @@ const trustFacts = [
 
 export function TrustBarSection() {
   return (
-    <section
-      aria-label="Unternehmensfakten"
-      data-reveal="fade-up"
-      className="mt-8 rounded-[var(--radius-xl)] border-y border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] py-8 sm:py-9"
-    >
-      <p className="text-sm font-semibold text-[var(--color-deep-green)]">Vertrauen entsteht durch saubere Abläufe.</p>
-      <div className="mt-5 border-y border-[var(--color-border-green-gray)] py-4">
-        <ul data-reveal-stagger className="grid gap-3 text-sm font-medium text-[var(--color-deep-green)] sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
+    <section aria-label="Qualität und Ablauf" className="mt-10 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:p-8 lg:p-10">
+      <div data-reveal="line" className="scm-line-draw-ready h-px w-full bg-[var(--color-border-green-gray)]" />
+      <h2 data-reveal="fade-up" className="mt-6 text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
+        Wir stehen für saubere Ausführung und klare Abläufe.
+      </h2>
+      <p data-reveal="fade-up" className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
+        SCM Baupartner verbindet präzises Handwerk mit strukturierter Projektabwicklung. Für Privatkunden, Verwaltungen, Firmen und Immobilienbesitzer entstehen so saubere Ergebnisse, verlässliche Termine und nachvollziehbare Offerten.
+      </p>
+
+      <div className="mt-7">
+        <ul data-reveal-stagger className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
           {trustFacts.map((fact, index) => (
-            <li key={fact} className="min-h-8">
-              <span className="mr-2 text-xs font-semibold text-[var(--color-fresh-green)]">
+            <li
+              key={fact}
+              className="flex min-h-28 flex-col justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-4 sm:min-h-32"
+            >
+              <span className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              {fact}
+              <p className="mt-3 text-base font-semibold leading-snug text-[var(--color-deep-green)] [overflow-wrap:anywhere]">
+                {fact}
+              </p>
             </li>
           ))}
         </ul>
-      </div>
-      <div className="pt-4">
-        <p className="text-sm text-[var(--color-soft-graphite)]">
-          Für Privatkunden, Verwaltungen, Firmen und Immobilienbesitzer.
-        </p>
       </div>
     </section>
   );
