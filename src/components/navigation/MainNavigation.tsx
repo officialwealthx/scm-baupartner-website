@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
 import { desktopNavigationItems } from "@/content/navigation";
@@ -31,15 +32,16 @@ export function MainNavigation() {
           href="/"
           onClick={handleHomeClick}
           aria-label={`${siteConfig.name} — zur Startseite`}
-          className="group flex min-w-0 items-center gap-3"
+          className="group flex min-w-0 items-center"
         >
-          <span
-            aria-hidden="true"
-            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[0.62rem] bg-[var(--color-deep-green)] text-[0.7rem] font-bold tracking-tight text-white ring-1 ring-inset ring-white/10 transition-colors group-hover:bg-[var(--color-fresh-green)]"
-          >
-            SCM
-          </span>
-          <span className="truncate text-sm font-semibold tracking-wide text-[var(--color-deep-green)] sm:text-base">{siteConfig.name}</span>
+          <Image
+            src="/brand/scm-logo-green-transparent.png"
+            alt="SCM Baupartner"
+            width={260}
+            height={72}
+            priority
+            className="h-8 w-auto shrink-0 sm:h-9"
+          />
         </Link>
 
         <div className="hidden min-[1180px]:flex min-[1180px]:items-center min-[1180px]:gap-2">

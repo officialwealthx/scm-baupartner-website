@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
@@ -89,7 +90,13 @@ export function MobileNavigation() {
             <div className="flex h-full flex-col overflow-hidden">
               <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white/85 px-5 py-4">
                 <div>
-                  <p className="text-sm font-semibold text-[var(--color-deep-green)]">SCM Baupartner</p>
+                  <Image
+                    src="/brand/scm-logo-green-transparent.png"
+                    alt="SCM Baupartner"
+                    width={200}
+                    height={56}
+                    className="h-7 w-auto"
+                  />
                   <LanguageSwitcher className="mt-2" />
                 </div>
                 <button

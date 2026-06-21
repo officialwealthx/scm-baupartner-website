@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { footerServices } from "@/content/services";
 import { regionGroups } from "@/content/regions";
 import { siteConfig } from "@/content/site";
@@ -40,7 +41,14 @@ export function SiteFooter() {
           </section>
 
           <section className="relative z-20 rounded-[var(--radius-xl)] border border-white/15 bg-[linear-gradient(155deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white shadow-[0_24px_60px_-34px_rgba(18,60,46,0.8)]">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-white/90">Kontakt</h3>
+            <Image
+              src="/brand/scm-logo-white-transparent.png"
+              alt="SCM Baupartner"
+              width={220}
+              height={64}
+              className="h-8 w-auto"
+            />
+            <h3 className="mt-4 text-sm font-semibold uppercase tracking-[0.16em] text-white/90">Kontakt</h3>
             <dl className="mt-4 space-y-3 text-sm">
               <div className="grid gap-1">
                 <dt className="text-white/70">E-Mail</dt>

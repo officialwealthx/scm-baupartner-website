@@ -54,5 +54,10 @@ export function buildMetadata({
       description: fullDescription,
       images: ["/og-placeholder.svg"],
     },
+    icons: {
+      icon: "/brand/favicon-round-512.png",
+      shortcut: "/brand/favicon-round-512.png",
+      apple: "/brand/app-icon-1024.png",
+    },
   };
 }
