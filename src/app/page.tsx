@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <div className="relative z-10 -mt-8 sm:-mt-10">
+    <div className="relative z-20 -mt-12 sm:-mt-14 lg:-mt-16">
         <TrustBarSection />
       </div>
       <ServiceCompassSection />

@@ -273,3 +273,10 @@ summary:focus-visible,
     clip-path: inset(0 0 0 0);
   }
 }
+
+.heroImageStage {
+  background:
+    linear-gradient(132deg, rgba(18, 60, 46, 0.5) 0%, rgba(18, 60, 46, 0.12) 44%, rgba(247, 248, 245, 0.1) 100%),
+    radial-gradient(88% 76% at 18% 22%, rgba(232, 243, 237, 0.52) 0%, rgba(232, 243, 237, 0.04) 66%, transparent 100%),
+    linear-gradient(165deg, #eaf3ee 0%, #f5f8f2 45%, #edf4ef 100%);
+}
