@@ -6,8 +6,8 @@ export function ServiceCompassSection() {
   return (
     <SectionShell
       id="leistungen"
-      title="Leistungen"
-      description="Drei Leistungsfelder mit klaren Schwerpunkten für Zürich und Umgebung."
+      title="Leistungen, die Räume schützen, erneuern und aufwerten."
+      description="Von der einzelnen Wand bis zur kompletten Renovation: SCM Baupartner plant die Arbeit sauber, schützt die Umgebung und führt präzise aus."
     >
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <article
@@ -23,16 +23,17 @@ export function ServiceCompassSection() {
             }}
           />
           <div className="relative">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">Materialanker</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">Oberflächen und Renovation</p>
             <h3 className="mt-3 text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2.1rem]">
-              Oberflächen prägen Räume.
+              Oberflächen prägen den ersten Eindruck.
             </h3>
             <p className="mt-3 max-w-lg text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-              SCM bündelt Ausführung, Schutz und Renovation in einer strukturierten Arbeitsarchitektur statt in losen Einzelkarten.
+              Farbe, Gips, Fassade und Schutzarbeiten werden so geplant, dass Räume sauber wirken und die Ausführung nachvollziehbar bleibt.
             </p>
-            <div className="mt-8 grid grid-cols-3 gap-2.5 text-[0.72rem] font-medium text-[var(--color-deep-green)] sm:max-w-[23rem]">
+            <div className="mt-8 grid grid-cols-2 gap-2.5 text-[0.72rem] font-medium text-[var(--color-deep-green)] sm:max-w-[23rem]">
               <span className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2">Farbe</span>
-              <span className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2">Schutz</span>
+              <span className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2">Gips</span>
+              <span className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2">Fassade</span>
               <span className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2">Renovation</span>
             </div>
           </div>

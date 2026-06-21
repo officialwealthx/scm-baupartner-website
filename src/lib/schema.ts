@@ -3,8 +3,31 @@ import { siteConfig } from "@/content/site";
 export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "ProfessionalService",
     name: siteConfig.name,
+    description: siteConfig.description,
+    areaServed: "Zürich und Umgebung",
+    serviceType: [
+      "Malerarbeiten Zürich",
+      "Gipserarbeiten Zürich",
+      "Fassadenarbeiten Zürich",
+      "Renovation Zürich",
+      "Ausbesserungen",
+      "Graffitientfernung",
+      "Graffitischutz",
+      "Schimmelbehandlung",
+      "Spritzlackierung",
+      "Verputz",
+      "Sanierung",
+    ],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: siteConfig.email,
+      telephone: siteConfig.phoneDisplay,
+      contactType: "customer service",
+      areaServed: "CH",
+      availableLanguage: ["de", "en", "fr", "it"],
+    },
     email: siteConfig.email,
     telephone: siteConfig.phoneDisplay,
     address: {

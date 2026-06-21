@@ -17,7 +17,7 @@ export const siteConfig = {
   companyFacts: [
     "8 Mitarbeitende",
     "45+ Jahre kombinierte Familienerfahrung",
-    "Zürich und erweiterte Region",
-    "Offerte nach Projektklärung",
+    "Zürich und Umgebung",
+    "Besichtigung nach Projektklärung",
   ],
 } as const;

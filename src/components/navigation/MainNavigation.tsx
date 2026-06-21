@@ -84,8 +84,8 @@ export function MainNavigation() {
           <Button href="/login" variant="ghost">
             Login
           </Button>
-          <Button href="/offerte" variant="primaryLight">
-            Offerte
+          <Button href="/offerte" variant="primaryLight" className="px-4 text-[0.82rem]">
+            Kostenlose Offerte
           </Button>
         </div>
 

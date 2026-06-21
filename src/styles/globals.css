@@ -54,7 +54,7 @@ body {
 }
 
 body {
-  background: linear-gradient(180deg, var(--color-warm-off-white) 0%, var(--color-white) 30%, var(--color-white) 100%);
+  background: var(--color-warm-off-white);
   color: var(--foreground);
   font-family: var(--font-sans);
 }

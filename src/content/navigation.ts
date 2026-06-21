@@ -1,6 +1,6 @@
 export const desktopNavigationItems = [
+  { href: "/", label: "Startseite" },
   { href: "/leistungen", label: "Leistungen" },
-  { href: "/ablauf", label: "Ablauf" },
   { href: "/projekte", label: "Projekte" },
   { href: "/ratgeber", label: "Ratgeber" },
   { href: "/portal", label: "Portal" },
@@ -11,7 +11,6 @@ export const desktopNavigationItems = [
 export const mobileNavigationItems = [
   { href: "/", label: "Startseite" },
   { href: "/leistungen", label: "Leistungen" },
-  { href: "/ablauf", label: "Ablauf" },
   { href: "/projekte", label: "Projekte" },
   { href: "/ratgeber", label: "Ratgeber" },
   { href: "/portal", label: "Portal" },
@@ -20,7 +19,7 @@ export const mobileNavigationItems = [
 ] as const;
 
 export const primaryCtas = [
-  { href: "/offerte", label: "Offerte anfragen" },
+  { href: "/offerte", label: "Kostenlose Offerte" },
   { href: "/login", label: "Login" },
 ] as const;
 
