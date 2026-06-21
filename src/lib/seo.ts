@@ -30,7 +30,7 @@ export function buildMetadata({
           url: "/og-placeholder.svg",
           width: 1200,
           height: 630,
-          alt: "SCM Baupartner Studio Open Graph Placeholder",
+          alt: "SCM Baupartner",
         },
       ],
     },

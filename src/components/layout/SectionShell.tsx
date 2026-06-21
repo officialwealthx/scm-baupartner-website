@@ -70,17 +70,20 @@ export function SectionShell({
       className={cn("mt-16 first:mt-0 sm:mt-20", variantWrapper[variant], className)}
     >
       {hasHeader && (
-        <div className={cn("scm-fade-up", headWidth[width], headerClassName)}>
+        <div className={cn("scm-fade-up", headWidth[width], headerClassName)} data-reveal="fade-up">
           {eyebrow && (
             <p
               className={cn(
-                "inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em]",
+                "flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]",
                 eyebrowTone[variant],
               )}
             >
               <span
                 aria-hidden="true"
-                className="h-2 w-2 rounded-full bg-[var(--color-active-green)]"
+                className={cn(
+                  "h-px w-7",
+                  variant === "deep" ? "bg-[var(--color-active-green)]" : "bg-[var(--color-fresh-green)]",
+                )}
               />
               {eyebrow}
             </p>
