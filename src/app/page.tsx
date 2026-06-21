@@ -8,7 +8,6 @@ import {
   TargetGroupsSection,
   RegionSystemSection,
   FaqSection,
-  FinalCtaSection,
 } from "@/components/sections";
 
 export default function Home() {
@@ -23,7 +22,6 @@ export default function Home() {
       <TargetGroupsSection />
       <RegionSystemSection />
       <FaqSection />
-      <FinalCtaSection />
     </>
   );
 }

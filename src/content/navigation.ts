@@ -10,3 +10,11 @@ export const primaryCtas = [
   { href: "/offerte", label: "Offerte anfragen" },
   { href: "/login", label: "Kundenlogin" },
 ] as const;
+
+// Language switch placeholder. DE is active; EN/FR/IT are planned.
+export const languages = [
+  { code: "DE", active: true },
+  { code: "EN", active: false },
+  { code: "FR", active: false },
+  { code: "IT", active: false },
+] as const;

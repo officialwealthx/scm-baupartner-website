@@ -64,6 +64,22 @@ a {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-active-green);
+  outline-offset: 2px;
+  border-radius: 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   SCM safe motion utility system
+   - CSS only, no JavaScript dependency
+   - Content stays visible if motion is disabled (no JS-hidden content)
+   - Respects prefers-reduced-motion
+   -------------------------------------------------------------------------- */
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -75,8 +91,84 @@ a {
   }
 }
 
+@keyframes scm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scm-surface-wipe {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Base classes keep content fully visible by default so nothing depends on JS. */
+.scm-fade-up,
+.scm-surface-wipe {
+  opacity: 1;
+}
+
+/* Stagger helper: apply incremental delays to direct children. */
+.scm-stagger > * {
+  --scm-stagger-step: 70ms;
+}
+
+.scm-press {
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .motion-safe\:animate-fade-in {
     animation: fade-in 0.45s ease-out both;
+  }
+
+  .scm-fade-up {
+    animation: scm-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .scm-surface-wipe {
+    animation: scm-surface-wipe 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .scm-stagger > *:nth-child(1) {
+    animation-delay: calc(var(--scm-stagger-step) * 0);
+  }
+  .scm-stagger > *:nth-child(2) {
+    animation-delay: calc(var(--scm-stagger-step) * 1);
+  }
+  .scm-stagger > *:nth-child(3) {
+    animation-delay: calc(var(--scm-stagger-step) * 2);
+  }
+  .scm-stagger > *:nth-child(4) {
+    animation-delay: calc(var(--scm-stagger-step) * 3);
+  }
+  .scm-stagger > *:nth-child(5) {
+    animation-delay: calc(var(--scm-stagger-step) * 4);
+  }
+  .scm-stagger > *:nth-child(6) {
+    animation-delay: calc(var(--scm-stagger-step) * 5);
+  }
+
+  .scm-press:active {
+    transform: translateY(1px) scale(0.99);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scm-fade-up,
+  .scm-surface-wipe,
+  .motion-safe\:animate-fade-in {
+    animation: none;
   }
 }
