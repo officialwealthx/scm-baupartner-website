@@ -77,7 +77,7 @@ export function MainNavigation() {
           <Button
             href="/login"
             variant="ghost"
-            className="whitespace-nowrap rounded-full border border-[var(--color-deep-green)] bg-transparent px-4 text-[0.8rem] text-[var(--color-deep-green)] hover:border-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]"
+            className="whitespace-nowrap rounded-full border border-[var(--color-deep-green)] bg-white px-4 text-[0.8rem] text-[var(--color-deep-green)] hover:border-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]"
           >
             Login
           </Button>
