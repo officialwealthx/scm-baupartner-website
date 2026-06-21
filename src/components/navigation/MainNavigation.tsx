@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { MouseEvent } from "react";
 import { navigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -16,9 +17,10 @@ function normalizePath(href: string) {
 export function MainNavigation() {
   const pathname = usePathname();
 
-  const handleHomeClick = () => {
+  const handleHomeClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/" && typeof window !== "undefined") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
   };
 
@@ -55,7 +57,8 @@ export function MainNavigation() {
             <ul className="flex items-center gap-0.5">
               {navigationItems.map((item) => {
                 const normalized = normalizePath(item.href);
-                const isActive = normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
+                const isHashLink = item.href.includes("#");
+                const isActive = isHashLink ? false : normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
                 return (
                   <li key={item.href}>
                     <Link

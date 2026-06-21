@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * ScrollReveal arms the CSS-based reveal system.
@@ -12,6 +13,8 @@ import { useEffect } from "react";
  * remains fully visible — nothing is hidden behind JavaScript.
  */
 export function ScrollReveal() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const root = document.documentElement;
 
@@ -19,6 +22,7 @@ export function ScrollReveal() {
     // already visible; we simply skip the observer to avoid any movement.
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) {
+      root.removeAttribute("data-scm-js");
       return;
     }
 
@@ -28,7 +32,11 @@ export function ScrollReveal() {
       document.querySelectorAll<HTMLElement>("[data-reveal], [data-reveal-stagger]"),
     );
 
-    if (targets.length === 0 || typeof IntersectionObserver === "undefined") {
+    if (targets.length === 0) {
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
       // Fallback: reveal everything immediately.
       targets.forEach((el) => el.classList.add("is-visible"));
       root.removeAttribute("data-scm-js");
@@ -47,13 +55,16 @@ export function ScrollReveal() {
       { rootMargin: "0px 0px -10% 0px", threshold: 0.12 },
     );
 
-    targets.forEach((el) => observer.observe(el));
+    targets.forEach((el) => {
+      if (!el.classList.contains("is-visible")) {
+        observer.observe(el);
+      }
+    });
 
     return () => {
       observer.disconnect();
-      root.removeAttribute("data-scm-js");
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }

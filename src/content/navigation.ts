@@ -2,8 +2,9 @@ export const navigationItems = [
   { href: "/", label: "Startseite" },
   { href: "/leistungen", label: "Leistungen" },
   { href: "/#ablauf", label: "Ablauf" },
-  { href: "/portal", label: "Portal" },
   { href: "/projekte", label: "Projekte" },
+  { href: "/ratgeber", label: "Ratgeber" },
+  { href: "/portal", label: "Portal" },
   { href: "/ueber-uns", label: "Über uns" },
   { href: "/kontakt", label: "Kontakt" },
 ] as const;
