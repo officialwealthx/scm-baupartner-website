@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { SectionShell } from "@/components/layout/SectionShell";
 
@@ -233,6 +234,15 @@ export function ProcessTimelineSection() {
           );
         })}
       </ol>
+
+      <div className="mt-10">
+        <Link
+          href="/ablauf"
+          className="inline-flex min-h-11 items-center rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)] transition-colors hover:bg-[var(--color-mist-green)]"
+        >
+          Ablauf im Detail ansehen
+        </Link>
+      </div>
     </SectionShell>
   );
 }

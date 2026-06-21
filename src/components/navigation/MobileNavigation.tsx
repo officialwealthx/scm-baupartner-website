@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
 import { useState } from "react";
-import { navigationItems } from "@/content/navigation";
+import { mobileNavigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -74,14 +74,14 @@ export function MobileNavigation() {
 
               <nav aria-label="Mobile Hauptnavigation" className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
                 <ul className="space-y-1.5">
-                  {navigationItems.map((item) => (
+                  {mobileNavigationItems.map((item, index) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
                         onClick={(event) => handleNavigationClick(event, item.href)}
                         className="flex min-h-12 items-center justify-between rounded-[var(--radius-md)] border border-transparent px-4 text-base font-medium text-[var(--color-deep-green)] transition-colors hover:border-[var(--color-border-green-gray)] hover:bg-[var(--color-mist-green)]"
                       >
-                        <span>{item.label}</span>
+                        <span>{`${String(index + 1).padStart(2, "0")} ${item.label}`}</span>
                         <span aria-hidden="true" className="text-[var(--color-fresh-green)]">
                           ↗
                         </span>

@@ -1,7 +1,17 @@
-export const navigationItems = [
+export const desktopNavigationItems = [
+  { href: "/leistungen", label: "Leistungen" },
+  { href: "/ablauf", label: "Ablauf" },
+  { href: "/projekte", label: "Projekte" },
+  { href: "/ratgeber", label: "Ratgeber" },
+  { href: "/portal", label: "Portal" },
+  { href: "/ueber-uns", label: "Über uns" },
+  { href: "/kontakt", label: "Kontakt" },
+] as const;
+
+export const mobileNavigationItems = [
   { href: "/", label: "Startseite" },
   { href: "/leistungen", label: "Leistungen" },
-  { href: "/#ablauf", label: "Ablauf" },
+  { href: "/ablauf", label: "Ablauf" },
   { href: "/projekte", label: "Projekte" },
   { href: "/ratgeber", label: "Ratgeber" },
   { href: "/portal", label: "Portal" },
