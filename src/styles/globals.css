@@ -113,10 +113,34 @@ summary:focus-visible,
   }
 }
 
+@keyframes scm-line-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 /* Base classes keep content fully visible by default so nothing depends on JS. */
 .scm-fade-up,
 .scm-surface-wipe {
   opacity: 1;
+}
+
+/* Line-draw-ready: horizontal rule that can grow from the left. Visible by default. */
+.scm-line-draw-ready {
+  transform-origin: left center;
+}
+
+/* Stagger-ready: marks a container whose children can receive staggered delays. */
+.scm-stagger-ready > * {
+  --scm-stagger-step: 70ms;
+}
+
+/* Subtle card hover lift — pure CSS, safe on all devices. */
+.scm-lift {
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 /* Stagger helper: apply incremental delays to direct children. */
@@ -160,6 +184,15 @@ summary:focus-visible,
     animation-delay: calc(var(--scm-stagger-step) * 5);
   }
 
+  .scm-line-draw-ready {
+    animation: scm-line-draw 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .scm-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 45px -28px rgba(18, 60, 46, 0.45);
+  }
+
   .scm-press:active {
     transform: translateY(1px) scale(0.99);
   }
@@ -168,6 +201,7 @@ summary:focus-visible,
 @media (prefers-reduced-motion: reduce) {
   .scm-fade-up,
   .scm-surface-wipe,
+  .scm-line-draw-ready,
   .motion-safe\:animate-fade-in {
     animation: none;
   }
