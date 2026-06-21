@@ -1,15 +1,16 @@
 export const navigationItems = [
   { href: "/", label: "Startseite" },
   { href: "/leistungen", label: "Leistungen" },
-  { href: "/projekte", label: "Projekte" },
+  { href: "/#ablauf", label: "Ablauf" },
   { href: "/portal", label: "Portal" },
+  { href: "/projekte", label: "Projekte" },
   { href: "/ueber-uns", label: "Über uns" },
   { href: "/kontakt", label: "Kontakt" },
 ] as const;
 
 export const primaryCtas = [
   { href: "/offerte", label: "Offerte anfragen" },
-  { href: "/login", label: "Kundenlogin" },
+  { href: "/login", label: "Login" },
 ] as const;
 
 // Language switch placeholder. DE is active; EN/FR/IT are planned.

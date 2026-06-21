@@ -24,8 +24,15 @@ const steps = [
 
 export function ProcessTimelineSection() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [activeStep, setActiveStep] = useState(0);
+  const mobileRailRef = useRef<HTMLOListElement | null>(null);
+  const mobileItemRefs = useRef<Array<HTMLLIElement | null>>([]);
+  const rafDesktopRef = useRef<number | null>(null);
+  const rafMobileRef = useRef<number | null>(null);
+
+  const [desktopProgress, setDesktopProgress] = useState(0);
+  const [desktopActiveStep, setDesktopActiveStep] = useState(0);
+  const [mobileProgress, setMobileProgress] = useState(0);
+  const [mobileActiveStep, setMobileActiveStep] = useState(0);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -33,7 +40,7 @@ export function ProcessTimelineSection() {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
 
-    const update = () => {
+    const computeDesktop = () => {
       const el = sectionRef.current;
       if (!el || window.innerWidth < 1024) return;
 
@@ -45,47 +52,101 @@ export function ProcessTimelineSection() {
 
       const raw = (0 - start) / range;
       const nextProgress = Math.max(0, Math.min(1, raw));
-      const index = Math.min(steps.length - 1, Math.floor(nextProgress * steps.length));
+      const nextStep = Math.min(steps.length - 1, Math.floor(nextProgress * steps.length));
 
-      setProgress(nextProgress);
-      setActiveStep(index);
+      setDesktopProgress((prev) => (Math.abs(prev - nextProgress) > 0.003 ? nextProgress : prev));
+      setDesktopActiveStep((prev) => (prev !== nextStep ? nextStep : prev));
     };
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    const onScroll = () => {
+      if (rafDesktopRef.current !== null) return;
+      rafDesktopRef.current = window.requestAnimationFrame(() => {
+        computeDesktop();
+        rafDesktopRef.current = null;
+      });
+    };
+
+    computeDesktop();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      if (rafDesktopRef.current !== null) {
+        window.cancelAnimationFrame(rafDesktopRef.current);
+      }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    const computeMobile = () => {
+      const rail = mobileRailRef.current;
+      if (!rail || window.innerWidth >= 1024) return;
+
+      const railRect = rail.getBoundingClientRect();
+      const start = window.innerHeight * 0.8;
+      const total = railRect.height + window.innerHeight * 0.28;
+      const raw = (start - railRect.top) / Math.max(total, 1);
+      const nextProgress = Math.max(0, Math.min(1, raw));
+
+      let nextStep = 0;
+      mobileItemRefs.current.forEach((item, index) => {
+        if (!item) return;
+        const rect = item.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.6) {
+          nextStep = index;
+        }
+      });
+
+      setMobileProgress((prev) => (Math.abs(prev - nextProgress) > 0.01 ? nextProgress : prev));
+      setMobileActiveStep((prev) => (prev !== nextStep ? nextStep : prev));
+    };
+
+    const onScroll = () => {
+      if (rafMobileRef.current !== null) return;
+      rafMobileRef.current = window.requestAnimationFrame(() => {
+        computeMobile();
+        rafMobileRef.current = null;
+      });
+    };
+
+    computeMobile();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      if (rafMobileRef.current !== null) {
+        window.cancelAnimationFrame(rafMobileRef.current);
+      }
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
   }, []);
 
   return (
-    <SectionShell
-      title="Von der Anfrage bis zur sauberen Übergabe."
-      description="Klarer Ablauf in vier Schritten."
-    >
+    <SectionShell id="ablauf" title="Ablauf / Scrollytelling Rail" description="Klarer Ablauf in vier Schritten.">
       <div className="mt-10 hidden lg:block">
         <div ref={sectionRef} className="relative min-h-[250vh]">
           <div className="sticky top-24 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-white shadow-[var(--shadow-soft)]">
             <div className="grid grid-cols-[18rem_1fr] gap-0">
               <div className="relative border-r border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] p-7">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-fresh-green)]">
-                  Ablauf
-                </span>
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-fresh-green)]">Ablauf</span>
                 <div className="relative mt-6 pl-7">
-                  <span
-                    aria-hidden="true"
-                    className="absolute bottom-0 left-0 top-0 w-px bg-[var(--color-border-green-gray)]"
-                  />
+                  <span aria-hidden="true" className="absolute bottom-0 left-0 top-0 w-px bg-[var(--color-border-green-gray)]" />
                   <span
                     aria-hidden="true"
                     className="absolute left-0 top-0 w-px bg-[var(--color-fresh-green)] transition-[height] duration-200"
-                    style={{ height: `${progress * 100}%` }}
+                    style={{ height: `${desktopProgress * 100}%` }}
                   />
                   <ol className="space-y-8">
                     {steps.map((step, index) => {
-                      const isActive = index <= activeStep;
+                      const isActive = index <= desktopActiveStep;
                       return (
                         <li key={step.title} className="relative">
                           <span
@@ -112,7 +173,7 @@ export function ProcessTimelineSection() {
               <div className="p-8">
                 <div className="space-y-5">
                   {steps.map((step, index) => {
-                    const isActive = index === activeStep;
+                    const isActive = index === desktopActiveStep;
                     return (
                       <article
                         key={step.title}
@@ -126,9 +187,7 @@ export function ProcessTimelineSection() {
                           {String(index + 1).padStart(2, "0")}
                         </p>
                         <h3 className="mt-2 text-lg font-semibold text-[var(--color-deep-green)]">{step.title}</h3>
-                        <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-soft-graphite)]">
-                          {step.description}
-                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{step.description}</p>
                       </article>
                     );
                   })}
@@ -139,21 +198,40 @@ export function ProcessTimelineSection() {
         </div>
       </div>
 
-      <ol data-reveal-stagger className="relative mt-10 grid gap-8 lg:hidden">
+      <ol ref={mobileRailRef} data-reveal-stagger className="relative mt-10 grid gap-8 lg:hidden">
         <span
           aria-hidden="true"
-          data-reveal="line"
-          className="absolute bottom-5 left-5 top-5 w-px origin-top bg-gradient-to-b from-[var(--color-fresh-green)] via-[var(--color-border-green-gray)] to-transparent"
+          className="absolute bottom-6 left-5 top-5 w-px bg-[var(--color-border-green-gray)]"
         />
-        {steps.map((step, index) => (
-          <li key={step.title} className="relative pl-16">
-            <span className="absolute left-0 top-0 flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] bg-white text-sm font-semibold text-[var(--color-deep-green)] shadow-[var(--shadow-soft)]">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <h3 className="text-base font-semibold text-[var(--color-deep-green)]">{step.title}</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{step.description}</p>
-          </li>
-        ))}
+        <span
+          aria-hidden="true"
+          className="absolute left-5 top-5 w-px bg-[var(--color-fresh-green)] transition-[height] duration-200"
+          style={{ height: `calc((100% - 2.75rem) * ${mobileProgress})` }}
+        />
+        {steps.map((step, index) => {
+          const isActive = index <= mobileActiveStep;
+          return (
+            <li
+              key={step.title}
+              ref={(element) => {
+                mobileItemRefs.current[index] = element;
+              }}
+              className="relative pl-16"
+            >
+              <span
+                className={`absolute left-0 top-0 flex h-11 w-11 items-center justify-center rounded-full border text-sm font-semibold shadow-[var(--shadow-soft)] ${
+                  isActive
+                    ? "border-[var(--color-fresh-green)] bg-[var(--color-soft-green)] text-[var(--color-deep-green)]"
+                    : "border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)]"
+                }`}
+              >
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-base font-semibold text-[var(--color-deep-green)]">{step.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{step.description}</p>
+            </li>
+          );
+        })}
       </ol>
     </SectionShell>
   );

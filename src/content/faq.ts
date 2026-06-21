@@ -1,17 +1,27 @@
 export const faqPlaceholder = [
   {
-    question: "Wann erhalte ich eine Offerte?",
+    question: "Wie läuft eine Offerte ab?",
     answer:
-      "Wir planen eine klare digitale Projektkommunikation. Die genaue Offertabearbeitung wird pro Projekt transparent abgestimmt.",
+      "Nach Ihrer Anfrage klären wir die Eckpunkte, besichtigen bei Bedarf und erstellen danach eine nachvollziehbare Offerte passend zum Projekt.",
   },
   {
-    question: "Ist das Kundenportal bereits verfügbar?",
+    question: "Gibt es eine Besichtigung?",
     answer:
-      "Das Kundenportal befindet sich in Planung und wird als zukünftige Projektübersicht aufgebaut.",
+      "Ja, wenn das Projekt eine Vor-Ort-Einschätzung braucht, wird eine Besichtigung eingeplant, damit Aufwand und Ausführung sauber abgestimmt werden können.",
   },
   {
-    question: "In welchen Regionen arbeitet SCM Baupartner?",
+    question: "Welche Regionen bedient SCM?",
     answer:
-      "Wir betreuen Projekte in Zürich und der erweiterten Region, darunter Zug, Schwyz, Winterthur, Schaffhausen und Aargau.",
+      "Hauptgebiet ist Zürich und Umgebung. Zusätzlich betreut SCM Projekte in der erweiterten Region mit Zug, Schwyz, Winterthur, Schaffhausen, Aargau und Aarau.",
+  },
+  {
+    question: "Welche Arbeiten übernimmt SCM?",
+    answer:
+      "SCM übernimmt Maler-, Gipser-, Fassaden- und Renovationsarbeiten inklusive Graffitischutz, Graffitientfernung, Schimmelbehandlung, Spritzlackierung sowie Ausbesserungen und Reparaturen.",
+  },
+  {
+    question: "Wird es ein Kundenportal geben?",
+    answer:
+      "Ja, Portal und App sind geplant und werden Schritt für Schritt als digitale Projektkommunikation aufgebaut.",
   },
 ] as const;

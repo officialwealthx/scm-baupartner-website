@@ -32,7 +32,7 @@ const imageSlots = [
     ratio: "min-h-48",
   },
   {
-    label: "Werkzeug / Oberfläche",
+    label: "Werkzeug und Oberfläche",
     hint: "Echtes SCM Bild folgt.",
     span: "lg:col-span-2",
     ratio: "min-h-48",
@@ -41,25 +41,14 @@ const imageSlots = [
 
 export function InsightsSection() {
   return (
-    <SectionShell
-      title="Einblicke in Material, Räume und Ausführung."
-      description="Bildarchitektur für reale SCM-Aufnahmen."
-      width="wide"
-    >
+    <SectionShell title="Einblicke in Material, Räume und Ausführung." description="Editoriale Bildarchitektur für echte SCM-Aufnahmen." width="wide">
       <div data-reveal-stagger className="mt-10 grid auto-rows-min gap-4 sm:grid-cols-2 lg:grid-cols-6">
-        {imageSlots.map((slot, index) => (
+        {imageSlots.map((slot) => (
           <article
             key={slot.label}
-            className={`scm-lift group relative flex flex-col justify-end overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-gradient-to-br from-[var(--color-mist-green)] via-white to-[var(--color-soft-green)] p-5 ${slot.span} ${slot.ratio}`}
+            data-reveal="mask"
+            className={`relative flex flex-col justify-end overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-gradient-to-br from-[var(--color-mist-green)] via-white to-[var(--color-soft-green)] p-5 ${slot.span} ${slot.ratio}`}
           >
-            {index === 0 && (
-              <span
-                aria-hidden="true"
-                className="absolute right-4 top-4 rounded-full bg-white/75 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)] backdrop-blur-sm"
-              >
-                Echte SCM-Aufnahmen folgen
-              </span>
-            )}
             <div>
               <p className="text-sm font-semibold text-[var(--color-deep-green)]">{slot.label}</p>
               <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">{slot.hint}</p>
