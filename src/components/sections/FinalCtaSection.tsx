@@ -13,7 +13,7 @@ export function FinalCtaSection() {
           WhatsApp schreiben
         </Button>
         <Button href="/login" variant="ghostDark">
-          Kundenlogin
+          Login
         </Button>
       </div>
     </section>

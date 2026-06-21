@@ -2,38 +2,30 @@ import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/content/site";
 
 const materialStrips = [
-  { label: "Oberfläche", tone: "var(--color-soft-green)" },
-  { label: "Fassade", tone: "var(--color-mist-green)" },
-  { label: "Innenraum", tone: "var(--color-porcelain-surface)" },
-];
+  { label: "Mineralische Fläche", tone: "var(--color-soft-green)" },
+  { label: "Fassadenstruktur", tone: "var(--color-mist-green)" },
+  { label: "Innenraumoberfläche", tone: "var(--color-porcelain-surface)" },
+] as const;
 
 export function HeroSection() {
   return (
     <section className="scm-surface-wipe relative overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)]">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.6]"
+        className="pointer-events-none absolute inset-0 opacity-[0.65]"
         style={{
           background:
             "radial-gradient(120% 120% at 100% 0%, var(--color-mist-green) 0%, transparent 48%), radial-gradient(95% 95% at 0% 100%, var(--color-soft-green) 0%, transparent 42%)",
         }}
       />
-      <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:p-12">
+      <div className="relative grid gap-9 p-6 sm:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:p-12">
         <div data-reveal="fade-up" className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-fresh-green)]">
-            Maler · Gipser · Fassaden · Renovation
-          </p>
-          <h1 className="mt-4 text-balance text-3xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-4xl lg:text-[3.25rem] lg:leading-[1.05]">
+          <h1 className="text-balance text-[2.05rem] font-semibold leading-[1.08] text-[var(--color-deep-green)] sm:text-5xl lg:text-[3.35rem] lg:leading-[1.03]">
             Oberflächen, Räume und Fassaden — sauber geplant, präzise umgesetzt.
           </h1>
-          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-[var(--color-soft-graphite)]">
+          <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-[var(--color-soft-graphite)] sm:text-lg">
             SCM Baupartner verbindet Maler-, Gipser-, Fassaden- und Renovationsarbeiten mit klarer Kommunikation für Zürich und die erweiterte Region.
           </p>
-          <span
-            aria-hidden="true"
-            data-reveal="line"
-            className="mt-7 block h-px w-40 bg-gradient-to-r from-[var(--color-fresh-green)] to-transparent"
-          />
 
           <div className="mt-7 flex flex-wrap gap-3">
             <Button href="/offerte" variant="primaryLight">
@@ -42,10 +34,14 @@ export function HeroSection() {
             <Button href={siteConfig.whatsappUrl} variant="secondaryLight">
               WhatsApp schreiben
             </Button>
+            <Button href="/portal" variant="ghost">
+              Kundenportal ansehen
+            </Button>
           </div>
-          <Button href="/portal" variant="ghost" className="mt-3 px-0 py-1 text-sm font-medium">
-            Kundenportal ansehen
-          </Button>
+
+          <p className="mt-6 text-sm font-medium text-[var(--color-deep-green)]">
+            8 Mitarbeitende · 45+ Jahre kombinierte Familienerfahrung · Zürich und Umgebung
+          </p>
         </div>
 
         <div data-reveal="pop" className="relative min-w-0">
@@ -60,14 +56,11 @@ export function HeroSection() {
               <span className="absolute bottom-4 left-4 h-5 w-5 border-b border-l border-[var(--color-fresh-green)]/55" />
               <span className="absolute bottom-4 right-4 h-5 w-5 border-b border-r border-[var(--color-fresh-green)]/55" />
               <span className="absolute inset-y-8 left-1/2 w-px bg-[var(--color-border-green-gray)]/70" />
+              <span className="absolute inset-x-7 top-1/2 h-px bg-[var(--color-border-green-gray)]/65" />
             </div>
             <figcaption className="flex items-center justify-between gap-3 border-t border-[var(--color-border-green-gray)] px-4 py-3">
-              <span className="text-xs font-medium text-[var(--color-soft-graphite)]">
-                Echte SCM-Aufnahmen folgen.
-              </span>
-              <span className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)]">
-                Platzhalter
-              </span>
+              <span className="text-xs font-medium text-[var(--color-soft-graphite)]">Echte SCM-Aufnahmen folgen.</span>
+              <span className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)]">Bildfläche</span>
             </figcaption>
           </figure>
 
@@ -78,7 +71,7 @@ export function HeroSection() {
                 className="flex h-14 items-end rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] px-2.5 pb-2"
                 style={{ background: strip.tone }}
               >
-                <span className="text-[0.7rem] font-medium text-[var(--color-deep-green)]">{strip.label}</span>
+                <span className="text-[0.65rem] font-medium text-[var(--color-deep-green)]">{strip.label}</span>
               </div>
             ))}
           </div>

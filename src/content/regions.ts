@@ -1,11 +1,4 @@
-export const regions = [
-  "Stadt Zürich",
-  "Kanton Zürich",
-  "Umgebung Zürich",
-  "Zug",
-  "Schwyz",
-  "Winterthur",
-  "Schaffhausen",
-  "Kanton Aargau",
-  "Aarau",
-] as const;
+export const regionGroups = {
+  main: "Zürich und Umgebung",
+  expanded: ["Zug", "Schwyz", "Winterthur", "Schaffhausen", "Aargau", "Aarau"],
+} as const;

@@ -9,11 +9,13 @@ import { MobileNavigation } from "./MobileNavigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Button } from "@/components/ui/Button";
 
+function normalizePath(href: string) {
+  return href.split("#")[0] || "/";
+}
+
 export function MainNavigation() {
   const pathname = usePathname();
 
-  // Clicking the wordmark always lands at the very top of the homepage,
-  // even when the visitor is already on "/".
   const handleHomeClick = () => {
     if (pathname === "/" && typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -21,17 +23,17 @@ export function MainNavigation() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:gap-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/78">
+      <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6 xl:px-8">
         <Link
           href="/"
           onClick={handleHomeClick}
           aria-label={`${siteConfig.name} — zur Startseite`}
-          className="group flex min-w-0 items-center gap-2.5"
+          className="group flex min-w-0 items-center gap-3"
         >
           <span
             aria-hidden="true"
-            className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[0.55rem] bg-[var(--color-deep-green)] text-[0.7rem] font-bold tracking-tight text-white ring-1 ring-inset ring-white/10 transition-colors group-hover:bg-[var(--color-fresh-green)]"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[0.62rem] bg-[var(--color-deep-green)] text-[0.7rem] font-bold tracking-tight text-white ring-1 ring-inset ring-white/10 transition-colors group-hover:bg-[var(--color-fresh-green)]"
           >
             SCM
           </span>
@@ -40,52 +42,48 @@ export function MainNavigation() {
               {siteConfig.name}
             </span>
             <span className="hidden text-[0.62rem] font-medium uppercase tracking-[0.2em] text-[var(--color-soft-graphite)] sm:block">
-              Oberflächen &amp; Renovation
+              Oberfläche · Fassade · Renovation
             </span>
           </span>
         </Link>
 
-        <nav className="hidden lg:block" aria-label="Hauptnavigation">
-          <ul className="flex items-center gap-1">
-            {navigationItems.map((item) => {
-              const isActive =
-                item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={item.href === "/" ? handleHomeClick : undefined}
-                    aria-current={isActive ? "page" : undefined}
-                    className={cn(
-                      "relative inline-flex h-10 items-center rounded-[var(--radius-md)] px-3.5 text-sm font-medium leading-none transition-colors",
-                      isActive
-                        ? "text-[var(--color-deep-green)]"
-                        : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
-                    )}
-                  >
-                    {item.label}
-                    <span
-                      aria-hidden="true"
+        <div className="hidden xl:flex xl:items-center xl:gap-3.5">
+          <nav
+            aria-label="Hauptnavigation"
+            className="rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-2 py-1"
+          >
+            <ul className="flex items-center gap-0.5">
+              {navigationItems.map((item) => {
+                const normalized = normalizePath(item.href);
+                const isActive = normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      onClick={item.href === "/" ? handleHomeClick : undefined}
+                      aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "absolute inset-x-3.5 -bottom-0.5 h-px origin-left rounded-full bg-[var(--color-fresh-green)] transition-transform duration-300",
-                        isActive ? "scale-x-100" : "scale-x-0",
+                        "inline-flex h-10 items-center rounded-full px-4 text-sm font-medium leading-none whitespace-nowrap transition-colors",
+                        isActive
+                          ? "bg-white text-[var(--color-deep-green)] ring-1 ring-[var(--color-border-green-gray)]"
+                          : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
                       )}
-                    />
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
 
-        <div className="hidden items-center gap-2.5 lg:flex xl:gap-3">
           <LanguageSwitcher />
-          <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)] xl:mx-0.5" />
+          <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)]" />
           <Button href="/login" variant="ghost">
-            Kundenlogin
+            Login
           </Button>
           <Button href="/offerte" variant="primaryLight">
-            Offerte anfragen
+            Offerte
           </Button>
         </div>
 
