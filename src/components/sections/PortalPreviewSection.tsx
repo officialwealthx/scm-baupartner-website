@@ -1,6 +1,7 @@
 const modules = [
   "Offerten",
   "Termine",
+  "Projektstatus",
   "Dokumente",
   "Rechnungen / Quittungen",
   "Kommunikation",
@@ -19,18 +20,14 @@ export function PortalPreviewSection() {
       <div className="grid gap-10 p-6 sm:p-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-12">
         {/* Left: cockpit */}
         <div data-reveal="fade-up" className="min-w-0">
-          <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-active-green)]">
-            <span aria-hidden="true" className="h-px w-7 bg-[var(--color-active-green)]" />
-            Kundenportal &amp; App
-          </p>
           <h2 className="mt-4 text-balance text-2xl font-semibold leading-tight text-white sm:text-3xl">
-            Digitale Projektübersicht — geplant für klare Abläufe.
+            Digitale Projektkommunikation — geplant für klare Abläufe.
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/75">
             Portal und App sind als digitale Projektkommunikation geplant und werden später Schritt für Schritt aufgebaut.
           </p>
           <p className="mt-4 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15">
-            Geplant · in Vorbereitung — noch nicht live
+            Geplant · in Vorbereitung
           </p>
 
           {/* Featured cockpit module */}

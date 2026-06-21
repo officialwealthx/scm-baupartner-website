@@ -17,7 +17,7 @@ export const siteConfig = {
   companyFacts: [
     "8 Mitarbeitende",
     "45+ Jahre kombinierte Familienerfahrung",
-    "Zürich und erweitertes regionales Einsatzgebiet",
-    "Maler, Gipser, Fassaden und Renovation",
+    "Zürich und erweiterte Region",
+    "Offerte nach Projektklärung",
   ],
 } as const;

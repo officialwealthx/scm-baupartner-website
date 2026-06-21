@@ -4,7 +4,6 @@ export { ServiceCompassSection } from "./ServiceCompassSection";
 export { PortalPreviewSection } from "./PortalPreviewSection";
 export { ProcessTimelineSection } from "./ProcessTimelineSection";
 export { InsightsSection } from "./InsightsSection";
-export { TargetGroupsSection } from "./TargetGroupsSection";
 export { RegionSystemSection } from "./RegionSystemSection";
 export { FaqSection } from "./FaqSection";
 export { FinalCtaSection } from "./FinalCtaSection";

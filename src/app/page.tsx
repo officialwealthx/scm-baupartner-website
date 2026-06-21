@@ -2,11 +2,10 @@ import {
   HeroSection,
   TrustBarSection,
   ServiceCompassSection,
-  PortalPreviewSection,
   ProcessTimelineSection,
-  InsightsSection,
-  TargetGroupsSection,
+  PortalPreviewSection,
   RegionSystemSection,
+  InsightsSection,
   FaqSection,
 } from "@/components/sections";
 
@@ -16,11 +15,10 @@ export default function Home() {
       <HeroSection />
       <TrustBarSection />
       <ServiceCompassSection />
-      <PortalPreviewSection />
       <ProcessTimelineSection />
-      <InsightsSection />
-      <TargetGroupsSection />
+      <PortalPreviewSection />
       <RegionSystemSection />
+      <InsightsSection />
       <FaqSection />
     </>
   );
