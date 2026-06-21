@@ -20,8 +20,20 @@ export const faqPlaceholder = [
       "SCM übernimmt Maler-, Gipser-, Fassaden- und Renovationsarbeiten inklusive Graffitischutz, Graffitientfernung, Schimmelbehandlung, Spritzlackierung sowie Ausbesserungen und Reparaturen.",
   },
   {
-    question: "Wird es ein Portal geben?",
+    question: "Wozu ist das Portal geplant und wie nutze ich es später?",
     answer:
-      "Ja, das Portal ist geplant und wird Schritt für Schritt als digitale Projektkommunikation aufgebaut.",
+      "Das Portal ist als digitale Projektkommunikation geplant. Künftig sollen dort Informationen wie Offerten, Termine, Dokumente, Projektstatus und Rückfragen übersichtlich zusammengeführt werden.",
+  },
+  {
+    question: "Arbeitet SCM mit Verwaltungen?",
+    answer: "Ja. SCM begleitet Projekte für Privatkunden, Verwaltungen, Firmen und Immobilienbesitzer mit klaren Abläufen.",
+  },
+  {
+    question: "Übernimmt SCM auch kleinere Arbeiten?",
+    answer: "Ja. Neben Renovationen übernimmt SCM auch Ausbesserungen und kleinere, sauber abgegrenzte Arbeiten.",
+  },
+  {
+    question: "Wie schnell kann ein Projekt starten?",
+    answer: "Das hängt von Umfang und Auslastung ab. Nach Projektklärung und Offerte stimmen wir den frühesten sinnvollen Starttermin ab.",
   },
 ] as const;

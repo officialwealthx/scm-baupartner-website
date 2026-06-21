@@ -4,5 +4,10 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({ title: "Leistungen", path: "/leistungen" });
 
 export default function LeistungenPage() {
-  return <PlaceholderPage title="Leistungen" description="Strukturseite für Service-Detailbereiche von SCM Baupartner." />;
+  return (
+    <PlaceholderPage
+      title="Leistungen"
+      description="Malerarbeiten Zürich, Gipserarbeiten Zürich, Fassadenarbeiten Zürich, Renovation Zürich sowie Ausbesserungen, Graffitientfernung, Graffitischutz, Schimmelbehandlung, Spritzlackierung und Verputz."
+    />
+  );
 }

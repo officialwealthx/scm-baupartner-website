@@ -6,9 +6,9 @@ import { buildOrganizationSchema, toJsonLdScript } from "@/lib/schema";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Maler, Gipser, Fassaden und Renovation in Zürich",
+  title: "Malerarbeiten, Gipserarbeiten und Renovation in Zürich",
   description:
-    "SCM Baupartner — Maler-, Gipser-, Fassaden- und Renovationsarbeiten für Zürich und die erweiterte Region, mit geplanter digitaler Projektkommunikation.",
+    "SCM Baupartner bietet Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovation und Ausbesserungen in Zürich und Umgebung mit sauberer Projektkommunikation.",
 });
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
