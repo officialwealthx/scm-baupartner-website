@@ -1,45 +1,71 @@
+import { SectionShell } from "@/components/layout/SectionShell";
+
 const imageSlots = [
-  { label: "Materialdetail", hint: "Nahaufnahme Oberfläche" },
-  { label: "Innenraum", hint: "Raum nach Ausführung" },
-  { label: "Fassade / Schutz", hint: "Aussenfläche & Schutz" },
-  { label: "Vorher-Nachher Slot", hint: "Direkter Vergleich" },
-];
+  {
+    label: "Hero / Surface Detail",
+    hint: "Nahaufnahme einer realen Oberfläche.",
+    span: "lg:col-span-3 lg:row-span-2",
+    ratio: "min-h-64 lg:min-h-[26rem]",
+  },
+  {
+    label: "Interior / Innenraum",
+    hint: "Raum nach der Ausführung.",
+    span: "lg:col-span-3",
+    ratio: "min-h-48",
+  },
+  {
+    label: "Facade / Schutz",
+    hint: "Aussenfläche und Schutz.",
+    span: "lg:col-span-3",
+    ratio: "min-h-48",
+  },
+  {
+    label: "Vorher-Nachher",
+    hint: "Direkter Vergleich.",
+    span: "lg:col-span-2",
+    ratio: "min-h-48",
+  },
+  {
+    label: "Team / Ausführung",
+    hint: "Menschen bei der Arbeit.",
+    span: "lg:col-span-2",
+    ratio: "min-h-48",
+  },
+  {
+    label: "Material / Werkzeug",
+    hint: "Werkzeug und Material.",
+    span: "lg:col-span-2",
+    ratio: "min-h-48",
+  },
+] as const;
 
 export function InsightsSection() {
   return (
-    <section className="mt-16">
-      <div className="max-w-2xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">Einblicke</p>
-        <h2 className="mt-2 text-2xl font-semibold text-[var(--color-deep-green)] sm:text-3xl">
-          Einblicke in Oberflächen, Räume und Ausführung.
-        </h2>
-        <p className="mt-3 text-sm leading-relaxed text-[var(--color-soft-graphite)]">
-          Diese Flächen sind Bildplätze. Echte Aufnahmen aus realen Projekten werden später eingesetzt —
-          ohne erfundene Projektdetails.
-        </p>
-      </div>
-
-      <div className="scm-stagger mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <SectionShell
+      eyebrow="Einblicke"
+      title="Einblicke in Oberflächen, Räume und Ausführung."
+      description="Diese Flächen sind Bildplätze. Echte Aufnahmen aus realen Projekten werden später eingesetzt — ohne erfundene Projektdetails."
+      width="wide"
+    >
+      <div className="scm-stagger mt-10 grid auto-rows-min gap-4 sm:grid-cols-2 lg:grid-cols-6">
         {imageSlots.map((slot) => (
           <article
             key={slot.label}
-            className="scm-fade-up flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white"
+            className={`scm-fade-up scm-lift group relative flex flex-col justify-end overflow-hidden rounded-[var(--radius-lg)] border border-dashed border-[var(--color-border-green-gray)] bg-gradient-to-br from-[var(--color-mist-green)] to-[var(--color-soft-green)] p-5 ${slot.span} ${slot.ratio}`}
           >
-            <div
-              className="flex h-36 items-center justify-center border-b border-dashed border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)]"
+            <span
               aria-hidden="true"
+              className="absolute right-4 top-4 rounded-full bg-white/70 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)] backdrop-blur-sm"
             >
-              <span className="rounded-full bg-white/70 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)]">
-                Bildplatz
-              </span>
-            </div>
-            <div className="p-4">
+              Echtes SCM Bild folgt
+            </span>
+            <div>
               <p className="text-sm font-semibold text-[var(--color-deep-green)]">{slot.label}</p>
               <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">{slot.hint}</p>
             </div>
           </article>
         ))}
       </div>
-    </section>
+    </SectionShell>
   );
 }
