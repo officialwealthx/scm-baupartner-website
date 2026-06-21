@@ -4,7 +4,7 @@ import { siteConfig } from "@/content/site";
 export function HeroSection() {
   return (
     <section className="relative isolate -mx-4 -mt-10 overflow-hidden bg-[var(--color-warm-off-white)] sm:-mx-6 lg:-mx-8">
-      <div className="relative mx-auto grid min-h-[82svh] w-full max-w-[1360px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-24 sm:px-6 sm:pb-14 sm:pt-26 md:min-h-[78svh] md:pb-16 lg:min-h-[calc(100svh-72px)] lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-0 lg:px-8 lg:pb-20 lg:pt-20">
+      <div className="relative mx-auto grid min-h-[82svh] w-full max-w-[1360px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-24 sm:px-6 sm:pb-14 sm:pt-24 md:min-h-[78svh] md:pb-16 lg:min-h-[calc(100svh-72px)] lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-0 lg:px-8 lg:pb-20 lg:pt-20">
         <div className="relative z-20 min-w-0 max-w-3xl lg:pr-6">
           <p data-reveal="fade-up" className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]/80 sm:text-sm">
             Maler und Gipser in Zürich
