@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
-import { navigationItems } from "@/content/navigation";
+import { desktopNavigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { MobileNavigation } from "./MobileNavigation";
@@ -55,7 +55,7 @@ export function MainNavigation() {
             className="rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-2 py-1"
           >
             <ul className="flex items-center gap-0.5">
-              {navigationItems.map((item) => {
+              {desktopNavigationItems.map((item) => {
                 const normalized = normalizePath(item.href);
                 const isHashLink = item.href.includes("#");
                 const isActive = isHashLink ? false : normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
