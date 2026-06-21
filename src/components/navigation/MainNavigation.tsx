@@ -26,7 +26,7 @@ export function MainNavigation() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/78">
-      <div className="mx-auto flex w-full max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6 xl:px-8">
+      <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 xl:px-8">
         <Link
           href="/"
           onClick={handleHomeClick}
@@ -39,17 +39,10 @@ export function MainNavigation() {
           >
             SCM
           </span>
-          <span className="flex min-w-0 flex-col leading-none">
-            <span className="truncate text-sm font-semibold tracking-wide text-[var(--color-deep-green)] sm:text-base">
-              {siteConfig.name}
-            </span>
-            <span className="hidden text-[0.62rem] font-medium uppercase tracking-[0.2em] text-[var(--color-soft-graphite)] sm:block">
-              Oberfläche · Fassade · Renovation
-            </span>
-          </span>
+          <span className="truncate text-sm font-semibold tracking-wide text-[var(--color-deep-green)] sm:text-base">{siteConfig.name}</span>
         </Link>
 
-        <div className="hidden 2xl:flex 2xl:items-center 2xl:gap-2.5">
+        <div className="hidden min-[1180px]:flex min-[1180px]:items-center min-[1180px]:gap-2">
           <nav
             aria-label="Hauptnavigation"
             className="rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-1.5 py-1"
@@ -65,7 +58,7 @@ export function MainNavigation() {
                       href={item.href}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
-                        "inline-flex h-10 items-center rounded-full px-4 text-sm font-medium leading-none whitespace-nowrap transition-colors",
+                        "inline-flex h-10 items-center whitespace-nowrap rounded-full px-3 text-[0.84rem] font-medium leading-none transition-colors xl:px-3.5",
                         isActive
                           ? "bg-white text-[var(--color-deep-green)] ring-1 ring-[var(--color-border-green-gray)]"
                           : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
@@ -79,17 +72,19 @@ export function MainNavigation() {
             </ul>
           </nav>
 
-          <LanguageSwitcher />
+          <LanguageSwitcher className="scale-[0.97]" />
           <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)]" />
-          <Button href="/login" variant="ghost">
+          <Button href="/login" variant="ghost" className="whitespace-nowrap px-3 text-[0.8rem]">
             Login
           </Button>
-          <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap px-3.5 text-[0.8rem]">
+          <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap px-3 text-[0.8rem]">
             Kostenlose Offerte
           </Button>
         </div>
 
-        <MobileNavigation />
+        <div className="min-[1180px]:hidden">
+          <MobileNavigation />
+        </div>
       </div>
     </header>
   );
