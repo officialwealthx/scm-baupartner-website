@@ -130,7 +130,7 @@ export function ProcessTimelineSection() {
   }, []);
 
   return (
-    <SectionShell id="ablauf" title="Ablauf / Scrollytelling Rail" description="Klarer Ablauf in vier Schritten.">
+    <SectionShell id="ablauf" title="Ablauf" description="Klarer Ablauf in vier Schritten.">
       <div className="mt-10 hidden lg:block">
         <div ref={sectionRef} className="relative min-h-[250vh]">
           <div className="sticky top-24 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-white shadow-[var(--shadow-soft)]">

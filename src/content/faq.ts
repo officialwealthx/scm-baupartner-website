@@ -20,8 +20,8 @@ export const faqPlaceholder = [
       "SCM übernimmt Maler-, Gipser-, Fassaden- und Renovationsarbeiten inklusive Graffitischutz, Graffitientfernung, Schimmelbehandlung, Spritzlackierung sowie Ausbesserungen und Reparaturen.",
   },
   {
-    question: "Wird es ein Kundenportal geben?",
+    question: "Wird es ein Portal geben?",
     answer:
-      "Ja, Portal und App sind geplant und werden Schritt für Schritt als digitale Projektkommunikation aufgebaut.",
+      "Ja, das Portal ist geplant und wird Schritt für Schritt als digitale Projektkommunikation aufgebaut.",
   },
 ] as const;

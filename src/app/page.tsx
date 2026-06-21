@@ -6,6 +6,7 @@ import {
   PortalPreviewSection,
   RegionSystemSection,
   InsightsSection,
+  GuideSection,
   FaqSection,
 } from "@/components/sections";
 
@@ -19,6 +20,7 @@ export default function Home() {
       <PortalPreviewSection />
       <RegionSystemSection />
       <InsightsSection />
+      <GuideSection />
       <FaqSection />
     </>
   );

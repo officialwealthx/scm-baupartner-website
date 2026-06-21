@@ -3,7 +3,6 @@ import { footerServices } from "@/content/services";
 import { regionGroups } from "@/content/regions";
 import { siteConfig } from "@/content/site";
 import { Button } from "@/components/ui/Button";
-import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 
 export function SiteFooter() {
   return (
@@ -65,62 +64,78 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-[var(--color-border-green-gray)] bg-white">
-        <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr_0.9fr] lg:px-8">
+      <div className="mx-auto grid w-full max-w-[1200px] gap-10 px-4 py-12 sm:px-6 lg:grid-cols-4 lg:px-8">
           <section>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Leistungen</h3>
-            <ul className="grid grid-cols-1 gap-x-6 gap-y-2 text-sm text-[var(--color-soft-graphite)]">
-              {footerServices.map((service) => (
-                <li key={service}>
-                  <Link href="/leistungen" className="hover:text-[var(--color-deep-green)]">
-                    {service}
-                  </Link>
-                </li>
-              ))}
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Kontakt</h3>
+          <ul className="space-y-2 text-sm text-[var(--color-soft-graphite)]">
+            <li>
+              <a className="text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href={`mailto:${siteConfig.email}`}>
+                {siteConfig.email}
+              </a>
+            </li>
+            <li>
+              <a className="text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href={`tel:${siteConfig.phoneTechnical}`}>
+                {siteConfig.phoneDisplay}
+              </a>
+            </li>
+            <li className="pt-1">
+              {siteConfig.address.label}
+              <br />
+              {siteConfig.address.line1}
+              <br />
+              {siteConfig.address.line2}
+            </li>
             </ul>
           </section>
 
           <section>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Einsatzgebiet</h3>
-            <p className="text-sm font-medium text-[var(--color-deep-green)]">Hauptgebiet: {regionGroups.main}</p>
-            <ul className="mt-2 space-y-1.5 text-sm text-[var(--color-soft-graphite)]">
-              {regionGroups.expanded.map((region) => (
-                <li key={region}>{region}</li>
-              ))}
-            </ul>
-          </section>
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Leistungen</h3>
+          <ul className="grid grid-cols-1 gap-x-6 gap-y-2 text-sm text-[var(--color-soft-graphite)]">
+            {footerServices.map((service) => (
+              <li key={service}>
+                <Link href="/leistungen" className="hover:text-[var(--color-deep-green)]">
+                  {service}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-          <section>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Direktlinks</h3>
-            <div className="space-y-2 text-sm">
-              <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/kontakt">
-                Kontakt
-              </Link>
-              <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/offerte">
-                Offerte anfragen
-              </Link>
-              <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/login">
-                Login
-              </Link>
-              <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/portal">
-                Portal
-              </Link>
-            </div>
-          </section>
+        <section>
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Unternehmen</h3>
+          <div className="space-y-2 text-sm">
+            <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/ueber-uns">
+              Über uns
+            </Link>
+            <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/projekte">
+              Einblicke
+            </Link>
+            <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/ratgeber">
+              Ratgeber
+            </Link>
+            <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/kontakt">
+              Kontakt
+            </Link>
+            <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/login">
+              Login
+            </Link>
+          </div>
+        </section>
 
-          <section>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Öffnungszeiten</h3>
-            <ul className="space-y-1 text-sm text-[var(--color-soft-graphite)]">
-              {siteConfig.openingHours.map((hour) => (
-                <li key={hour}>{hour}</li>
-              ))}
-            </ul>
-          </section>
-        </div>
+        <section>
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Einsatzgebiet</h3>
+          <p className="text-sm font-medium text-[var(--color-deep-green)]">Hauptgebiet: {regionGroups.main}</p>
+          <ul className="mt-2 space-y-1.5 text-sm text-[var(--color-soft-graphite)]">
+            {regionGroups.expanded.map((region) => (
+              <li key={region}>{region}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
         <div className="border-t border-[var(--color-border-green-gray)]">
           <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-4 px-4 py-6 text-sm text-[var(--color-soft-graphite)] sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <p>© {new Date().getFullYear()} {siteConfig.name}</p>
-            <LanguageSwitcher />
             <nav aria-label="Rechtliches" className="flex gap-5">
               <Link href="/impressum" className="text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]">
                 Impressum

@@ -17,7 +17,7 @@ export function PortalPreviewSection() {
             Digitale Projektkommunikation — geplant für klare Abläufe.
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:text-base">
-            Portal und App sind als digitale Projektkommunikation geplant und werden später Schritt für Schritt aufgebaut.
+            Das Portal ist als digitale Projektkommunikation geplant und wird später Schritt für Schritt aufgebaut.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/72 sm:text-base">
             Damit Offerten, Termine, Bilder, Dokumente und Rückfragen künftig nicht verstreut bleiben.
@@ -43,7 +43,7 @@ export function PortalPreviewSection() {
         <div data-reveal="pop" className="min-w-0">
           <article className="rounded-[var(--radius-xl)] border border-white/15 bg-white/5 p-5 sm:p-6">
             <header className="flex items-center justify-between gap-3 border-b border-white/15 pb-3">
-              <h3 className="text-lg font-semibold">Projektkommunikation Cockpit</h3>
+              <h3 className="text-lg font-semibold">Projektkommunikation</h3>
               <span className="rounded-full bg-white/10 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-white/80 ring-1 ring-white/20">
                 künftig
               </span>
