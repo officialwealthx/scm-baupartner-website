@@ -21,7 +21,7 @@ export function HeroSection() {
       <div className="relative grid gap-9 p-6 sm:p-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:p-12">
         <div data-reveal="fade-up" className="min-w-0">
           <h1 className="text-balance text-[2.05rem] font-semibold leading-[1.08] text-[var(--color-deep-green)] sm:text-5xl lg:text-[3.35rem] lg:leading-[1.03]">
-            Oberflächen, Räume und Fassaden — sauber geplant, präzise umgesetzt.
+            Saubere Oberflächen. Klare Abläufe. Verlässliche Ausführung.
           </h1>
           <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-[var(--color-soft-graphite)] sm:text-lg">
             SCM Baupartner verbindet Maler-, Gipser-, Fassaden- und Renovationsarbeiten mit klarer Kommunikation für Zürich und die erweiterte Region.
@@ -34,8 +34,8 @@ export function HeroSection() {
             <Button href={siteConfig.whatsappUrl} variant="secondaryLight">
               WhatsApp schreiben
             </Button>
-            <Button href="/portal" variant="ghost">
-              Kundenportal ansehen
+            <Button href="/login" variant="ghost">
+              Login
             </Button>
           </div>
 
@@ -59,7 +59,7 @@ export function HeroSection() {
               <span className="absolute inset-x-7 top-1/2 h-px bg-[var(--color-border-green-gray)]/65" />
             </div>
             <figcaption className="flex items-center justify-between gap-3 border-t border-[var(--color-border-green-gray)] px-4 py-3">
-              <span className="text-xs font-medium text-[var(--color-soft-graphite)]">Echte SCM-Aufnahmen folgen.</span>
+              <span className="text-xs font-medium text-[var(--color-soft-graphite)]">Ruhige Materialfläche für die Projektvorschau.</span>
               <span className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)]">Bildfläche</span>
             </figcaption>
           </figure>

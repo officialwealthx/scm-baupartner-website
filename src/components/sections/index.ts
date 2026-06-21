@@ -6,4 +6,5 @@ export { ProcessTimelineSection } from "./ProcessTimelineSection";
 export { InsightsSection } from "./InsightsSection";
 export { RegionSystemSection } from "./RegionSystemSection";
 export { FaqSection } from "./FaqSection";
+export { GuideSection } from "./GuideSection";
 export { FinalCtaSection } from "./FinalCtaSection";

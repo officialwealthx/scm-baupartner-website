@@ -3,37 +3,37 @@ import { SectionShell } from "@/components/layout/SectionShell";
 const imageSlots = [
   {
     label: "Materialdetail",
-    hint: "Echtes SCM Bild folgt.",
+    hint: "Material und Ausführung.",
     span: "lg:col-span-3 lg:row-span-2",
     ratio: "min-h-64 lg:min-h-[26rem]",
   },
   {
     label: "Innenraum",
-    hint: "Echtes SCM Bild folgt.",
+    hint: "Saubere Flächen im Innenbereich.",
     span: "lg:col-span-3",
     ratio: "min-h-48",
   },
   {
     label: "Fassade",
-    hint: "Echtes SCM Bild folgt.",
+    hint: "Schutz und Werterhalt an Aussenflächen.",
     span: "lg:col-span-3",
     ratio: "min-h-48",
   },
   {
     label: "Vorher / Nachher",
-    hint: "Echtes SCM Bild folgt.",
+    hint: "Nachvollziehbare Zustandsvergleiche.",
     span: "lg:col-span-2",
     ratio: "min-h-48",
   },
   {
     label: "Ausführung",
-    hint: "Echtes SCM Bild folgt.",
+    hint: "Koordinierte Arbeitsschritte vor Ort.",
     span: "lg:col-span-2",
     ratio: "min-h-48",
   },
   {
     label: "Werkzeug und Oberfläche",
-    hint: "Echtes SCM Bild folgt.",
+    hint: "Werkzeuge und Oberflächenqualität.",
     span: "lg:col-span-2",
     ratio: "min-h-48",
   },

@@ -1,8 +1,8 @@
 import { PlaceholderPage } from "@/components/layout/PlaceholderPage";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({ title: "Portal Preview", path: "/portal" });
+export const metadata = buildMetadata({ title: "Portal", path: "/portal" });
 
 export default function PortalPage() {
-  return <PlaceholderPage title="Kundenportal Preview" description="Das Kundenportal ist geplant und wird als zukünftige digitale Projektkommunikation aufgebaut." />;
+  return <PlaceholderPage title="Portal" description="Das Portal ist geplant und wird als digitale Projektkommunikation Schritt für Schritt aufgebaut." />;
 }

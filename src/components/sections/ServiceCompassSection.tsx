@@ -6,8 +6,8 @@ export function ServiceCompassSection() {
   return (
     <SectionShell
       id="leistungen"
-      title="Leistungen / Surface Architecture"
-      description="Drei Leistungsfelder mit klaren Kapiteln und einer ruhigen Materialfläche als Anker."
+      title="Leistungen"
+      description="Drei Leistungsfelder mit klaren Schwerpunkten für Zürich und Umgebung."
     >
       <div className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <article
