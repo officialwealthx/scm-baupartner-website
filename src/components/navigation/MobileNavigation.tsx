@@ -19,11 +19,6 @@ const quickActions = [
 export function MobileNavigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!isOpen || typeof document === "undefined") return;
@@ -77,7 +72,7 @@ export function MobileNavigation() {
         <span>{isOpen ? "Schliessen" : "Menü"}</span>
       </button>
 
-      {isOpen && isMounted
+      {isOpen && typeof document !== "undefined"
         ? createPortal(
           <>
           <button
