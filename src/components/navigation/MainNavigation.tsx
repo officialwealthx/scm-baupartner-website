@@ -63,7 +63,6 @@ export function MainNavigation() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      onClick={item.href === "/" ? handleHomeClick : undefined}
                       aria-current={isActive ? "page" : undefined}
                       className={cn(
                         "inline-flex h-10 items-center rounded-full px-4 text-sm font-medium leading-none whitespace-nowrap transition-colors",
