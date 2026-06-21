@@ -2,17 +2,17 @@ export const faqPlaceholder = [
   {
     question: "Wie läuft eine Offerte ab?",
     answer:
-      "Nach Ihrer Anfrage klärt SCM Baupartner die Eckpunkte und erstellt nach Bedarf mit Besichtigung eine nachvollziehbare Offerte passend zum Projekt.",
+      "Nach Ihrer Anfrage klärt SCM Baupartner die wichtigsten Eckdaten und plant grundsätzlich zuerst eine Besichtigung ein. Danach erhalten Sie eine nachvollziehbare Offerte passend zum Projektumfang.",
   },
   {
     question: "Gibt es eine Besichtigung?",
     answer:
-      "Ja. Wenn das Projekt eine Vor-Ort-Einschätzung braucht, plant SCM Baupartner eine Besichtigung ein, damit Aufwand und Ausführung sauber abgestimmt werden.",
+      "Ja. Besichtigungen sind ein wichtiger Teil unserer Projektklärung, damit Aufwand, Flächen, Material und Ausführung sauber eingeschätzt werden können.",
   },
   {
     question: "Welche Regionen bedient SCM Baupartner?",
     answer:
-      "Hauptgebiet ist Zürich und Umgebung. Zusätzlich betreut SCM Baupartner Projekte in der erweiterten Region mit Zug, Schwyz, Winterthur, Schaffhausen, Aargau und Aarau.",
+      "SCM Baupartner ist hauptsächlich in Zürich und Umgebung tätig. Zusätzlich werden Projekte in Winterthur, Schaffhausen, Basel, Aargau, Schwyz und Zug geprüft und je nach Umfang eingeplant.",
   },
   {
     question: "Welche Arbeiten übernimmt SCM Baupartner?",
