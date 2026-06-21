@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "SCM Baupartner",
-  title: "SCM Baupartner Studio",
+  title: "SCM Baupartner",
   description:
-    "Premium Swiss Surface Studio für Maler-, Gipser-, Fassaden- und Renovationsarbeiten mit geplanter digitaler Projektkommunikation.",
+    "SCM Baupartner — Maler-, Gipser-, Fassaden- und Renovationsarbeiten für Zürich und die erweiterte Region, mit geplanter digitaler Projektkommunikation.",
   email: "kontakt@scmbaupartner.ch",
   phoneDisplay: "+41 76 469 14 18",
   phoneTechnical: "+41764691418",

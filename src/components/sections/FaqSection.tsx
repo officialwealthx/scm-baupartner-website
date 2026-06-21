@@ -8,7 +8,7 @@ export function FaqSection() {
       title="Häufige Fragen, kurz beantwortet."
       width="narrow"
     >
-      <div className="mt-8 space-y-3">
+      <div data-reveal-stagger className="mt-8 space-y-3">
         {faqPlaceholder.map((item) => (
           <details
             key={item.question}

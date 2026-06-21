@@ -7,53 +7,39 @@ export function ServiceCompassSection() {
     <SectionShell
       eyebrow="Leistungen"
       title="Leistungen für Oberfläche, Schutz und Renovation."
-      description="Drei klar geführte Leistungsgruppen — von feiner Farb- und Oberflächenarbeit bis zu Fassadenschutz und Renovation."
+      description="Drei klar geführte Arbeitsbereiche — von feiner Farb- und Oberflächenarbeit über Fassadenschutz bis zur Renovation."
     >
-      <div className="scm-stagger mt-10 grid gap-5 md:grid-cols-3">
+      <div
+        data-reveal-stagger
+        className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+      >
         {serviceGroups.map((group, index) => (
           <article
             key={group.title}
-            className="scm-fade-up scm-lift group relative flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-white shadow-[var(--shadow-soft)] hover:border-[var(--color-fresh-green)]"
+            className={cnCard(index)}
           >
-            {/* Future image slot / surface swatch area */}
+            {/* Surface swatch header with a large editorial index */}
             <div
-              className="relative flex h-28 items-end justify-between border-b border-dashed border-[var(--color-border-green-gray)] p-4"
+              className="relative flex h-24 items-start justify-between overflow-hidden border-b border-[var(--color-border-green-gray)] p-4"
               style={{ background: group.swatch }}
               aria-hidden="true"
             >
-              <span className="text-4xl font-semibold leading-none text-[var(--color-deep-green)]/30">
+              <span className="text-[2.75rem] font-semibold leading-none text-[var(--color-deep-green)]/20">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="rounded-full bg-white/70 px-2.5 py-1 text-[0.6rem] font-semibold uppercase tracking-wide text-[var(--color-fresh-green)] backdrop-blur-sm">
-                Bildplatz
+              <span className="mt-1 text-[0.7rem] font-medium uppercase tracking-[0.16em] text-[var(--color-deep-green)]/55">
+                {group.tags.join(" · ")}
               </span>
             </div>
 
             <div className="flex flex-1 flex-col p-6">
-              <div className="flex flex-wrap gap-1.5">
-                {group.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-[var(--color-mist-green)] px-2.5 py-1 text-[0.65rem] font-medium uppercase tracking-wide text-[var(--color-deep-green)]"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <h3 className="mt-4 text-lg font-semibold text-[var(--color-deep-green)]">{group.title}</h3>
+              <h3 className="text-lg font-semibold text-[var(--color-deep-green)]">{group.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{group.description}</p>
 
-              {/* Material line accent */}
-              <span
-                aria-hidden="true"
-                className="mt-4 block h-px w-full bg-gradient-to-r from-[var(--color-fresh-green)]/50 to-transparent"
-              />
-
-              <ul className="mt-4 space-y-2 text-sm text-[var(--color-soft-graphite)]">
+              <ul className="mt-5 space-y-2.5 text-sm text-[var(--color-soft-graphite)]">
                 {group.items.map((item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-fresh-green)]" />
+                  <li key={item} className="flex items-baseline gap-3 border-t border-[var(--color-border-green-gray)]/60 pt-2.5 first:border-t-0 first:pt-0">
+                    <span aria-hidden="true" className="text-[var(--color-fresh-green)]">—</span>
                     {item}
                   </li>
                 ))}
@@ -61,7 +47,7 @@ export function ServiceCompassSection() {
 
               <Link
                 href="/leistungen"
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-deep-green)] transition-colors hover:text-[var(--color-fresh-green)]"
+                className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--color-deep-green)] transition-colors hover:text-[var(--color-fresh-green)]"
               >
                 Leistung ansehen
                 <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
@@ -74,4 +60,12 @@ export function ServiceCompassSection() {
       </div>
     </SectionShell>
   );
+}
+
+// First card is the visual anchor (wider on large screens); the others are
+// supporting panels, so the grid never reads as three identical cards.
+function cnCard(index: number) {
+  const base =
+    "scm-lift group flex flex-col overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-white shadow-[var(--shadow-soft)] hover:border-[var(--color-fresh-green)]";
+  return index === 0 ? `${base} md:col-span-2 lg:col-span-1` : base;
 }

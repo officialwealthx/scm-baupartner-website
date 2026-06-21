@@ -5,17 +5,19 @@ export function TargetGroupsSection() {
   return (
     <SectionShell
       eyebrow="Zielgruppen"
-      title="Für private Projekte und professionelle Partner."
+      title="Für private Projekte, Verwaltungen und professionelle Partner."
       description="Unterschiedliche Bedürfnisse, eine klare Ausführung — von Privatkunden bis zu Architektur- und Verwaltungspartnern."
     >
-      <ul className="scm-stagger mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {targetGroups.map((group) => (
+      <ul data-reveal-stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {targetGroups.map((group, index) => (
           <li
             key={group.name}
-            className="scm-fade-up scm-lift flex flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[var(--shadow-soft)] hover:border-[var(--color-fresh-green)]"
+            className="scm-lift flex flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[var(--shadow-soft)] hover:border-[var(--color-fresh-green)]"
           >
-            <div className="flex items-center gap-2">
-              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-[var(--color-active-green)]" />
+            <div className="flex items-baseline gap-3">
+              <span aria-hidden="true" className="text-sm font-semibold tabular-nums text-[var(--color-fresh-green)]">
+                {String(index + 1).padStart(2, "0")}
+              </span>
               <p className="text-base font-semibold text-[var(--color-deep-green)]">{group.name}</p>
             </div>
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{group.description}</p>

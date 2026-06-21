@@ -1,4 +1,5 @@
 export const navigationItems = [
+  { href: "/", label: "Startseite" },
   { href: "/leistungen", label: "Leistungen" },
   { href: "/projekte", label: "Projekte" },
   { href: "/portal", label: "Portal" },
