@@ -74,7 +74,11 @@ export function MainNavigation() {
 
           <LanguageSwitcher className="scale-[0.97]" />
           <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)]" />
-          <Button href="/login" variant="ghost" className="whitespace-nowrap px-3 text-[0.8rem]">
+          <Button
+            href="/login"
+            variant="ghost"
+            className="whitespace-nowrap rounded-full border border-[var(--color-deep-green)] bg-transparent px-4 text-[0.8rem] text-[var(--color-deep-green)] hover:border-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]"
+          >
             Login
           </Button>
           <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap px-3 text-[0.8rem]">

@@ -14,16 +14,17 @@ export function buildOrganizationSchema() {
     "Verputz",
     "Sanierung",
   ] as const;
+  const areaServed = ["Zürich", "Winterthur", "Schaffhausen", "Basel", "Aargau", "Zug", "Schwyz"] as const;
 
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: siteConfig.name,
     description: siteConfig.description,
-    areaServed: {
+    areaServed: areaServed.map((region) => ({
       "@type": "AdministrativeArea",
-      name: "Zürich und Umgebung",
-    },
+      name: region,
+    })),
     serviceType: services,
     contactPoint: {
       "@type": "ContactPoint",

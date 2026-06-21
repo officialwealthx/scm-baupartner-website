@@ -7,7 +7,10 @@ const trustFacts = [
 
 export function TrustBarSection() {
   return (
-    <section aria-label="Qualität und Ablauf" className="mt-10 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:p-8 lg:p-10">
+    <section
+      aria-label="Qualität und Ablauf"
+      className="mt-8 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:mt-9 sm:p-8 lg:p-10"
+    >
       <div data-reveal="line" className="scm-line-draw-ready h-px w-full bg-[var(--color-border-green-gray)]" />
       <h2 data-reveal="fade-up" className="mt-6 text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
         Wir stehen für Qualität, Tempo und saubere Ausführung.

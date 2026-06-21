@@ -9,11 +9,9 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)]" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1200px] px-4 py-14 sm:px-6 lg:px-8">
         <div className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-6 sm:p-8 lg:grid-cols-[1.06fr_0.94fr] lg:p-10">
-          <span aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 z-0 h-px bg-[var(--color-border-green-gray)]/80" />
-          <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-[56%] z-0 hidden w-px bg-[var(--color-border-green-gray)]/65 lg:block" />
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-5 right-4 z-0 text-[3.6rem] font-semibold tracking-[0.08em] text-[var(--color-deep-green)]/5 sm:text-[5.2rem]"
+            className="pointer-events-none absolute -bottom-6 left-4 z-0 hidden text-[3.8rem] font-semibold tracking-[0.08em] text-[var(--color-deep-green)]/5 lg:block"
           >
             SCM BAUPARTNER
           </span>
@@ -34,7 +32,7 @@ export function SiteFooter() {
               <Button
                 href={`tel:${siteConfig.phoneTechnical}`}
                 variant="secondaryLight"
-                className="whitespace-nowrap border-[var(--color-border-green-gray)] bg-white"
+                className="whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
               >
                 Anrufen
               </Button>

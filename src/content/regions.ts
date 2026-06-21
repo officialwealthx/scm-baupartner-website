@@ -1,13 +1,14 @@
 export const regionGroups = {
   main: "Zürich und Umgebung",
-  expanded: ["Zug", "Schwyz", "Winterthur", "Schaffhausen", "Aargau", "Aarau"],
+  expanded: ["Winterthur", "Schaffhausen", "Aargau", "Zug", "Schwyz", "Basel"],
 } as const;
 
 export const regionPins = [
-  { name: "Zürich", top: "49%", left: "50%", primary: true },
-  { name: "Zug", top: "63%", left: "58%", primary: false },
-  { name: "Schwyz", top: "74%", left: "62%", primary: false },
-  { name: "Winterthur", top: "35%", left: "63%", primary: false },
-  { name: "Schaffhausen", top: "18%", left: "64%", primary: false },
-  { name: "Aargau", top: "52%", left: "32%", primary: false },
+  { name: "Zürich", top: "52%", left: "56%", primary: true },
+  { name: "Winterthur", top: "40%", left: "63%", primary: false },
+  { name: "Schaffhausen", top: "24%", left: "66%", primary: false },
+  { name: "Aargau", top: "52%", left: "40%", primary: false },
+  { name: "Zug", top: "64%", left: "61%", primary: false },
+  { name: "Schwyz", top: "74%", left: "66%", primary: false },
+  { name: "Basel", top: "45%", left: "23%", primary: false },
 ] as const;

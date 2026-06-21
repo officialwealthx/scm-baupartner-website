@@ -14,7 +14,9 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <TrustBarSection />
+      <div className="relative z-10 -mt-8 sm:-mt-10">
+        <TrustBarSection />
+      </div>
       <ServiceCompassSection />
       <ProcessTimelineSection />
       <PortalPreviewSection />

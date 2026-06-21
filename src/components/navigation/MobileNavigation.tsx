@@ -90,7 +90,6 @@ export function MobileNavigation() {
               <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white/85 px-5 py-4">
                 <div>
                   <p className="text-sm font-semibold text-[var(--color-deep-green)]">SCM Baupartner</p>
-                  <p className="mt-0.5 text-xs text-[var(--color-soft-graphite)]">Zürich und Umgebung</p>
                   <LanguageSwitcher className="mt-2" />
                 </div>
                 <button
