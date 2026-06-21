@@ -28,7 +28,7 @@ export function TargetGroupsSection() {
                 <dd className="mt-0.5 text-[var(--color-soft-graphite)]">{group.need}</dd>
               </div>
               <div>
-                <dt className="font-semibold uppercase tracking-wide text-[var(--color-fresh-green)]">SCM passt</dt>
+                <dt className="font-semibold uppercase tracking-wide text-[var(--color-fresh-green)]">SCM Baupartner passt</dt>
                 <dd className="mt-0.5 text-[var(--color-soft-graphite)]">{group.fit}</dd>
               </div>
             </dl>

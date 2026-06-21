@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "SCM Baupartner",
   title: "SCM Baupartner",
   description:
-    "SCM Baupartner — Maler-, Gipser-, Fassaden- und Renovationsarbeiten für Zürich und die erweiterte Region, mit geplanter digitaler Projektkommunikation.",
+    "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen und Ausbesserungen in Zürich und Umgebung mit klarer Offerte und strukturierter Ausführung.",
   email: "kontakt@scmbaupartner.ch",
   phoneDisplay: "+41 76 469 14 18",
   phoneTechnical: "+41764691418",
