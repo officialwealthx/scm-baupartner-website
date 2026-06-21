@@ -1,6 +1,20 @@
 import { siteConfig } from "@/content/site";
 
 export function buildOrganizationSchema() {
+  const services = [
+    "Malerarbeiten",
+    "Gipserarbeiten",
+    "Fassadenarbeiten",
+    "Renovationen",
+    "Ausbesserungen",
+    "Graffitientfernung",
+    "Graffitischutz",
+    "Schimmelbehandlung",
+    "Spritzlackierung",
+    "Verputz",
+    "Sanierung",
+  ] as const;
+
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -10,19 +24,7 @@ export function buildOrganizationSchema() {
       "@type": "AdministrativeArea",
       name: "Zürich und Umgebung",
     },
-    serviceType: [
-      "Malerarbeiten",
-      "Gipserarbeiten",
-      "Fassadenarbeiten",
-      "Renovationen",
-      "Ausbesserungen",
-      "Graffitientfernung",
-      "Graffitischutz",
-      "Schimmelbehandlung",
-      "Spritzlackierung",
-      "Verputz",
-      "Sanierung",
-    ],
+    serviceType: services,
     contactPoint: {
       "@type": "ContactPoint",
       email: siteConfig.email,
@@ -35,10 +37,22 @@ export function buildOrganizationSchema() {
     telephone: siteConfig.phoneDisplay,
     address: {
       "@type": "PostalAddress",
+      name: "Postadresse",
       streetAddress: siteConfig.address.line1,
       postalCode: "8051",
       addressLocality: "Zürich",
       addressCountry: "CH",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Leistungen SCM Baupartner",
+      itemListElement: services.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service,
+        },
+      })),
     },
   };
 }

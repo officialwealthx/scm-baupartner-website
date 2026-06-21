@@ -30,7 +30,7 @@ export function buildMetadata({
       "Schimmelbehandlung",
       "Spritzlackierung",
       "Verputz",
-      "Sanierung",
+      "Sanierung Zürich",
       "Zürich und Umgebung",
     ],
     openGraph: {

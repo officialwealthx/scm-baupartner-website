@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "SCM Baupartner",
   title: "SCM Baupartner",
   description:
-    "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen und Ausbesserungen in Zürich und Umgebung mit klarer Offerte und strukturierter Ausführung.",
+    "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen, Ausbesserungen und Schutzarbeiten in Zürich und Umgebung. Sauber geplant, klar offeriert und professionell ausgeführt.",
   email: "kontakt@scmbaupartner.ch",
   phoneDisplay: "+41 76 469 14 18",
   phoneTechnical: "+41764691418",
@@ -15,9 +15,9 @@ export const siteConfig = {
   },
   openingHours: ["Mo–Fr 08:00–18:00", "Sa 09:30–14:30"],
   companyFacts: [
-    "8 Mitarbeitende",
+    "16 Mitarbeitende",
+    "30+ Kunden",
+    "200+ Aufträge",
     "45+ Jahre kombinierte Familienerfahrung",
-    "Zürich und Umgebung",
-    "Besichtigung nach Projektklärung",
   ],
 } as const;

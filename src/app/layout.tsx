@@ -6,7 +6,7 @@ import { buildOrganizationSchema, toJsonLdScript } from "@/lib/schema";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Malerarbeiten, Gipserarbeiten und Renovation in Zürich",
+  title: "Malerarbeiten, Gipserarbeiten und Renovationen in Zürich",
   description:
     "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen, Ausbesserungen und Schutzarbeiten in Zürich und Umgebung – sauber geplant, klar offeriert und professionell ausgeführt.",
 });

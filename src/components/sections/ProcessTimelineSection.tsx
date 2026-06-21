@@ -192,10 +192,7 @@ export function ProcessTimelineSection() {
                             : "border-[var(--color-border-green-gray)] bg-white"
                         }`}
                       >
-                        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">
-                          {String(index + 1).padStart(2, "0")}
-                        </p>
-                        <h3 className="mt-2 text-lg font-semibold text-[var(--color-deep-green)]">{step.title}</h3>
+                        <h3 className="text-lg font-semibold text-[var(--color-deep-green)]">{step.title}</h3>
                         <p className="mt-1.5 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{step.description}</p>
                       </article>
                     );
