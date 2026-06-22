@@ -12,7 +12,7 @@ export const faqPlaceholder = [
   {
     question: "Welche Regionen bedient SCM Baupartner?",
     answer:
-      "SCM Baupartner ist hauptsächlich in Zürich und Umgebung tätig. Zusätzlich werden Projekte in Winterthur, Schaffhausen, Basel, Aargau, Schwyz und Zug geprüft und je nach Umfang eingeplant.",
+      "SCM Baupartner ist hauptsächlich in Zürich und Umgebung tätig. Zusätzlich werden Projekte in Winterthur, Basel, Aargau, Schwyz und Zug geprüft und je nach Umfang eingeplant.",
   },
   {
     question: "Welche Arbeiten übernimmt SCM Baupartner?",

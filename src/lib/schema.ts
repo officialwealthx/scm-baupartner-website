@@ -14,7 +14,7 @@ export function buildOrganizationSchema() {
     "Verputz",
     "Sanierung",
   ] as const;
-  const areaServed = ["Zürich", "Winterthur", "Schaffhausen", "Basel", "Aargau", "Zug", "Schwyz"] as const;
+  const areaServed = ["Zürich", "Winterthur", "Basel", "Aargau", "Zug", "Schwyz"] as const;
 
   return {
     "@context": "https://schema.org",

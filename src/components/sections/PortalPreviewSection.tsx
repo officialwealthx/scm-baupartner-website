@@ -19,7 +19,7 @@ export function PortalPreviewSection() {
             Digitales Portal für klare Projektkommunikation
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-            SCM Baupartner plant ein Portal, in dem Offerten, Termine, Dokumente, Projektstatus und Rückfragen künftig übersichtlich an einem Ort zusammenlaufen.
+            SCM Baupartner baut ein Portal schrittweise auf, damit Offerten, Termine, Dokumente, Projektstatus und Rückfragen künftig übersichtlich an einem Ort zusammenlaufen.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
             So bleiben Projekte nachvollziehbar – von der ersten Anfrage bis zur sauberen Übergabe.
@@ -101,7 +101,7 @@ export function PortalPreviewSection() {
               Portal künftig auch als App und Desktop-Zugang
             </h3>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-              Geplant ist ein Zugriff über Smartphone, Tablet und Desktop – damit Offerten, Termine, Dokumente und Rückfragen auch unterwegs übersichtlich bleiben.
+              Portal und App werden schrittweise aufgebaut. Geplant ist ein Zugriff über Smartphone, Tablet und Desktop, damit Offerten, Termine, Dokumente und Rückfragen auch unterwegs übersichtlich bleiben.
             </p>
             <div className="mt-5 flex flex-wrap gap-2.5">
               {["iOS", "Android", "Mac", "Windows"].map((platform) => (

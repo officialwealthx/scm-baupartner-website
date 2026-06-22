@@ -18,6 +18,6 @@ export const siteConfig = {
     "8 Mitarbeitende",
     "30+ Kunden",
     "200+ Aufträge",
-    "45+ Jahre kombinierte Familienerfahrung",
+    "Handwerkserfahrung seit 1981",
   ],
 } as const;

@@ -10,12 +10,6 @@ export function SiteFooter() {
     <footer className="mt-24 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)]" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1200px] px-4 py-14 sm:px-6 lg:px-8">
         <div className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-6 sm:p-8 lg:grid-cols-[1.06fr_0.94fr] lg:p-10">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -bottom-6 left-4 z-0 hidden text-[3.8rem] font-semibold tracking-[0.08em] text-[var(--color-deep-green)]/5 lg:block"
-          >
-            SCM BAUPARTNER
-          </span>
           <section className="relative z-10">
             <h2 className="max-w-2xl text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-3xl lg:text-[2.45rem] lg:leading-[1.08]">
               Bereit für eine saubere Umsetzung?
@@ -36,7 +30,8 @@ export function SiteFooter() {
               <Button href="/offerte" variant="primaryLight" className="w-full justify-center whitespace-nowrap">
                 Kostenlose Offerte
               </Button>
-              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+              <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-3">
+                <div className="grid gap-3 sm:grid-cols-3">
                 <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
                   Kontaktformular
                 </Button>
@@ -50,6 +45,7 @@ export function SiteFooter() {
                 >
                   Anrufen
                 </Button>
+                </div>
               </div>
             </div>
           </section>
@@ -84,7 +80,7 @@ export function SiteFooter() {
                 </dd>
               </div>
             </dl>
-            <p className="mt-5 text-sm font-medium text-white/90">Professionell. Präzise. Persönlich.</p>
+            <p className="mt-5 text-sm font-medium text-white/90">Für Offerten und Rückfragen sind wir direkt erreichbar.</p>
           </section>
         </div>
 
