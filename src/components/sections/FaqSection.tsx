@@ -4,7 +4,8 @@ import { faqPlaceholder } from "@/content/faq";
 export function FaqSection() {
   return (
     <SectionShell
-      title="FAQ"
+      title="Häufige Fragen zur Zusammenarbeit."
+      description="Kurze Antworten zu Offerte, Ablauf und Ausführung."
       width="narrow"
     >
       <div data-reveal-stagger className="mt-8 space-y-3">

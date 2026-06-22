@@ -11,7 +11,7 @@ import { siteConfig } from "@/content/site";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const quickActions = [
-  { href: "/offerte", label: "Kostenlose Offerte", primary: true },
+  { href: "/offerte", label: "Offerte anfragen", primary: true },
   { href: siteConfig.whatsappUrl, label: "WhatsApp schreiben", primary: false },
   { href: `tel:${siteConfig.phoneTechnical}`, label: "Anrufen", primary: false },
   { href: "/login", label: "Login", primary: false },
@@ -20,6 +20,7 @@ const quickActions = [
 export function MobileNavigation() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isOpen || typeof document === "undefined") return;
@@ -45,7 +46,12 @@ export function MobileNavigation() {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: "auto" });
     }
+    setOpenGroup(null);
     setIsOpen(false);
+  };
+
+  const handleGroupToggle = (label: string) => {
+    setOpenGroup((previous) => (previous === label ? null : label));
   };
 
   return (
@@ -55,7 +61,10 @@ export function MobileNavigation() {
         aria-label={isOpen ? "Menü schliessen" : "Menü öffnen"}
         aria-expanded={isOpen}
         aria-controls="mobile-navigation-panel"
-        onClick={() => setIsOpen((previous) => !previous)}
+        onClick={() => {
+          if (isOpen) setOpenGroup(null);
+          setIsOpen((previous) => !previous);
+        }}
         className="flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2 text-sm font-semibold text-[var(--color-deep-green)]"
       >
         <span aria-hidden="true" className="flex h-4 w-4 flex-col justify-between">
@@ -80,7 +89,10 @@ export function MobileNavigation() {
           <button
             type="button"
             aria-label="Menü schliessen"
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setOpenGroup(null);
+              setIsOpen(false);
+            }}
             className="fixed inset-0 z-[1100] bg-[rgba(10,20,15,0.24)] backdrop-blur-[1.5px]"
           />
           <div
@@ -105,7 +117,10 @@ export function MobileNavigation() {
                 <button
                   type="button"
                   aria-label="Menü schliessen"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => {
+                    setOpenGroup(null);
+                    setIsOpen(false);
+                  }}
                   className="inline-flex min-h-10 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-deep-green)]"
                 >
                   Schliessen
@@ -114,20 +129,55 @@ export function MobileNavigation() {
 
               <nav aria-label="Mobile Hauptnavigation" className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
                 <ul className="divide-y divide-[var(--color-border-green-gray)] rounded-[22px] border border-[var(--color-border-green-gray)] bg-white">
-                  {mobileNavigationItems.map((item) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        onClick={(event) => handleNavigationClick(event, item.href)}
-                        className="flex min-h-14 items-center justify-between gap-3 px-4 py-2 transition-colors hover:bg-[var(--color-mist-green)]"
-                      >
-                        <span className="mr-auto text-lg font-semibold text-[var(--color-deep-green)]">{item.label}</span>
-                        <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
-                          →
-                        </span>
-                      </Link>
+                  {mobileNavigationItems.map((item) => {
+                    const groupId = `mobile-submenu-${item.label.toLowerCase().replaceAll(" ", "-")}`;
+                    return (
+                    <li key={item.label}>
+                      {item.children?.length ? (
+                        <div>
+                          <button
+                            type="button"
+                            aria-expanded={openGroup === item.label}
+                            aria-controls={groupId}
+                            onClick={() => handleGroupToggle(item.label)}
+                            className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-3 px-4 py-2 text-left transition-colors hover:bg-[var(--color-mist-green)]"
+                          >
+                            <span className="mr-auto text-lg font-semibold text-[var(--color-deep-green)]">{item.label}</span>
+                            <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
+                              {openGroup === item.label ? "−" : "+"}
+                            </span>
+                          </button>
+                          {openGroup === item.label && (
+                            <ul id={groupId} className="grid gap-1 border-t border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-3">
+                              {item.children.map((child) => (
+                                <li key={`${item.label}-${child.label}`}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={(event) => handleNavigationClick(event, child.href)}
+                                    className="block rounded-[0.8rem] border border-[var(--color-border-green-gray)] bg-white px-3 py-2.5"
+                                  >
+                                    <p className="text-sm font-semibold text-[var(--color-deep-green)]">{child.label}</p>
+                                    {child.description && <p className="mt-0.5 text-xs leading-relaxed text-[var(--color-soft-graphite)]">{child.description}</p>}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          onClick={(event) => handleNavigationClick(event, item.href)}
+                          className="flex min-h-14 items-center justify-between gap-3 px-4 py-2 transition-colors hover:bg-[var(--color-mist-green)]"
+                        >
+                          <span className="mr-auto text-lg font-semibold text-[var(--color-deep-green)]">{item.label}</span>
+                          <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
+                            →
+                          </span>
+                        </Link>
+                      )}
                     </li>
-                  ))}
+                  )})}
                 </ul>
 
                 <div className="mt-6 border-t border-[var(--color-border-green-gray)] pt-5">
@@ -139,7 +189,10 @@ export function MobileNavigation() {
                         <Link
                           key={action.label}
                           href={action.href}
-                          onClick={() => setIsOpen(false)}
+                          onClick={() => {
+                            setOpenGroup(null);
+                            setIsOpen(false);
+                          }}
                           {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                           className={`flex min-h-12 items-center justify-between rounded-[var(--radius-md)] border px-4 text-sm font-semibold transition-colors ${
                             action.primary

@@ -16,13 +16,13 @@ export function PortalPreviewSection() {
       <div className="grid gap-9 p-6 sm:p-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:p-10">
         <div data-reveal="fade-up" className="min-w-0">
           <h2 className="text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-3xl">
-            Digitales Portal für klare Projektkommunikation
+            Portal und App für klarere Projektabstimmung
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-            SCM Baupartner baut ein Portal schrittweise auf, damit Offerten, Termine, Dokumente, Projektstatus und Rückfragen künftig übersichtlich an einem Ort zusammenlaufen.
+            Wir bauen das Portal schrittweise auf, damit Offerten, Termine, Dokumente, Projektstatus und Rückfragen geordnet an einem Ort liegen.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-            So bleiben Projekte nachvollziehbar – von der ersten Anfrage bis zur sauberen Übergabe.
+            So bleibt der Ablauf von der Anfrage bis zur Übergabe besser nachvollziehbar.
           </p>
 
           <ul data-reveal-stagger className="mt-6 grid gap-2.5 sm:grid-cols-2">
@@ -60,15 +60,15 @@ export function PortalPreviewSection() {
               <div className="space-y-2">
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Projektstatus</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Offerte bestätigt · Ablauf wird geplant</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Offerte bestätigt · Start wird koordiniert</p>
                 </div>
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Termine</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Besichtigung, Projektstart und Übergabe strukturiert</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Besichtigung, Start und Übergabe strukturiert</p>
                 </div>
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Rückfragen</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Klärungen gebündelt an einem Ort</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Klärungen gebündelt dokumentiert</p>
                 </div>
               </div>
               <div className="space-y-2">
@@ -101,7 +101,7 @@ export function PortalPreviewSection() {
               Portal künftig auch als App und Desktop-Zugang
             </h3>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-              Portal und App werden schrittweise aufgebaut. Geplant ist ein Zugriff über Smartphone, Tablet und Desktop, damit Offerten, Termine, Dokumente und Rückfragen auch unterwegs übersichtlich bleiben.
+              Portal und App werden schrittweise aufgebaut. Geplant ist der Zugriff über Smartphone, Tablet und Desktop, damit wichtige Projektinfos auch unterwegs geordnet bleiben.
             </p>
             <div className="mt-5 flex flex-wrap gap-2.5">
               {["iOS", "Android", "Mac", "Windows"].map((platform) => (

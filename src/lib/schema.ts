@@ -1,4 +1,5 @@
 import { siteConfig } from "@/content/site";
+import { servedRegions } from "@/content/regions";
 
 export function buildOrganizationSchema() {
   const services = [
@@ -14,14 +15,13 @@ export function buildOrganizationSchema() {
     "Verputz",
     "Sanierung",
   ] as const;
-  const areaServed = ["Zürich", "Winterthur", "Basel", "Aargau", "Zug", "Schwyz"] as const;
-
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: siteConfig.name,
+    legalName: siteConfig.legalName,
     description: siteConfig.description,
-    areaServed: areaServed.map((region) => ({
+    areaServed: servedRegions.map((region) => ({
       "@type": "AdministrativeArea",
       name: region,
     })),

@@ -58,7 +58,7 @@ export function Button({
       href={href}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
       className={cn(
-        "scm-press inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-active-green)]",
+        "scm-press inline-flex min-h-12 items-center justify-center gap-2 rounded-[var(--radius-md)] px-5 py-2.5 text-sm font-semibold leading-none transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-active-green)]",
         variantStyles[variant],
         className,
       )}

@@ -1,8 +1,9 @@
 export const siteConfig = {
   name: "SCM Baupartner",
+  legalName: "SCM Baupartner Kiraz",
   title: "SCM Baupartner",
   description:
-    "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen, Ausbesserungen und Schutzarbeiten in Zürich und Umgebung. Sauber geplant, klar offeriert und professionell ausgeführt.",
+    "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Fassadenarbeiten, Renovationen, Ausbesserungen und Schutzarbeiten in Zürich und Umgebung. Sauber geplant, präzise ausgeführt und verlässlich übergeben.",
   email: "kontakt@scmbaupartner.ch",
   phoneDisplay: "+41 76 469 14 18",
   phoneTechnical: "+41764691418",
