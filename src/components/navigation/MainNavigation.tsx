@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { MouseEvent as ReactMouseEvent } from "react";
+import type { FocusEvent, KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from "react";
 import { desktopNavigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -14,6 +14,17 @@ import { Button } from "@/components/ui/Button";
 
 function normalizePath(href: string) {
   return href.split("#")[0] || "/";
+}
+
+function splitIntoColumns<T>(items: readonly T[], columns: number) {
+  const chunkSize = Math.ceil(items.length / columns);
+  const chunks: T[][] = [];
+  for (let index = 0; index < columns; index += 1) {
+    const start = index * chunkSize;
+    const slice = items.slice(start, start + chunkSize);
+    if (slice.length) chunks.push(slice);
+  }
+  return chunks;
 }
 
 export function MainNavigation() {
@@ -54,6 +65,20 @@ export function MainNavigation() {
     setOpenMenu(null);
   };
 
+  const handleMenuButtonKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>, label: string) => {
+    if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      setOpenMenu(label);
+    }
+  };
+
+  const handleItemBlur = (event: FocusEvent<HTMLLIElement>) => {
+    const nextFocused = event.relatedTarget as Node | null;
+    if (!event.currentTarget.contains(nextFocused)) {
+      setOpenMenu(null);
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/78">
       <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 xl:px-8">
@@ -86,17 +111,25 @@ export function MainNavigation() {
                 const isActive = isHashLink ? false : normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
                 const hasChildren = Boolean(item.children?.length);
                 const isOpen = openMenu === item.label;
+                const menuColumns = item.children && item.children.length > 8 ? 3 : 2;
                 const menuId = `mega-${item.label.toLowerCase().replaceAll(" ", "-")}`;
                 return (
-                  <li key={item.label} className="relative">
+                  <li
+                    key={item.label}
+                    className="relative"
+                    onMouseLeave={() => setOpenMenu((previous) => (previous === item.label ? null : previous))}
+                    onBlur={handleItemBlur}
+                  >
                     {hasChildren ? (
                       <button
                         type="button"
                         aria-expanded={isOpen}
                         aria-controls={menuId}
+                        aria-haspopup="true"
                         onMouseEnter={() => setOpenMenu(item.label)}
                         onFocus={() => setOpenMenu(item.label)}
                         onClick={() => setOpenMenu((previous) => (previous === item.label ? null : item.label))}
+                        onKeyDown={(event) => handleMenuButtonKeyDown(event, item.label)}
                         className={cn(
                           "inline-flex h-10 cursor-pointer items-center whitespace-nowrap rounded-full px-3 text-[0.84rem] font-medium leading-none transition-colors xl:px-3.5",
                           isActive || isOpen
@@ -126,24 +159,29 @@ export function MainNavigation() {
                       <div
                         id={menuId}
                         role="menu"
-                        onMouseLeave={() => setOpenMenu(null)}
-                        className="absolute left-1/2 top-[calc(100%+0.65rem)] z-50 w-[min(48rem,72vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
+                        className="absolute left-1/2 top-[calc(100%+0.6rem)] z-50 w-[min(50rem,74vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
                       >
-                        <div className="mb-4 border-b border-[var(--color-border-green-gray)] pb-3">
+                        <div className="mb-4 border-b border-[var(--color-border-green-gray)] pb-3.5">
                           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">{item.label}</p>
+                          <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">Übersicht der vorgesehenen Bereiche.</p>
                         </div>
-                        <div className="grid gap-2 sm:grid-cols-2">
-                          {item.children?.map((child) => (
-                            <Link
-                              key={`${item.label}-${child.label}`}
-                              href={child.href}
-                              onClick={() => setOpenMenu(null)}
-                              role="menuitem"
-                              className="rounded-[0.85rem] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] px-3.5 py-3 transition-colors hover:border-[var(--color-fresh-green)] hover:bg-[var(--color-mist-green)]"
-                            >
-                              <p className="text-sm font-semibold text-[var(--color-deep-green)]">{child.label}</p>
-                              {child.description && <p className="mt-1 text-xs leading-relaxed text-[var(--color-soft-graphite)]">{child.description}</p>}
-                            </Link>
+                        <div className={cn("grid gap-4", menuColumns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
+                          {splitIntoColumns(item.children ?? [], menuColumns).map((column, columnIndex) => (
+                            <ul key={`${item.label}-column-${columnIndex}`} className="space-y-1.5">
+                              {column.map((child) => (
+                                <li key={`${item.label}-${child.label}`}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={() => setOpenMenu(null)}
+                                    role="menuitem"
+                                    className="block rounded-[0.8rem] border border-transparent px-2.5 py-2.5 transition-colors hover:border-[var(--color-border-green-gray)] hover:bg-[var(--color-mist-green)] focus-visible:border-[var(--color-fresh-green)] focus-visible:bg-[var(--color-mist-green)]"
+                                  >
+                                    <p className="text-sm font-semibold text-[var(--color-deep-green)]">{child.label}</p>
+                                    {child.description && <p className="mt-0.5 text-xs leading-relaxed text-[var(--color-soft-graphite)]">{child.description}</p>}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
                           ))}
                         </div>
                       </div>

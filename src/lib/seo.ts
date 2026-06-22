@@ -7,10 +7,12 @@ export function buildMetadata({
   title,
   description,
   path = "/",
+  noIndex = false,
 }: {
   title: string;
   description?: string;
   path?: string;
+  noIndex?: boolean;
 }): Metadata {
   const fullTitle = `${title} | ${siteConfig.title}`;
   const fullDescription = description ?? siteConfig.description;
@@ -59,5 +61,11 @@ export function buildMetadata({
       shortcut: "/brand/favicon-round-512.png",
       apple: "/brand/app-icon-1024.png",
     },
+    robots: noIndex
+      ? {
+          index: false,
+          follow: false,
+        }
+      : undefined,
   };
 }

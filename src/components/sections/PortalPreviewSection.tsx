@@ -19,10 +19,10 @@ export function PortalPreviewSection() {
             Portal und App für klarere Projektabstimmung
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-            Wir bauen das Portal schrittweise auf, damit Offerten, Termine, Dokumente, Projektstatus und Rückfragen geordnet an einem Ort liegen.
+            Das Portal wird schrittweise aufgebaut, damit Offerten, Termine, Dokumente und Projektstatus geordnet an einem Ort liegen.
           </p>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-            So bleibt der Ablauf von der Anfrage bis zur Übergabe besser nachvollziehbar.
+            So bleibt der Ablauf von der Anfrage bis zur Übergabe nachvollziehbar.
           </p>
 
           <ul data-reveal-stagger className="mt-6 grid gap-2.5 sm:grid-cols-2">
@@ -101,7 +101,7 @@ export function PortalPreviewSection() {
               Portal künftig auch als App und Desktop-Zugang
             </h3>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-              Portal und App werden schrittweise aufgebaut. Geplant ist der Zugriff über Smartphone, Tablet und Desktop, damit wichtige Projektinfos auch unterwegs geordnet bleiben.
+              Portal und App werden schrittweise aufgebaut. Geplant ist der Zugriff über Smartphone, Tablet und Desktop, damit Projektinfos auch unterwegs geordnet bleiben.
             </p>
             <div className="mt-5 flex flex-wrap gap-2.5">
               {["iOS", "Android", "Mac", "Windows"].map((platform) => (

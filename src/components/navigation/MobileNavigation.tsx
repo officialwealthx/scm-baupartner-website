@@ -12,9 +12,10 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const quickActions = [
   { href: "/offerte", label: "Offerte anfragen", primary: true },
+  { href: "/login", label: "Login", primary: false },
+  { href: "/kontakt", label: "Kontaktformular", primary: false },
   { href: siteConfig.whatsappUrl, label: "WhatsApp schreiben", primary: false },
   { href: `tel:${siteConfig.phoneTechnical}`, label: "Anrufen", primary: false },
-  { href: "/login", label: "Login", primary: false },
 ] as const;
 
 export function MobileNavigation() {
@@ -127,7 +128,34 @@ export function MobileNavigation() {
                 </button>
               </div>
 
-              <nav aria-label="Mobile Hauptnavigation" className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
+              <nav aria-label="Mobile Hauptnavigation" className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+                <div className="mb-5">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">Direkt</p>
+                  <div className="grid gap-2.5">
+                    {quickActions.map((action) => {
+                      const external = action.href.startsWith("http");
+                      return (
+                        <Link
+                          key={action.label}
+                          href={action.href}
+                          onClick={() => {
+                            setOpenGroup(null);
+                            setIsOpen(false);
+                          }}
+                          {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+                          className={`flex min-h-12 items-center justify-between rounded-[var(--radius-md)] border px-4 text-sm font-semibold transition-colors ${
+                            action.primary
+                              ? "border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] text-white hover:bg-[var(--color-active-green)]"
+                              : "border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)] hover:border-[var(--color-fresh-green)] hover:bg-[var(--color-mist-green)]"
+                          }`}
+                        >
+                          {action.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 <ul className="divide-y divide-[var(--color-border-green-gray)] rounded-[22px] border border-[var(--color-border-green-gray)] bg-white">
                   {mobileNavigationItems.map((item) => {
                     const groupId = `mobile-submenu-${item.label.toLowerCase().replaceAll(" ", "-")}`;
@@ -142,7 +170,7 @@ export function MobileNavigation() {
                             onClick={() => handleGroupToggle(item.label)}
                             className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-3 px-4 py-2 text-left transition-colors hover:bg-[var(--color-mist-green)]"
                           >
-                            <span className="mr-auto text-lg font-semibold text-[var(--color-deep-green)]">{item.label}</span>
+                            <span className="mr-auto text-base font-semibold text-[var(--color-deep-green)]">{item.label}</span>
                             <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
                               {openGroup === item.label ? "−" : "+"}
                             </span>
@@ -165,49 +193,22 @@ export function MobileNavigation() {
                           )}
                         </div>
                       ) : (
-                        <Link
-                          href={item.href}
-                          onClick={(event) => handleNavigationClick(event, item.href)}
-                          className="flex min-h-14 items-center justify-between gap-3 px-4 py-2 transition-colors hover:bg-[var(--color-mist-green)]"
-                        >
-                          <span className="mr-auto text-lg font-semibold text-[var(--color-deep-green)]">{item.label}</span>
-                          <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
-                            →
-                          </span>
-                        </Link>
-                      )}
-                    </li>
-                  )})}
-                </ul>
-
-                <div className="mt-6 border-t border-[var(--color-border-green-gray)] pt-5">
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">Direkt</p>
-                  <div className="grid gap-2.5">
-                    {quickActions.map((action) => {
-                      const external = action.href.startsWith("http");
-                      return (
-                        <Link
-                          key={action.label}
-                          href={action.href}
-                          onClick={() => {
-                            setOpenGroup(null);
-                            setIsOpen(false);
-                          }}
-                          {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-                          className={`flex min-h-12 items-center justify-between rounded-[var(--radius-md)] border px-4 text-sm font-semibold transition-colors ${
-                            action.primary
-                              ? "border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] text-white hover:bg-[var(--color-active-green)]"
-                              : "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)] hover:border-[var(--color-fresh-green)] hover:bg-[var(--color-soft-green)]"
-                          }`}
-                        >
-                          {action.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              </nav>
-            </div>
+                       <Link
+                         href={item.href}
+                         onClick={(event) => handleNavigationClick(event, item.href)}
+                         className="flex min-h-14 items-center justify-between gap-3 px-4 py-2 transition-colors hover:bg-[var(--color-mist-green)]"
+                       >
+                         <span className="mr-auto text-base font-semibold text-[var(--color-deep-green)]">{item.label}</span>
+                         <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
+                           →
+                         </span>
+                       </Link>
+                     )}
+                   </li>
+                 )})}
+               </ul>
+             </nav>
+           </div>
            </div>
           </>,
           document.body,

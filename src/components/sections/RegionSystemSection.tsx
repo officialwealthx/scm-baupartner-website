@@ -6,7 +6,7 @@ export function RegionSystemSection() {
     <SectionShell
       variant="surface"
       title="Unsere Einsatzgebiete"
-      description="SCM Baupartner ist in Zürich und ausgewählten Regionen der Deutschschweiz tätig. Einsätze werden je nach Projektumfang sauber geplant und regional koordiniert."
+      description="SCM Baupartner arbeitet in Zürich und ausgewählten Regionen. Einsätze werden je nach Projektumfang klar geplant und regional koordiniert."
     >
       <div className="mt-9">
         <div
@@ -15,7 +15,7 @@ export function RegionSystemSection() {
         >
           <div className="grid gap-6 lg:grid-cols-[1.04fr_0.96fr] lg:items-stretch">
             <article className="rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-4 sm:p-5">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-deep-green)]">Gebietssystem</h3>
+              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-deep-green)]">Einsatzgebiet Dashboard</h3>
               <p className="mt-3 text-sm leading-relaxed text-[var(--color-soft-graphite)]">
                 Hauptgebiet ist {regionGroups.main}. Weitere Einsätze koordinieren wir in Winterthur, Aargau, Zug, Schwyz und Basel.
               </p>

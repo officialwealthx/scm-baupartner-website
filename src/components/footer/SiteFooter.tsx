@@ -9,39 +9,30 @@ export function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1200px] px-4 py-14 sm:px-6 lg:px-8">
-        <div className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-6 sm:p-8 lg:grid-cols-[1.06fr_0.94fr] lg:p-10">
+        <div className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-6 sm:p-8 lg:grid-cols-[1.03fr_0.97fr] lg:p-10">
           <section className="relative z-10">
             <h2 className="max-w-2xl text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-3xl lg:text-[2.45rem] lg:leading-[1.08]">
               Bereit für eine saubere Umsetzung?
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-              Senden Sie uns die wichtigsten Eckdaten. Wir prüfen Ihr Projekt und melden uns mit den nächsten sinnvollen Schritten.
+              Senden Sie uns die Eckdaten. Wir prüfen das Projekt und melden uns mit den nächsten klaren Schritten.
             </p>
-            <div className="mt-5 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">Kontaktwege</p>
-              <ul className="mt-3 grid gap-2 text-sm text-[var(--color-soft-graphite)]">
-                <li>Offerte für konkrete Projekte</li>
-                <li>Kontaktformular für allgemeine Anfragen</li>
-                <li>WhatsApp für schnelle Rückfragen</li>
-                <li>Telefon für direkte Abstimmung</li>
-              </ul>
-            </div>
             <div className="mt-7 max-w-xl">
               <Button href="/offerte" variant="primaryLight" className="w-full justify-center whitespace-nowrap">
                 Kostenlose Offerte
               </Button>
               <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-3 sm:p-4">
-                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
-                  <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+                <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-3">
+                  <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center">
                     Kontaktformular
                   </Button>
-                  <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+                  <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center">
                     WhatsApp schreiben
                   </Button>
                   <Button
                     href={`tel:${siteConfig.phoneTechnical}`}
                     variant="secondaryLight"
-                    className="w-full justify-center whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
+                    className="w-full justify-center border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
                   >
                     Anrufen
                   </Button>
@@ -80,7 +71,7 @@ export function SiteFooter() {
                 </dd>
               </div>
             </dl>
-            <p className="mt-5 text-sm font-medium text-white/90">Für Offerten und Rückfragen sind wir direkt erreichbar.</p>
+            <p className="mt-5 text-sm font-medium text-white/90">Von der Anfrage bis zur Übergabe bleiben Rückfragen direkt erreichbar.</p>
           </section>
         </div>
 
@@ -102,7 +93,7 @@ export function SiteFooter() {
             <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Unternehmen</h3>
             <div className="space-y-2 text-sm">
               <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/ueber-uns">
-                Über uns
+                Über SCM Baupartner
               </Link>
               <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/projekte">
                 Projekte
@@ -111,7 +102,7 @@ export function SiteFooter() {
                 Ratgeber
               </Link>
               <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/portal">
-                Portal
+                Portal und App
               </Link>
               <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/kontakt">
                 Kontakt
@@ -130,6 +121,7 @@ export function SiteFooter() {
                 <li key={region}>{region}</li>
               ))}
             </ul>
+            <p className="mt-3 text-xs leading-relaxed text-[var(--color-soft-graphite)]">Die Darstellung zeigt Einsatzgebiete, keine einzelnen Standorte.</p>
           </section>
 
           <section>

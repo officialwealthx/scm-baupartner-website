@@ -14,14 +14,14 @@ export function HeroSection() {
           sizes="100vw"
           className="object-cover object-[74%_center] sm:object-[67%_center] lg:object-[58%_center]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(99deg,rgba(247,248,245,0.985)_0%,rgba(247,248,245,0.94)_38%,rgba(247,248,245,0.74)_62%,rgba(247,248,245,0.35)_100%)] sm:bg-[linear-gradient(96deg,rgba(247,248,245,0.96)_0%,rgba(247,248,245,0.86)_39%,rgba(247,248,245,0.5)_68%,rgba(247,248,245,0.08)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(130deg,rgba(18,60,46,0.1)_0%,rgba(18,60,46,0.05)_34%,rgba(18,60,46,0)_62%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(247,248,245,0.97)_0%,rgba(247,248,245,0.9)_36%,rgba(247,248,245,0.68)_60%,rgba(247,248,245,0.34)_100%)] sm:bg-[linear-gradient(97deg,rgba(247,248,245,0.95)_0%,rgba(247,248,245,0.84)_40%,rgba(247,248,245,0.5)_67%,rgba(247,248,245,0.1)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(118%_90%_at_7%_20%,rgba(232,243,237,0.48)_0%,rgba(232,243,237,0.12)_52%,rgba(232,243,237,0)_100%)]" />
       </div>
       <div className="relative mx-auto grid min-h-[80svh] w-full max-w-[1360px] grid-cols-1 items-center gap-8 px-4 pb-16 pt-20 sm:min-h-[84svh] sm:px-6 sm:pb-20 sm:pt-24 md:min-h-[76svh] lg:min-h-[calc(100svh-72px)] lg:grid-cols-[minmax(0,51%)_minmax(0,49%)] lg:gap-0 lg:px-8 lg:pb-24 lg:pt-20">
         <div className="relative z-20 min-w-0 max-w-3xl lg:pr-6">
           <h1
             data-reveal="fade-up"
-            className="overflow-visible text-balance text-[2.15rem] font-semibold leading-[1.1] text-[var(--color-deep-green)] sm:text-[2.6rem] lg:text-[3.15rem] lg:leading-[1.08] xl:text-[3.45rem]"
+            className="overflow-visible text-balance text-[2.06rem] font-semibold leading-[1.1] text-[var(--color-deep-green)] sm:text-[2.48rem] lg:text-[2.95rem] lg:leading-[1.08] xl:text-[3.2rem]"
           >
             Malerarbeiten, Gipserarbeiten und Renovationen in Zürich.
           </h1>
@@ -35,17 +35,17 @@ export function HeroSection() {
             Handwerkserfahrung seit 1981. Modern organisiert für heute.
           </p>
 
-          <div data-reveal="fade-up" className="mt-8 grid max-w-3xl grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-            <Button href="/offerte" variant="primaryLight" className="w-full justify-center whitespace-nowrap md:col-span-2 lg:col-span-1">
+          <div data-reveal="fade-up" className="mt-8 grid max-w-3xl grid-cols-1 items-stretch gap-3 md:max-w-[31rem] md:grid-cols-1 lg:max-w-[45rem] lg:grid-cols-3">
+            <Button href="/offerte" variant="primaryLight" className="w-full justify-center">
               Kostenlose Offerte
             </Button>
-            <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+            <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center">
               WhatsApp schreiben
             </Button>
             <Button
               href={`tel:${siteConfig.phoneTechnical}`}
               variant="secondaryLight"
-              className="w-full justify-center whitespace-nowrap border-[var(--color-border-green-gray)] bg-white"
+              className="w-full justify-center border-[var(--color-border-green-gray)] bg-white"
             >
               Telefon
             </Button>
