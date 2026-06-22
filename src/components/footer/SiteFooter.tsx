@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)]" data-reveal="fade-up">
+    <footer className="mt-24 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)]" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1200px] px-4 py-14 sm:px-6 lg:px-8">
         <div className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-6 sm:p-8 lg:grid-cols-[1.06fr_0.94fr] lg:p-10">
           <span
@@ -32,23 +32,25 @@ export function SiteFooter() {
                 <li>Telefon für direkte Abstimmung</li>
               </ul>
             </div>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap">
+            <div className="mt-7 max-w-xl">
+              <Button href="/offerte" variant="primaryLight" className="w-full justify-center whitespace-nowrap">
                 Kostenlose Offerte
               </Button>
-              <Button href="/kontakt" variant="secondaryLight" className="whitespace-nowrap">
-                Kontaktformular
-              </Button>
-              <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="whitespace-nowrap">
-                WhatsApp schreiben
-              </Button>
-              <Button
-                href={`tel:${siteConfig.phoneTechnical}`}
-                variant="secondaryLight"
-                className="whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
-              >
-                Anrufen
-              </Button>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+                  Kontaktformular
+                </Button>
+                <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+                  WhatsApp schreiben
+                </Button>
+                <Button
+                  href={`tel:${siteConfig.phoneTechnical}`}
+                  variant="secondaryLight"
+                  className="w-full justify-center whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
+                >
+                  Anrufen
+                </Button>
+              </div>
             </div>
           </section>
 
@@ -58,7 +60,7 @@ export function SiteFooter() {
               alt="SCM Baupartner"
               width={240}
               height={72}
-              className="h-9 w-auto"
+              className="h-10 w-auto sm:h-11"
             />
             <p className="mt-3 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/90">
               Antwort in der Regel zeitnah
@@ -83,16 +85,6 @@ export function SiteFooter() {
               </div>
             </dl>
             <p className="mt-5 text-sm font-medium text-white/90">Professionell. Präzise. Persönlich.</p>
-            <div className="mt-5 border-t border-white/20 pt-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/75">{siteConfig.address.label}</p>
-              <address className="mt-2 not-italic text-sm leading-relaxed text-white/85">
-                {siteConfig.address.line1}
-                <br />
-                {siteConfig.address.line2}
-                <br />
-                {siteConfig.address.line3}
-              </address>
-            </div>
           </section>
         </div>
 

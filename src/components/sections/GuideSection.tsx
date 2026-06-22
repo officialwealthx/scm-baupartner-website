@@ -6,7 +6,7 @@ export function GuideSection() {
   return (
     <SectionShell
       title="Ratgeber"
-      description="Drei kompakte Beiträge zu Ablauf, Vorbereitung und neutralen Kostenfaktoren."
+      description="Drei kompakte Beiträge zu Ablauf, Vorbereitung und sauberen Entscheidungsgrundlagen."
     >
       <div data-reveal-stagger className="mt-8 grid gap-4 md:grid-cols-3">
         {guideArticles.map((article) => (

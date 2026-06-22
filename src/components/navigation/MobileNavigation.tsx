@@ -95,7 +95,7 @@ export function MobileNavigation() {
                     alt="SCM Baupartner"
                     width={200}
                     height={56}
-                    className="h-7 w-auto"
+                    className="h-7 w-auto select-none"
                   />
                   <LanguageSwitcher className="mt-2" />
                 </div>
