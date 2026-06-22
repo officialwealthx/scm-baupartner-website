@@ -1,35 +1,69 @@
 const trustFacts = [
-  "16 Mitarbeitende",
-  "30+ Kunden",
-  "200+ Aufträge",
-  "45+ Jahre kombinierte Familienerfahrung",
+  {
+    label: "8 Mitarbeitende",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-[1.125rem] w-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+        <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+        <path d="M3 19a5 5 0 0 1 10 0M13 19a5 5 0 0 1 8 0" />
+      </svg>
+    ),
+  },
+  {
+    label: "30+ Kunden",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-[1.125rem] w-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+        <path d="M12 4.75l2.24 4.55 5.03.73-3.64 3.55.86 5.02L12 16.25l-4.49 2.35.86-5.02-3.64-3.55 5.03-.73L12 4.75Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "200+ Aufträge",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-[1.125rem] w-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+        <path d="M7.25 12.25 10.5 15.5l6.25-6.25" />
+        <rect x="4" y="4" width="16" height="16" rx="3" />
+      </svg>
+    ),
+  },
+  {
+    label: "45+ Jahre kombinierte Familienerfahrung",
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-[1.125rem] w-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+        <path d="M12 4v8l4.5 2.5" />
+        <circle cx="12" cy="12" r="8" />
+      </svg>
+    ),
+  },
 ] as const;
 
 export function TrustBarSection() {
   return (
     <section
       aria-label="Qualität und Ablauf"
-      className="mt-8 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:mt-10 sm:p-8 lg:p-10"
+      className="rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:p-8 lg:p-10"
     >
       <h2 data-reveal="fade-up" className="text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
-        Qualität, Tempo und saubere Ausführung – von Anfang an.
+        Saubere Arbeit, klare Abläufe, verlässliche Umsetzung.
       </h2>
       <p data-reveal="fade-up" className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-        SCM Baupartner verbindet präzises Handwerk mit klaren Abläufen. Von der Anfrage über die Besichtigung bis zur sauberen Übergabe bleiben Aufwand, Termine und Ausführung nachvollziehbar.
+        SCM Baupartner sorgt dafür, dass Malerarbeiten, Gipserarbeiten und Renovationen sauber geplant, verständlich offeriert und zuverlässig ausgeführt werden.
       </p>
 
-      <div className="mt-7">
-        <ul data-reveal-stagger className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8">
+        <ul data-reveal-stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {trustFacts.map((fact) => (
             <li
-              key={fact}
-              className="scm-lift flex min-h-36 flex-col gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5"
+              key={fact.label}
+              className="scm-lift flex min-h-36 flex-col gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 sm:min-h-40 sm:p-6"
             >
-              <span aria-hidden="true" className="inline-flex h-11 w-11 items-center justify-center rounded-[0.9rem] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)]">
-                <span className="h-4 w-4 rounded-full border border-[var(--color-fresh-green)]/70" />
+              <span
+                aria-hidden="true"
+                className="inline-flex h-11 w-11 items-center justify-center rounded-[0.9rem] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
+              >
+                {fact.icon}
               </span>
               <p className="text-lg font-semibold leading-snug text-[var(--color-deep-green)] break-words">
-                {fact}
+                {fact.label}
               </p>
             </li>
           ))}

@@ -32,7 +32,7 @@ export function MainNavigation() {
           href="/"
           onClick={handleHomeClick}
           aria-label={`${siteConfig.name} — zur Startseite`}
-          className="group flex min-w-0 items-center"
+          className="group flex min-w-0 cursor-pointer select-none items-center"
         >
           <Image
             src="/brand/scm-logo-green-transparent.png"
@@ -40,7 +40,7 @@ export function MainNavigation() {
             width={260}
             height={72}
             priority
-            className="h-8 w-auto shrink-0 sm:h-9"
+            className="h-8 w-auto shrink-0 select-none sm:h-9"
           />
         </Link>
 

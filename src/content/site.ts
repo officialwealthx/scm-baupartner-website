@@ -15,7 +15,7 @@ export const siteConfig = {
   },
   openingHours: ["Mo–Fr 08:00–18:00", "Sa 09:30–14:30"],
   companyFacts: [
-    "16 Mitarbeitende",
+    "8 Mitarbeitende",
     "30+ Kunden",
     "200+ Aufträge",
     "45+ Jahre kombinierte Familienerfahrung",
