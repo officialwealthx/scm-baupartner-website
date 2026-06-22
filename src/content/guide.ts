@@ -12,9 +12,9 @@ export const guideArticles = [
       "Wie Terminfenster, Schutzmassnahmen und Kommunikation im Alltag sauber koordiniert werden.",
   },
   {
-    slug: "kostenfaktoren-malerarbeiten",
-    title: "Kostenfaktoren bei Malerarbeiten: neutral erklärt",
+    slug: "wohnungsrenovation-ablauf",
+    title: "Wie läuft eine saubere Wohnungsrenovation ab?",
     excerpt:
-      "Welche Faktoren den Aufwand beeinflussen und warum seriöse Offerten ohne Pauschalversprechen auskommen.",
+      "Welche Schritte, Abstimmungen und Schutzmassnahmen eine Wohnungsrenovation in Zürich planbar und sauber machen.",
   },
 ] as const;

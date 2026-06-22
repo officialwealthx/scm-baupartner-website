@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="relative isolate -mx-4 -mt-10 overflow-hidden bg-[var(--color-warm-off-white)] sm:-mx-6 lg:-mx-8">
+    <section className="relative isolate left-1/2 right-1/2 -mt-10 w-screen -translate-x-1/2 overflow-hidden bg-[var(--color-warm-off-white)]">
       <div aria-hidden="true" className="absolute inset-0">
         <Image
           src="/images/hero/af38c578147c774a82688d1913992fc8870252cfa44030da51f4c9d975adba95.png"
@@ -12,13 +12,13 @@ export function HeroSection() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[58%_center]"
+          className="object-cover object-[72%_center] sm:object-[65%_center] lg:object-[58%_center]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(247,248,245,0.97)_0%,rgba(247,248,245,0.92)_38%,rgba(247,248,245,0.58)_68%,rgba(247,248,245,0.3)_100%)] sm:bg-[linear-gradient(90deg,rgba(247,248,245,0.96)_0%,rgba(247,248,245,0.84)_34%,rgba(247,248,245,0.42)_66%,rgba(247,248,245,0.18)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(18,60,46,0.06)_0%,rgba(18,60,46,0)_52%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(98deg,rgba(247,248,245,0.985)_0%,rgba(247,248,245,0.95)_42%,rgba(247,248,245,0.7)_64%,rgba(247,248,245,0.4)_100%)] sm:bg-[linear-gradient(96deg,rgba(247,248,245,0.96)_0%,rgba(247,248,245,0.86)_40%,rgba(247,248,245,0.5)_67%,rgba(247,248,245,0.2)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(18,60,46,0.12)_0%,rgba(18,60,46,0.04)_34%,rgba(18,60,46,0)_60%)]" />
       </div>
-      <div className="relative mx-auto grid min-h-[82svh] w-full max-w-[1360px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-24 sm:px-6 sm:pb-14 sm:pt-24 md:min-h-[78svh] md:pb-16 lg:min-h-[calc(100svh-72px)] lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-0 lg:px-8 lg:pb-20 lg:pt-20">
-        <div className="relative z-20 min-w-0 max-w-3xl lg:pr-6">
+      <div className="relative mx-auto grid min-h-[74svh] w-full max-w-[1360px] grid-cols-1 items-center gap-8 px-4 pb-12 pt-20 sm:min-h-[80svh] sm:px-6 sm:pb-14 sm:pt-24 md:min-h-[76svh] md:pb-16 lg:min-h-[calc(100svh-72px)] lg:grid-cols-[minmax(0,48%)_minmax(0,52%)] lg:gap-0 lg:px-8 lg:pb-20 lg:pt-20">
+        <div className="relative z-20 min-w-0 max-w-3xl rounded-[var(--radius-lg)] bg-[rgba(247,248,245,0.62)] p-4 backdrop-blur-[1px] sm:p-5 lg:rounded-none lg:bg-transparent lg:p-0 lg:backdrop-blur-none lg:pr-6">
           <p data-reveal="fade-up" className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]/80 sm:text-sm">
             Maler und Gipser in Zürich
           </p>
@@ -34,18 +34,21 @@ export function HeroSection() {
           <p data-reveal="fade-up" className="mt-4 max-w-2xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
             Professionell, sauber und persönlich. Mit klarer Offerte, geschützter Umgebung und zuverlässiger Ausführung.
           </p>
+          <p data-reveal="fade-up" className="mt-4 inline-flex items-center rounded-full border border-[var(--color-border-green-gray)] bg-white/88 px-3 py-1.5 text-xs font-semibold text-[var(--color-deep-green)]">
+            Persönliche Betreuung vom Erstkontakt bis zur Übergabe
+          </p>
 
-          <div data-reveal="fade-up" className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2 lg:flex lg:flex-wrap">
-            <Button href="/offerte" variant="primaryLight" className="w-full whitespace-nowrap sm:w-auto">
+          <div data-reveal="fade-up" className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <Button href="/offerte" variant="primaryLight" className="w-full whitespace-nowrap">
               Kostenlose Offerte
             </Button>
-            <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full whitespace-nowrap sm:w-auto">
+            <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full whitespace-nowrap">
               WhatsApp schreiben
             </Button>
             <Button
               href={`tel:${siteConfig.phoneTechnical}`}
               variant="secondaryLight"
-              className="w-full whitespace-nowrap border-[var(--color-border-green-gray)] bg-white sm:col-span-2 sm:w-auto"
+              className="w-full whitespace-nowrap border-[var(--color-border-green-gray)] bg-white sm:col-span-2 lg:col-span-1"
             >
               Telefon
             </Button>
