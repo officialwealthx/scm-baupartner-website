@@ -23,9 +23,21 @@ export function SiteFooter() {
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
               Senden Sie uns die wichtigsten Eckdaten. SCM Baupartner prüft Ihr Projekt und meldet sich mit den nächsten sinnvollen Schritten.
             </p>
+            <div className="mt-5 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">Kontaktwege</p>
+              <ul className="mt-3 grid gap-2 text-sm text-[var(--color-soft-graphite)]">
+                <li>Offerte für konkrete Projekte</li>
+                <li>Kontaktformular für allgemeine Anfrage</li>
+                <li>WhatsApp für schnelle Rückfrage</li>
+                <li>Telefon für direkte Abstimmung</li>
+              </ul>
+            </div>
             <div className="mt-7 flex flex-wrap gap-3">
               <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap">
                 Kostenlose Offerte
+              </Button>
+              <Button href="/kontakt" variant="secondaryLight" className="whitespace-nowrap">
+                Kontaktformular
               </Button>
               <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="whitespace-nowrap">
                 WhatsApp schreiben
@@ -44,10 +56,13 @@ export function SiteFooter() {
             <Image
               src="/brand/scm-logo-white-transparent.png"
               alt="SCM Baupartner"
-              width={220}
-              height={64}
-              className="h-8 w-auto"
+              width={240}
+              height={72}
+              className="h-9 w-auto"
             />
+            <p className="mt-3 inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.12em] text-white/90">
+              Antwort in der Regel zeitnah
+            </p>
             <h3 className="mt-4 text-sm font-semibold uppercase tracking-[0.16em] text-white/90">Kontakt</h3>
             <dl className="mt-4 space-y-3 text-sm">
               <div className="grid gap-1">
@@ -67,6 +82,7 @@ export function SiteFooter() {
                 </dd>
               </div>
             </dl>
+            <p className="mt-5 text-sm font-medium text-white/90">Professionell. Präzise. Persönlich.</p>
             <div className="mt-5 border-t border-white/20 pt-4">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/75">{siteConfig.address.label}</p>
               <address className="mt-2 not-italic text-sm leading-relaxed text-white/85">

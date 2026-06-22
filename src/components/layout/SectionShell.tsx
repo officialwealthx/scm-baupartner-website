@@ -67,7 +67,7 @@ export function SectionShell({
     <section
       id={id}
       aria-label={ariaLabel}
-      className={cn("mt-14 first:mt-0 sm:mt-16 lg:mt-[4.75rem]", variantWrapper[variant], className)}
+      className={cn("mt-16 first:mt-0 sm:mt-[4.5rem] lg:mt-[5.25rem]", variantWrapper[variant], className)}
     >
       {hasHeader && (
         <div className={cn("scm-fade-up", headWidth[width], headerClassName)} data-reveal="fade-up">

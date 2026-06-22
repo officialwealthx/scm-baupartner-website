@@ -9,14 +9,13 @@ export function TrustBarSection() {
   return (
     <section
       aria-label="Qualität und Ablauf"
-      className="mt-8 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:mt-9 sm:p-8 lg:p-10"
+      className="mt-8 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:mt-10 sm:p-8 lg:p-10"
     >
-      <div data-reveal="line" className="scm-line-draw-ready h-px w-full bg-[var(--color-border-green-gray)]" />
-      <h2 data-reveal="fade-up" className="mt-6 text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
-        Wir stehen für Qualität, Tempo und saubere Ausführung.
+      <h2 data-reveal="fade-up" className="text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
+        Qualität, Tempo und saubere Ausführung – von Anfang an.
       </h2>
       <p data-reveal="fade-up" className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-        SCM Baupartner verbindet präzises Handwerk mit klaren Abläufen. Für Privatkunden, Firmen und Immobilienbesitzer entstehen so saubere Ergebnisse, transparente Offerten und eine verlässliche Umsetzung in Zürich und Umgebung.
+        SCM Baupartner verbindet präzises Handwerk mit klaren Abläufen. Von der Anfrage über die Besichtigung bis zur sauberen Übergabe bleiben Aufwand, Termine und Ausführung nachvollziehbar.
       </p>
 
       <div className="mt-7">
