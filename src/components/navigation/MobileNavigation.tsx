@@ -90,13 +90,16 @@ export function MobileNavigation() {
             <div className="flex h-full flex-col overflow-hidden">
               <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white/85 px-5 py-4">
                 <div>
-                  <Image
-                    src="/brand/scm-logo-green-transparent.png"
-                    alt="SCM Baupartner"
-                    width={200}
-                    height={56}
-                    className="h-7 w-auto select-none"
-                  />
+                  <Link href="/" onClick={(event) => handleNavigationClick(event, "/")} aria-label="Zur Startseite" className="inline-flex cursor-pointer select-none">
+                    <Image
+                      src="/brand/scm-logo-green-transparent.png"
+                      alt="SCM Baupartner"
+                      width={200}
+                      height={56}
+                      draggable={false}
+                      className="h-7 w-auto cursor-pointer select-none"
+                    />
+                  </Link>
                   <LanguageSwitcher className="mt-2" />
                 </div>
                 <button

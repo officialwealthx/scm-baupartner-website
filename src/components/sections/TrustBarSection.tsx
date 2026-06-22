@@ -12,7 +12,9 @@ const trustFacts = [
     label: "30+ Kunden",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.125rem] w-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-        <path d="M12 4.75l2.24 4.55 5.03.73-3.64 3.55.86 5.02L12 16.25l-4.49 2.35.86-5.02-3.64-3.55 5.03-.73L12 4.75Z" />
+        <circle cx="9" cy="8" r="2.25" />
+        <circle cx="15.5" cy="9" r="2" />
+        <path d="M4.5 18a4.6 4.6 0 0 1 9.2 0M13 18a3.8 3.8 0 0 1 7.5 0" />
       </svg>
     ),
   },
@@ -26,11 +28,11 @@ const trustFacts = [
     ),
   },
   {
-    label: "45+ Jahre kombinierte Familienerfahrung",
+    label: "Handwerkserfahrung seit 1981",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.125rem] w-[1.125rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-        <path d="M12 4v8l4.5 2.5" />
-        <circle cx="12" cy="12" r="8" />
+        <path d="M4.5 16.5h15M7.5 16.5v-8M12 16.5V6M16.5 16.5V9.5" />
+        <path d="M6.5 6.5h1.8M11 4.5h1.8M15.5 7.5h1.8" />
       </svg>
     ),
   },
@@ -40,7 +42,7 @@ export function TrustBarSection() {
   return (
     <section
       aria-label="Qualität und Ablauf"
-      className="rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-6 sm:p-8 lg:p-10"
+      className="rounded-[var(--radius-xl)] bg-[var(--color-porcelain-surface)] p-6 shadow-[var(--shadow-soft)] sm:p-8 lg:p-10"
     >
       <h2 data-reveal="fade-up" className="text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
         Saubere Arbeit, klare Abläufe, verlässliche Umsetzung.
@@ -54,7 +56,7 @@ export function TrustBarSection() {
           {trustFacts.map((fact) => (
             <li
               key={fact.label}
-              className="scm-lift flex min-h-36 flex-col gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 sm:min-h-40 sm:p-6"
+              className="scm-lift flex min-h-36 flex-col gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-40 sm:p-6"
             >
               <span
                 aria-hidden="true"

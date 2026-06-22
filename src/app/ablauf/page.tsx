@@ -38,7 +38,7 @@ export default function AblaufPage() {
       <h1 className="mt-3 text-3xl font-semibold text-[var(--color-deep-green)] sm:text-4xl">So arbeiten wir bei SCM Baupartner</h1>
       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
         Für Projekte in Zürich und Umgebung arbeiten wir mit einem klaren, ruhigen Prozess. Unser Team mit 8 Mitarbeitenden bringt
-        45+ Jahre kombinierte Familienerfahrung in die Umsetzung ein.
+        Handwerkserfahrung seit 1981 in die Umsetzung ein.
       </p>
 
       <ol className="mt-8 grid gap-4">

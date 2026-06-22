@@ -40,7 +40,8 @@ export function MainNavigation() {
             width={260}
             height={72}
             priority
-            className="h-8 w-auto shrink-0 select-none sm:h-9"
+            draggable={false}
+            className="h-8 w-auto shrink-0 cursor-pointer select-none sm:h-9"
           />
         </Link>
 
