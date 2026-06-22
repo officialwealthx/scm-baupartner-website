@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-24 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)]" data-reveal="fade-up">
+    <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1200px] px-4 py-14 sm:px-6 lg:px-8">
         <div className="relative grid gap-8 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-6 sm:p-8 lg:grid-cols-[1.06fr_0.94fr] lg:p-10">
           <section className="relative z-10">
@@ -15,14 +15,14 @@ export function SiteFooter() {
               Bereit für eine saubere Umsetzung?
             </h2>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-              Senden Sie uns die wichtigsten Eckdaten. SCM Baupartner prüft Ihr Projekt und meldet sich mit den nächsten sinnvollen Schritten.
+              Senden Sie uns die wichtigsten Eckdaten. Wir prüfen Ihr Projekt und melden uns mit den nächsten sinnvollen Schritten.
             </p>
             <div className="mt-5 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">Kontaktwege</p>
               <ul className="mt-3 grid gap-2 text-sm text-[var(--color-soft-graphite)]">
                 <li>Offerte für konkrete Projekte</li>
-                <li>Kontaktformular für allgemeine Anfrage</li>
-                <li>WhatsApp für schnelle Rückfrage</li>
+                <li>Kontaktformular für allgemeine Anfragen</li>
+                <li>WhatsApp für schnelle Rückfragen</li>
                 <li>Telefon für direkte Abstimmung</li>
               </ul>
             </div>
@@ -30,21 +30,21 @@ export function SiteFooter() {
               <Button href="/offerte" variant="primaryLight" className="w-full justify-center whitespace-nowrap">
                 Kostenlose Offerte
               </Button>
-              <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-3">
-                <div className="grid gap-3 sm:grid-cols-3">
-                <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
-                  Kontaktformular
-                </Button>
-                <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
-                  WhatsApp schreiben
-                </Button>
-                <Button
-                  href={`tel:${siteConfig.phoneTechnical}`}
-                  variant="secondaryLight"
-                  className="w-full justify-center whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
-                >
-                  Anrufen
-                </Button>
+              <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-3 sm:p-4">
+                <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+                  <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+                    Kontaktformular
+                  </Button>
+                  <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
+                    WhatsApp schreiben
+                  </Button>
+                  <Button
+                    href={`tel:${siteConfig.phoneTechnical}`}
+                    variant="secondaryLight"
+                    className="w-full justify-center whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
+                  >
+                    Anrufen
+                  </Button>
                 </div>
               </div>
             </div>

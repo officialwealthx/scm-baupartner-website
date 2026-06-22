@@ -3,7 +3,7 @@ import { SectionShell } from "@/components/layout/SectionShell";
 const imageSlots = [
   {
     label: "Materialdetail",
-    hint: "Material und Ausführung.",
+    hint: "Material und Oberflächenqualität.",
     span: "lg:col-span-3 lg:row-span-2",
     ratio: "min-h-64 lg:min-h-[26rem]",
   },
@@ -42,8 +42,8 @@ const imageSlots = [
 export function InsightsSection() {
   return (
     <SectionShell
-      title="Einblicke in Material, Räume und Ausführung."
-      description="Editoriale Bildarchitektur für echte SCM Baupartner Aufnahmen."
+      title="Projekt Einblicke aus der Praxis."
+      description="Bereiche, die wir bei Malerarbeiten, Gipserarbeiten und Renovationen regelmässig umsetzen."
       width="wide"
     >
       <div data-reveal-stagger className="mt-10 grid auto-rows-min gap-4 sm:grid-cols-2 lg:grid-cols-6">

@@ -45,10 +45,10 @@ export function TrustBarSection() {
       className="rounded-[var(--radius-xl)] bg-[var(--color-porcelain-surface)] p-6 shadow-[var(--shadow-soft)] sm:p-8 lg:p-10"
     >
       <h2 data-reveal="fade-up" className="text-balance text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2rem]">
-        Saubere Arbeit, klare Abläufe, verlässliche Umsetzung.
+        Sauber geplant. Präzise ausgeführt. Verlässlich übergeben.
       </h2>
       <p data-reveal="fade-up" className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-soft-graphite)] sm:text-base">
-        SCM Baupartner sorgt dafür, dass Malerarbeiten, Gipserarbeiten und Renovationen sauber geplant, verständlich offeriert und zuverlässig ausgeführt werden.
+        Von der Anfrage bis zur Übergabe bleiben Zuständigkeiten, Termine und Ausführung klar.
       </p>
 
       <div className="mt-8">
@@ -56,17 +56,17 @@ export function TrustBarSection() {
           {trustFacts.map((fact) => (
             <li
               key={fact.label}
-              className="scm-lift flex min-h-36 flex-col gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-40 sm:p-6"
+              className="scm-lift flex min-h-36 flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-40 sm:p-6"
             >
               <span
                 aria-hidden="true"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-[0.9rem] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.9rem] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
               >
                 {fact.icon}
               </span>
-              <p className="text-lg font-semibold leading-snug text-[var(--color-deep-green)] break-words">
-                {fact.label}
-              </p>
+              <div className="mt-5 flex flex-1 items-end">
+                <p className="text-lg font-semibold leading-snug text-[var(--color-deep-green)] break-words">{fact.label}</p>
+              </div>
             </li>
           ))}
         </ul>

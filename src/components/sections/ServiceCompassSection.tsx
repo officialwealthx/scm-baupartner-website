@@ -4,19 +4,19 @@ import { SectionShell } from "@/components/layout/SectionShell";
 const services = [
   {
     title: "Malerarbeiten",
-    description: "Saubere Anstriche, Oberflächenvorbereitung und präzise Ausführung für Innenräume.",
+    description: "Wände, Decken und Innenräume sauber vorbereitet und gleichmässig gestrichen.",
   },
   {
     title: "Gipserarbeiten und Verputz",
-    description: "Glatte Flächen, Reparaturen, Verputz und saubere Vorarbeiten für hochwertige Ergebnisse.",
+    description: "Verputz, Reparaturen und Vorarbeiten für glatte und belastbare Oberflächen.",
   },
   {
     title: "Fassaden und Renovationen",
-    description: "Fassadenarbeiten, Sanierungen, Ausbesserungen und Renovationen für Werterhalt und gepflegte Gebäude.",
+    description: "Fassaden pflegen, Schäden beheben und Gebäude Schritt für Schritt erneuern.",
   },
   {
     title: "Schutz und Spezialarbeiten",
-    description: "Graffitientfernung, Graffitischutz, Schimmelbehandlung, Spritzlackierung und Feinarbeiten.",
+    description: "Graffiti entfernen, Schimmel behandeln und Spezialflächen präzise ausführen.",
   },
 ] as const;
 
@@ -24,8 +24,8 @@ export function ServiceCompassSection() {
   return (
     <SectionShell
       id="leistungen"
-      title="Unsere Bau und Oberflächenleistungen"
-      description="Von Malerarbeiten und Gipserarbeiten bis zu Fassaden, Renovationen und Ausbesserungen: SCM Baupartner deckt die wichtigsten Arbeiten für saubere Räume und gepflegte Immobilien in Zürich und Umgebung ab."
+      title="Leistungen für saubere Oberflächen und gepflegte Immobilien."
+      description="Malerarbeiten, Gipserarbeiten, Fassadenarbeiten und Renovationen mit klarer Planung und sauberer Ausführung."
     >
       <div data-reveal-stagger className="mt-10 grid gap-4 md:grid-cols-2">
         {services.map((service) => (

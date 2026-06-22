@@ -7,15 +7,15 @@ import { SectionShell } from "@/components/layout/SectionShell";
 const steps = [
   {
     title: "Anfrage",
-    description: "Sie senden die Eckdaten, damit Umfang und Prioritäten klar aufgenommen werden.",
+    description: "Sie senden die Eckdaten. Wir klären Umfang, Prioritäten und nächste Schritte.",
   },
   {
     title: "Besichtigung",
-    description: "Wenn nötig, prüfen wir das Projekt vor Ort und stimmen die Ausführung sauber ab.",
+    description: "Wenn nötig prüfen wir das Projekt vor Ort und stimmen die Ausführung sauber ab.",
   },
   {
     title: "Offerte",
-    description: "Sie erhalten eine transparente Offerte mit klar nachvollziehbaren Positionen.",
+    description: "Sie erhalten eine klare Offerte mit nachvollziehbaren Positionen.",
   },
   {
     title: "Ausführung",
@@ -23,7 +23,7 @@ const steps = [
   },
   {
     title: "Übergabe",
-    description: "Zum Abschluss erfolgt die geordnete Übergabe mit gemeinsamem Qualitätscheck.",
+    description: "Zum Abschluss folgt die geordnete Übergabe mit gemeinsamem Qualitätscheck.",
   },
 ] as const;
 
@@ -137,8 +137,8 @@ export function ProcessTimelineSection() {
   return (
     <SectionShell
       id="ablauf"
-      title="Ein Ablauf, der Projekte ruhig und nachvollziehbar macht."
-      description="Von der Anfrage bis zur Übergabe: Jeder Schritt ist klar aufgebaut, damit Termine, Offerte und Ausführung sauber zusammenpassen."
+      title="Ein Ablauf, der Ihnen von Anfang bis Ende Überblick gibt."
+      description="Von der Anfrage bis zur Übergabe sind alle Schritte klar aufgebaut und sauber abgestimmt."
     >
       <div className="mt-10 hidden lg:block">
         <div ref={sectionRef} className="relative min-h-[250vh]">
