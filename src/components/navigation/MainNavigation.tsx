@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { FocusEvent, KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from "react";
 import { desktopNavigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -72,13 +72,6 @@ export function MainNavigation() {
     }
   };
 
-  const handleItemBlur = (event: FocusEvent<HTMLLIElement>) => {
-    const nextFocused = event.relatedTarget as Node | null;
-    if (!event.currentTarget.contains(nextFocused)) {
-      setOpenMenu(null);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/78">
       <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 xl:px-8">
@@ -111,14 +104,12 @@ export function MainNavigation() {
                 const isActive = isHashLink ? false : normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
                 const hasChildren = Boolean(item.children?.length);
                 const isOpen = openMenu === item.label;
-                const menuColumns = item.children && item.children.length > 8 ? 3 : 2;
+                const menuColumns = item.children && item.children.length > 9 ? 3 : 2;
                 const menuId = `mega-${item.label.toLowerCase().replaceAll(" ", "-")}`;
                 return (
                   <li
                     key={item.label}
                     className="relative"
-                    onMouseLeave={() => setOpenMenu((previous) => (previous === item.label ? null : previous))}
-                    onBlur={handleItemBlur}
                   >
                     {hasChildren ? (
                       <button
@@ -128,7 +119,7 @@ export function MainNavigation() {
                         aria-haspopup="true"
                         onMouseEnter={() => setOpenMenu(item.label)}
                         onFocus={() => setOpenMenu(item.label)}
-                        onClick={() => setOpenMenu((previous) => (previous === item.label ? null : item.label))}
+                        onClick={() => setOpenMenu(item.label)}
                         onKeyDown={(event) => handleMenuButtonKeyDown(event, item.label)}
                         className={cn(
                           "inline-flex h-10 cursor-pointer items-center whitespace-nowrap rounded-full px-3 text-[0.84rem] font-medium leading-none transition-colors xl:px-3.5",
@@ -159,13 +150,13 @@ export function MainNavigation() {
                       <div
                         id={menuId}
                         role="menu"
-                        className="absolute left-1/2 top-[calc(100%+0.6rem)] z-50 w-[min(50rem,74vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
+                        className="absolute left-1/2 top-[calc(100%+0.6rem)] z-50 w-[min(46rem,70vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
                       >
                         <div className="mb-4 border-b border-[var(--color-border-green-gray)] pb-3.5">
                           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">{item.label}</p>
-                          <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">Übersicht der vorgesehenen Bereiche.</p>
+                          <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">Geordnet nach Themenbereichen.</p>
                         </div>
-                        <div className={cn("grid gap-4", menuColumns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
+                        <div className={cn("grid gap-3", menuColumns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
                           {splitIntoColumns(item.children ?? [], menuColumns).map((column, columnIndex) => (
                             <ul key={`${item.label}-column-${columnIndex}`} className="space-y-1.5">
                               {column.map((child) => (

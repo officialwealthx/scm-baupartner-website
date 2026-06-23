@@ -11,15 +11,15 @@ const steps = [
   },
   {
     title: "Besichtigung",
-    description: "Wenn nötig prüfen wir das Projekt vor Ort und stimmen die Ausführung sauber ab.",
+    description: "Wenn nötig prüfen wir das Projekt vor Ort und stimmen die Ausführung präzise ab.",
   },
   {
     title: "Offerte",
-    description: "Sie erhalten eine klare Offerte mit nachvollziehbaren Positionen.",
+    description: "Sie erhalten eine klare Offerte mit nachvollziehbaren Positionen und Abläufen.",
   },
   {
     title: "Ausführung",
-    description: "Die Arbeiten werden strukturiert umgesetzt, sauber koordiniert und termintreu geführt.",
+    description: "Die Arbeiten werden strukturiert umgesetzt, sauber koordiniert und termingerecht geführt.",
   },
   {
     title: "Übergabe",
@@ -138,7 +138,7 @@ export function ProcessTimelineSection() {
     <SectionShell
       id="ablauf"
       title="Ein Ablauf, der den Überblick sichert."
-      description="Von der Anfrage bis zur Übergabe sind Zuständigkeiten, Termine und Ausführung klar abgestimmt."
+      description="Von der Anfrage bis zur Übergabe bleiben Zuständigkeiten, Termine und Ausführung klar abgestimmt."
     >
       <div className="mt-10 hidden lg:block">
         <div ref={sectionRef} className="relative min-h-[250vh]">

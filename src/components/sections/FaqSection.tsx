@@ -5,7 +5,7 @@ export function FaqSection() {
   return (
     <SectionShell
       title="Häufige Fragen zur Zusammenarbeit."
-      description="Klare Antworten zu Offerte, Ablauf und Ausführung."
+      description="Klare Antworten zu Offerte, Ablauf und Ausführung ohne unnötige Umwege."
       width="narrow"
     >
       <div data-reveal-stagger className="mt-8 space-y-3">
