@@ -1,5 +1,6 @@
 export { HeroSection } from "./HeroSection";
 export { TrustBarSection } from "./TrustBarSection";
+export { StoryTeaserSection } from "./StoryTeaserSection";
 export { ServiceCompassSection } from "./ServiceCompassSection";
 export { PortalPreviewSection } from "./PortalPreviewSection";
 export { ProcessTimelineSection } from "./ProcessTimelineSection";

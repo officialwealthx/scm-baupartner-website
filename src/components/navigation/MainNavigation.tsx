@@ -3,204 +3,260 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import type { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from "react";
-import { desktopNavigationItems } from "@/content/navigation";
+import { useEffect, useMemo, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
+import { desktopQuickLinks, menuPanelGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { MobileNavigation } from "./MobileNavigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Button } from "@/components/ui/Button";
 
 function normalizePath(href: string) {
   return href.split("#")[0] || "/";
 }
 
-function splitIntoColumns<T>(items: readonly T[], columns: number) {
-  const chunkSize = Math.ceil(items.length / columns);
-  const chunks: T[][] = [];
-  for (let index = 0; index < columns; index += 1) {
-    const start = index * chunkSize;
-    const slice = items.slice(start, start + chunkSize);
-    if (slice.length) chunks.push(slice);
-  }
-  return chunks;
+function SearchIcon({ dark }: { dark: boolean }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" className="h-4 w-4" aria-hidden="true">
+      <circle cx="11" cy="11" r="6.25" />
+      <path d="m16 16 3.75 3.75" />
+      <title>{dark ? "Suche" : "Suche"}</title>
+    </svg>
+  );
 }
 
 export function MainNavigation() {
   const pathname = usePathname();
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const navWrapperRef = useRef<HTMLDivElement | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
 
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 12);
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen || typeof document === "undefined") return;
+
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpenMenu(null);
+      if (event.key === "Escape") setIsMenuOpen(false);
     };
 
-    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node;
-      if (navWrapperRef.current && !navWrapperRef.current.contains(target)) {
-        setOpenMenu(null);
-      }
-    };
-
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleEscape);
-    window.addEventListener("mousedown", handleOutsideClick);
-    window.addEventListener("touchstart", handleOutsideClick, { passive: true });
 
     return () => {
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleEscape);
-      window.removeEventListener("mousedown", handleOutsideClick);
-      window.removeEventListener("touchstart", handleOutsideClick);
     };
-  }, []);
+  }, [isMenuOpen]);
 
   const handleHomeClick = (event: ReactMouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/" && typeof window !== "undefined") {
       event.preventDefault();
       window.scrollTo({ top: 0, behavior: "auto" });
     }
-    setOpenMenu(null);
+    setIsMenuOpen(false);
   };
 
-  const handleMenuButtonKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>, label: string) => {
-    if (event.key === "ArrowDown" || event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      setOpenMenu(label);
-    }
-  };
+  const headerDark = !isScrolled && !isMenuOpen;
 
-  return (
-    <header className="sticky top-0 z-50 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/78">
-      <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 xl:px-8">
-        <Link
-          href="/"
-          onClick={handleHomeClick}
-          aria-label={`${siteConfig.name} — zur Startseite`}
-          className="group flex min-w-0 cursor-pointer select-none items-center"
-        >
-          <Image
-            src="/brand/scm-logo-green-transparent.png"
-            alt="SCM Baupartner"
-            width={260}
-            height={72}
-            priority
-            draggable={false}
-            className="h-8 w-auto shrink-0 cursor-pointer select-none sm:h-9"
-          />
-        </Link>
+  const menuPanel = useMemo(
+    () => (
+      <div className="fixed inset-0 top-[73px] z-[1000] hidden min-[1200px]:block">
+        <button
+          type="button"
+          aria-label="Menü schliessen"
+          className="absolute inset-0 bg-[rgba(6,16,11,0.35)] backdrop-blur-[1px]"
+          onClick={() => setIsMenuOpen(false)}
+        />
+        <div className="relative mx-auto mt-4 w-[min(1280px,96vw)] overflow-hidden rounded-[28px] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]">
+          <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-6 py-4 lg:px-8">
+            <Image
+              src="/brand/scm-logo-green-transparent.png"
+              alt="SCM Baupartner"
+              width={220}
+              height={64}
+              className="h-8 w-auto"
+            />
+            <div className="flex items-center gap-2">
+              <Link
+                href="/offerte"
+                onClick={() => setIsMenuOpen(false)}
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-active-green)]"
+              >
+                Offerte anfragen
+              </Link>
+              <button
+                type="button"
+                onClick={() => setIsMenuOpen(false)}
+                className="inline-flex min-h-11 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-deep-green)]"
+              >
+                Schliessen
+              </button>
+            </div>
+          </div>
 
-        <div ref={navWrapperRef} className="hidden min-[1180px]:flex min-[1180px]:items-center min-[1180px]:gap-2">
-          <nav
-            aria-label="Hauptnavigation"
-            className="rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-1.5 py-1"
-          >
-            <ul className="flex items-center gap-0">
-              {desktopNavigationItems.map((item) => {
-                const normalized = normalizePath(item.href);
-                const isHashLink = item.href.includes("#");
-                const isActive = isHashLink ? false : normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
-                const hasChildren = Boolean(item.children?.length);
-                const isOpen = openMenu === item.label;
-                const menuColumns = item.children && item.children.length > 9 ? 3 : 2;
-                const menuId = `mega-${item.label.toLowerCase().replaceAll(" ", "-")}`;
-                return (
-                  <li
-                    key={item.label}
-                    className="relative"
+          <nav aria-label="Menü" className="max-h-[calc(100svh-180px)] overflow-y-auto px-6 py-6 lg:px-8 lg:py-7">
+            <ul className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {menuPanelGroups.map((group) => (
+                <li key={group.title} className="rounded-[20px] border border-[var(--color-border-green-gray)] bg-white p-4">
+                  <Link
+                    href={group.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="mb-3 inline-flex text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-deep-green)]"
                   >
-                    {hasChildren ? (
-                      <button
-                        type="button"
-                        aria-expanded={isOpen}
-                        aria-controls={menuId}
-                        aria-haspopup="true"
-                        onMouseEnter={() => setOpenMenu(item.label)}
-                        onFocus={() => setOpenMenu(item.label)}
-                        onClick={() => setOpenMenu(item.label)}
-                        onKeyDown={(event) => handleMenuButtonKeyDown(event, item.label)}
-                        className={cn(
-                          "inline-flex h-10 cursor-pointer items-center whitespace-nowrap rounded-full px-3 text-[0.84rem] font-medium leading-none transition-colors xl:px-3.5",
-                          isActive || isOpen
-                            ? "bg-white text-[var(--color-deep-green)] ring-1 ring-[var(--color-border-green-gray)]"
-                            : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
-                        )}
-                      >
-                        {item.label}
-                      </button>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={() => setOpenMenu(null)}
-                        aria-current={isActive ? "page" : undefined}
-                        className={cn(
-                          "inline-flex h-10 items-center whitespace-nowrap rounded-full px-3 text-[0.84rem] font-medium leading-none transition-colors xl:px-3.5",
-                          isActive
-                            ? "bg-white text-[var(--color-deep-green)] ring-1 ring-[var(--color-border-green-gray)]"
-                            : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
-                        )}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-
-                    {hasChildren && isOpen && (
-                      <div
-                        id={menuId}
-                        role="menu"
-                        className="absolute left-1/2 top-[calc(100%+0.6rem)] z-50 w-[min(46rem,70vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
-                      >
-                        <div className="mb-4 border-b border-[var(--color-border-green-gray)] pb-3.5">
-                          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">{item.label}</p>
-                          <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">Geordnet nach Themenbereichen.</p>
-                        </div>
-                        <div className={cn("grid gap-3", menuColumns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
-                          {splitIntoColumns(item.children ?? [], menuColumns).map((column, columnIndex) => (
-                            <ul key={`${item.label}-column-${columnIndex}`} className="space-y-1.5">
-                              {column.map((child) => (
-                                <li key={`${item.label}-${child.label}`}>
-                                  <Link
-                                    href={child.href}
-                                    onClick={() => setOpenMenu(null)}
-                                    role="menuitem"
-                                    className="block rounded-[0.8rem] border border-transparent px-2.5 py-2.5 transition-colors hover:border-[var(--color-border-green-gray)] hover:bg-[var(--color-mist-green)] focus-visible:border-[var(--color-fresh-green)] focus-visible:bg-[var(--color-mist-green)]"
-                                  >
-                                    <p className="text-sm font-semibold text-[var(--color-deep-green)]">{child.label}</p>
-                                    {child.description && <p className="mt-0.5 text-xs leading-relaxed text-[var(--color-soft-graphite)]">{child.description}</p>}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
+                    {group.title}
+                  </Link>
+                  <ul className="space-y-1.5">
+                    {group.items.map((item) => (
+                      <li key={`${group.title}-${item.label}`}>
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
+                        >
+                          <span aria-hidden="true" className="text-[var(--color-fresh-green)]">
+                            ›
+                          </span>
+                          <span>{item.label}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
             </ul>
           </nav>
+        </div>
+      </div>
+    ),
+    [setIsMenuOpen],
+  );
 
-          <LanguageSwitcher className="scale-[0.97]" />
-          <span aria-hidden="true" className="h-6 w-px bg-[var(--color-border-green-gray)]" />
-          <Button
-            href="/login"
-            variant="ghost"
-            className="whitespace-nowrap rounded-full border border-[var(--color-deep-green)] bg-white px-4 text-[0.8rem] text-[var(--color-deep-green)] hover:border-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]"
+  return (
+    <header
+      className={cn(
+        "sticky top-0 z-[1010] border-b transition-colors duration-300",
+        headerDark
+          ? "border-white/16 bg-[var(--color-deep-green)] text-white"
+          : "border-[var(--color-border-green-gray)] bg-white/95 text-[var(--color-deep-green)] backdrop-blur supports-[backdrop-filter]:bg-white/88",
+      )}
+    >
+      <div className="mx-auto flex h-[73px] w-full max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+        <div className="flex min-w-0 items-center gap-2.5 lg:gap-3">
+          <Link
+            href="/"
+            onClick={handleHomeClick}
+            aria-label={`${siteConfig.name} — zur Startseite`}
+            className="inline-flex min-h-11 items-center rounded-[12px] bg-white px-2.5 py-1"
           >
-            Login
-          </Button>
-          <Button href="/offerte" variant="primaryLight" className="whitespace-nowrap px-3 text-[0.8rem]">
-            Offerte anfragen
-          </Button>
+            <Image
+              src="/brand/scm-logo-green-transparent.png"
+              alt="SCM Baupartner"
+              width={210}
+              height={60}
+              priority
+              draggable={false}
+              className="h-8 w-auto shrink-0"
+            />
+          </Link>
+
+          <span aria-hidden="true" className={cn("hidden h-8 w-px min-[1200px]:block", headerDark ? "bg-white/30" : "bg-[var(--color-border-green-gray)]")} />
+
+          <div className="hidden min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-2">
+            <button
+              type="button"
+              aria-expanded={isMenuOpen}
+              aria-controls="desktop-menu-panel"
+              onClick={() => setIsMenuOpen((previous) => !previous)}
+              className={cn(
+                "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors",
+                headerDark
+                  ? "border-white/30 bg-white/12 text-white hover:bg-white/18"
+                  : "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)] hover:bg-[var(--color-soft-green)]",
+              )}
+            >
+              <span aria-hidden="true" className="flex h-4 w-4 flex-col justify-between">
+                <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
+                <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
+                <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
+              </span>
+              Menü
+            </button>
+
+            {desktopQuickLinks.map((item) => {
+              const normalized = normalizePath(item.href);
+              const isActive = normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={cn(
+                    "inline-flex min-h-11 items-center rounded-full border px-3.5 text-sm font-medium transition-colors",
+                    headerDark
+                      ? isActive
+                        ? "border-white/40 bg-white/16 text-white"
+                        : "border-white/24 text-white/92 hover:bg-white/12"
+                      : isActive
+                        ? "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
+                        : "border-transparent text-[var(--color-soft-graphite)] hover:border-[var(--color-border-green-gray)] hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
-        <div className="min-[1180px]:hidden">
+        <div className="hidden min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-2">
+          <Link
+            href="/ratgeber"
+            className={cn(
+              "inline-flex min-h-11 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition-colors",
+              headerDark
+                ? "border-white/24 text-white hover:bg-white/12"
+                : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]",
+            )}
+          >
+            <SearchIcon dark={headerDark} />
+            Suche
+          </Link>
+          <Link
+            href="/login"
+            className={cn(
+              "inline-flex min-h-11 items-center rounded-full border px-3.5 text-sm font-medium transition-colors",
+              headerDark
+                ? "border-white/24 text-white hover:bg-white/12"
+                : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]",
+            )}
+          >
+            Login
+          </Link>
+          <LanguageSwitcher tone={headerDark ? "dark" : "light"} />
+          <Link
+            href="/offerte"
+            className="inline-flex min-h-11 items-center rounded-full border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-3.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-active-green)]"
+          >
+            Offerte
+          </Link>
+        </div>
+
+        <div className="min-[1200px]:hidden">
           <MobileNavigation />
         </div>
       </div>
+
+      {isMenuOpen ? <div id="desktop-menu-panel">{menuPanel}</div> : null}
     </header>
   );
 }

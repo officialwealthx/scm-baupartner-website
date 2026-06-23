@@ -1,6 +1,7 @@
 import {
   HeroSection,
   TrustBarSection,
+  StoryTeaserSection,
   ServiceCompassSection,
   ProcessTimelineSection,
   PortalPreviewSection,
@@ -21,6 +22,7 @@ export default function Home() {
       <div className="relative z-20">
         <TrustBarSection />
       </div>
+      <StoryTeaserSection />
       <ServiceCompassSection />
       <ProcessTimelineSection />
       <PortalPreviewSection />
