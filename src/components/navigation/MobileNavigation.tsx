@@ -2,24 +2,22 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import type { MouseEvent } from "react";
-import { mobileNavigationItems } from "@/content/navigation";
+import { mobileAccordionGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-const quickActions = [
-  { href: "/offerte", label: "Offerte anfragen", primary: true },
-  { href: "/login", label: "Login", primary: false },
-  { href: "/kontakt", label: "Kontaktformular", primary: false },
-  { href: siteConfig.whatsappUrl, label: "WhatsApp schreiben", primary: false },
-  { href: `tel:${siteConfig.phoneTechnical}`, label: "Anrufen", primary: false },
-] as const;
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" className="h-4 w-4" aria-hidden="true">
+      <circle cx="11" cy="11" r="6.25" />
+      <path d="m16 16 3.75 3.75" />
+    </svg>
+  );
+}
 
 export function MobileNavigation() {
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
 
@@ -27,9 +25,7 @@ export function MobileNavigation() {
     if (!isOpen || typeof document === "undefined") return;
 
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
+      if (event.key === "Escape") setIsOpen(false);
     };
 
     const previousOverflow = document.body.style.overflow;
@@ -42,174 +38,171 @@ export function MobileNavigation() {
     };
   }, [isOpen]);
 
-  const handleNavigationClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/" && pathname === "/" && typeof window !== "undefined") {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
-    setOpenGroup(null);
+  const closeMenu = () => {
     setIsOpen(false);
-  };
-
-  const handleGroupToggle = (label: string) => {
-    setOpenGroup((previous) => (previous === label ? null : label));
+    setOpenGroup(null);
   };
 
   return (
-    <div className="relative">
+    <div className="flex items-center gap-2">
+      <Link
+        href="/login"
+        className="inline-flex min-h-11 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-3 text-sm font-semibold text-[var(--color-deep-green)]"
+      >
+        Login
+      </Link>
+      <Link
+        href="/ratgeber"
+        aria-label="Suche"
+        className="hidden min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)] min-[420px]:inline-flex"
+      >
+        <SearchIcon />
+      </Link>
       <button
         type="button"
         aria-label={isOpen ? "Menü schliessen" : "Menü öffnen"}
         aria-expanded={isOpen}
         aria-controls="mobile-navigation-panel"
-        onClick={() => {
-          if (isOpen) setOpenGroup(null);
-          setIsOpen((previous) => !previous);
-        }}
-        className="flex min-h-11 cursor-pointer items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3 py-2 text-sm font-semibold text-[var(--color-deep-green)]"
+        onClick={() => setIsOpen((previous) => !previous)}
+        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-border-green-gray)] bg-white px-3.5 text-sm font-semibold text-[var(--color-deep-green)]"
       >
         <span aria-hidden="true" className="flex h-4 w-4 flex-col justify-between">
-          <span
-            className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-transform ${
-              isOpen ? "translate-y-[3px] rotate-45" : ""
-            }`}
-          />
+          <span className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-transform ${isOpen ? "translate-y-[3px] rotate-45" : ""}`} />
           <span className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-opacity ${isOpen ? "opacity-0" : ""}`} />
-          <span
-            className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-transform ${
-              isOpen ? "-translate-y-[3px] -rotate-45" : ""
-            }`}
-          />
+          <span className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-transform ${isOpen ? "-translate-y-[3px] -rotate-45" : ""}`} />
         </span>
-        <span>{isOpen ? "Schliessen" : "Menü"}</span>
+        {isOpen ? "Schliessen" : "Menü"}
       </button>
 
       {isOpen && typeof document !== "undefined"
         ? createPortal(
           <>
-          <button
-            type="button"
-            aria-label="Menü schliessen"
-            onClick={() => {
-              setOpenGroup(null);
-              setIsOpen(false);
-            }}
-            className="fixed inset-0 z-[1100] bg-[rgba(10,20,15,0.24)] backdrop-blur-[1.5px]"
-          />
-          <div
-            id="mobile-navigation-panel"
-            className="fixed inset-x-3 bottom-3 top-[74px] z-[1110] overflow-hidden rounded-[28px] border border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_26px_70px_-28px_rgba(18,60,46,0.55)] sm:inset-x-6"
-          >
-            <div className="flex h-full flex-col overflow-hidden">
-              <div className="flex items-start justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white/85 px-5 py-4">
-                <div>
-                  <Link href="/" onClick={(event) => handleNavigationClick(event, "/")} aria-label="Zur Startseite" className="inline-flex cursor-pointer select-none">
-                    <Image
-                      src="/brand/scm-logo-green-transparent.png"
-                      alt="SCM Baupartner"
-                      width={200}
-                      height={56}
-                      draggable={false}
-                      className="h-7 w-auto cursor-pointer select-none"
-                    />
-                  </Link>
-                  <LanguageSwitcher className="mt-2" />
-                </div>
+            <button
+              type="button"
+              aria-label="Menü schliessen"
+              onClick={closeMenu}
+              className="fixed inset-0 z-[1100] bg-[rgba(8,17,13,0.38)]"
+            />
+            <aside
+              id="mobile-navigation-panel"
+              aria-label="Mobile Navigation"
+              className="fixed inset-y-0 left-0 z-[1110] flex w-[min(92vw,460px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_24px_55px_-24px_rgba(18,60,46,0.55)]"
+            >
+              <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
+                <Image
+                  src="/brand/scm-logo-green-transparent.png"
+                  alt="SCM Baupartner"
+                  width={186}
+                  height={54}
+                  className="h-7 w-auto"
+                />
                 <button
                   type="button"
-                  aria-label="Menü schliessen"
-                  onClick={() => {
-                    setOpenGroup(null);
-                    setIsOpen(false);
-                  }}
+                  onClick={closeMenu}
                   className="inline-flex min-h-10 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-deep-green)]"
                 >
                   Schliessen
                 </button>
               </div>
 
-              <nav aria-label="Mobile Hauptnavigation" className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
-                <div className="mb-5">
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-fresh-green)]">Direkt</p>
-                  <div className="grid gap-2.5">
-                    {quickActions.map((action) => {
-                      const external = action.href.startsWith("http");
-                      return (
-                        <Link
-                          key={action.label}
-                          href={action.href}
-                          onClick={() => {
-                            setOpenGroup(null);
-                            setIsOpen(false);
-                          }}
-                          {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-                          className={`flex min-h-12 items-center justify-between rounded-[var(--radius-md)] border px-4 text-sm font-semibold transition-colors ${
-                            action.primary
-                              ? "border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] text-white hover:bg-[var(--color-active-green)]"
-                              : "border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)] hover:border-[var(--color-fresh-green)] hover:bg-[var(--color-mist-green)]"
-                          }`}
+              <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
+                <ul className="divide-y divide-[var(--color-border-green-gray)] rounded-[22px] border border-[var(--color-border-green-gray)] bg-white">
+                  {mobileAccordionGroups.map((group) => {
+                    const groupId = `mobile-${group.title.toLowerCase().replaceAll(" ", "-")}`;
+                    const open = openGroup === group.title;
+                    return (
+                      <li key={group.title}>
+                        <button
+                          type="button"
+                          aria-expanded={open}
+                          aria-controls={groupId}
+                          onClick={() => setOpenGroup((previous) => (previous === group.title ? null : group.title))}
+                          className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-2 text-left"
                         >
-                          {action.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
+                          <span className="text-base font-semibold text-[var(--color-deep-green)]">{group.title}</span>
+                          <span aria-hidden="true" className="text-lg text-[var(--color-soft-graphite)]">
+                            {open ? "−" : "+"}
+                          </span>
+                        </button>
+                        {open ? (
+                          <ul id={groupId} className="grid gap-1 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-3">
+                            {group.items.map((item) => (
+                              <li key={`${group.title}-${item.label}`}>
+                                <Link
+                                  href={item.href}
+                                  onClick={closeMenu}
+                                  className="flex min-h-11 items-center gap-2 rounded-[12px] border border-[var(--color-border-green-gray)] bg-white px-3 py-2 text-sm text-[var(--color-soft-graphite)]"
+                                >
+                                  <span aria-hidden="true" className="text-[var(--color-fresh-green)]">
+                                    ›
+                                  </span>
+                                  {item.label}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <div className="mt-5 space-y-2">
+                  <Link
+                    href="/offerte"
+                    onClick={closeMenu}
+                    className="inline-flex min-h-12 w-full items-center justify-center rounded-[14px] border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold text-white"
+                  >
+                    Offerte anfragen
+                  </Link>
+                  <Link
+                    href={siteConfig.whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={closeMenu}
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
+                  >
+                    WhatsApp schreiben
+                  </Link>
+                  <Link
+                    href={`tel:${siteConfig.phoneTechnical}`}
+                    onClick={closeMenu}
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
+                  >
+                    Anrufen
+                  </Link>
+                  <Link
+                    href="/login"
+                    onClick={closeMenu}
+                    className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
+                  >
+                    Login
+                  </Link>
                 </div>
 
-                <ul className="divide-y divide-[var(--color-border-green-gray)] rounded-[22px] border border-[var(--color-border-green-gray)] bg-white">
-                  {mobileNavigationItems.map((item) => {
-                    const groupId = `mobile-submenu-${item.label.toLowerCase().replaceAll(" ", "-")}`;
-                    return (
-                    <li key={item.label}>
-                      {item.children?.length ? (
-                        <div>
-                          <button
-                            type="button"
-                            aria-expanded={openGroup === item.label}
-                            aria-controls={groupId}
-                            onClick={() => handleGroupToggle(item.label)}
-                            className="flex min-h-14 w-full cursor-pointer items-center justify-between gap-3 px-4 py-2 text-left transition-colors hover:bg-[var(--color-mist-green)]"
-                          >
-                            <span className="mr-auto text-base font-semibold text-[var(--color-deep-green)]">{item.label}</span>
-                            <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
-                              {openGroup === item.label ? "−" : "+"}
-                            </span>
-                          </button>
-                          {openGroup === item.label && (
-                            <ul id={groupId} className="grid gap-1 border-t border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] p-3">
-                              {item.children.map((child) => (
-                                <li key={`${item.label}-${child.label}`}>
-                                  <Link
-                                    href={child.href}
-                                    onClick={(event) => handleNavigationClick(event, child.href)}
-                                    className="block rounded-[0.8rem] border border-[var(--color-border-green-gray)] bg-white px-3 py-2.5"
-                                  >
-                                    <p className="text-sm font-semibold text-[var(--color-deep-green)]">{child.label}</p>
-                                    {child.description && <p className="mt-0.5 text-xs leading-relaxed text-[var(--color-soft-graphite)]">{child.description}</p>}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                        </div>
-                      ) : (
-                       <Link
-                         href={item.href}
-                         onClick={(event) => handleNavigationClick(event, item.href)}
-                         className="flex min-h-14 items-center justify-between gap-3 px-4 py-2 transition-colors hover:bg-[var(--color-mist-green)]"
-                       >
-                         <span className="mr-auto text-base font-semibold text-[var(--color-deep-green)]">{item.label}</span>
-                         <span aria-hidden="true" className="text-[var(--color-soft-graphite)]">
-                           →
-                         </span>
-                       </Link>
-                     )}
-                   </li>
-                 )})}
-               </ul>
-             </nav>
-           </div>
-           </div>
+                <div className="mt-5 rounded-[16px] border border-[var(--color-border-green-gray)] bg-white p-3.5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-fresh-green)]">Sprache</p>
+                  <LanguageSwitcher className="mt-2" />
+                </div>
+
+                <nav aria-label="Rechtliches" className="mt-5 grid gap-2">
+                  <Link
+                    href="/impressum"
+                    onClick={closeMenu}
+                    className="inline-flex min-h-11 items-center rounded-[12px] border border-[var(--color-border-green-gray)] bg-white px-3.5 text-sm font-medium text-[var(--color-deep-green)]"
+                  >
+                    Impressum
+                  </Link>
+                  <Link
+                    href="/datenschutz"
+                    onClick={closeMenu}
+                    className="inline-flex min-h-11 items-center rounded-[12px] border border-[var(--color-border-green-gray)] bg-white px-3.5 text-sm font-medium text-[var(--color-deep-green)]"
+                  >
+                    Datenschutz
+                  </Link>
+                </nav>
+              </div>
+            </aside>
           </>,
           document.body,
         )
