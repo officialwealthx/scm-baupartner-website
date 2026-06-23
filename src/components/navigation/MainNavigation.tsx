@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { FocusEvent, KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from "react";
+import type { KeyboardEvent as ReactKeyboardEvent, MouseEvent as ReactMouseEvent } from "react";
 import { desktopNavigationItems } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -72,13 +72,6 @@ export function MainNavigation() {
     }
   };
 
-  const handleItemBlur = (event: FocusEvent<HTMLLIElement>) => {
-    const nextFocused = event.relatedTarget as Node | null;
-    if (!event.currentTarget.contains(nextFocused)) {
-      setOpenMenu(null);
-    }
-  };
-
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--color-border-green-gray)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/78">
       <div className="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-3 px-4 py-3 sm:px-6 xl:px-8">
@@ -117,8 +110,6 @@ export function MainNavigation() {
                   <li
                     key={item.label}
                     className="relative"
-                    onMouseLeave={() => setOpenMenu((previous) => (previous === item.label ? null : previous))}
-                    onBlur={handleItemBlur}
                   >
                     {hasChildren ? (
                       <button
@@ -128,7 +119,7 @@ export function MainNavigation() {
                         aria-haspopup="true"
                         onMouseEnter={() => setOpenMenu(item.label)}
                         onFocus={() => setOpenMenu(item.label)}
-                        onClick={() => setOpenMenu((previous) => (previous === item.label ? null : item.label))}
+                        onClick={() => setOpenMenu(item.label)}
                         onKeyDown={(event) => handleMenuButtonKeyDown(event, item.label)}
                         className={cn(
                           "inline-flex h-10 cursor-pointer items-center whitespace-nowrap rounded-full px-3 text-[0.84rem] font-medium leading-none transition-colors xl:px-3.5",
