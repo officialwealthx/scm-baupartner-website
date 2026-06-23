@@ -60,24 +60,18 @@ export function TrustBarSection() {
           {trustFacts.map((fact) => (
             <li
               key={`${fact.value}-${fact.description}`}
-              className="scm-lift flex min-h-[14.25rem] flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:px-6 sm:py-6"
+              className="scm-lift flex min-h-[15rem] flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-[15.5rem] sm:px-6 sm:py-6"
             >
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
                 <span
                   aria-hidden="true"
                   className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.9rem] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
                 >
                   {fact.icon}
                 </span>
-                <span
-                  aria-hidden="true"
-                  className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] text-[var(--color-fresh-green)]"
-                >
-                  ›
-                </span>
               </div>
 
-              <p className="mt-4 text-[1.28rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.35rem]">{fact.value}</p>
+              <p className="mt-4 text-[1.2rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.28rem]">{fact.value}</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{fact.description}</p>
             </li>
           ))}

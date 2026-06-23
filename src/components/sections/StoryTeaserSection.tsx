@@ -7,8 +7,7 @@ export function StoryTeaserSection() {
       aria-label="Unsere Geschichte"
     >
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">Story</p>
-        <h2 className="mt-3 text-balance text-[1.85rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2.2rem]">
+        <h2 className="text-balance text-[1.85rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[2.2rem]">
           Wir sind SCM Baupartner
         </h2>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--color-soft-graphite)]">
@@ -17,11 +16,8 @@ export function StoryTeaserSection() {
         </p>
         <Link
           href="/ueber-uns"
-          className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-border-green-gray)] px-4 text-sm font-semibold text-[var(--color-deep-green)] transition-colors hover:bg-[var(--color-mist-green)]"
+          className="scm-text-link mt-6 inline-flex min-h-11 items-center gap-1.5 text-base font-semibold"
         >
-          <span aria-hidden="true" className="text-[var(--color-fresh-green)]">
-            ›
-          </span>
           Unsere Geschichte
         </Link>
       </div>

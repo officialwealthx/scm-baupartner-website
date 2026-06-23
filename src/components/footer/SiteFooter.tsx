@@ -47,14 +47,29 @@ const footerColumns = [
   },
 ] as const;
 
+function ArrowGlyph() {
+  return (
+    <span aria-hidden="true" className="inline-flex h-4 w-4 items-center justify-center text-[var(--color-fresh-green)]">
+      ▸
+    </span>
+  );
+}
+
 function ArrowLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link href={href} className="inline-flex min-h-10 items-center gap-2 rounded-[10px] py-1 text-sm text-[var(--color-soft-graphite)] transition-colors hover:text-[var(--color-deep-green)]">
-      <span aria-hidden="true" className="text-[var(--color-fresh-green)]">
-        ›
-      </span>
+    <Link href={href} className="scm-text-link inline-flex min-h-10 items-center gap-1.5 py-1 text-sm">
+      <ArrowGlyph />
       <span>{label}</span>
     </Link>
+  );
+}
+
+function ArrowAnchor({ href, label }: { href: string; label: string }) {
+  return (
+    <a href={href} className="scm-text-link inline-flex min-h-10 items-center gap-1.5 py-1 text-sm">
+      <ArrowGlyph />
+      <span>{label}</span>
+    </a>
   );
 }
 
@@ -64,7 +79,7 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="rounded-[var(--radius-xl)] bg-[linear-gradient(150deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white sm:p-8">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <Image src="/brand/scm-logo-white-transparent.png" alt="SCM Baupartner" width={240} height={72} className="h-10 w-auto" />
+            <Image src="/brand/scm-logo-white-transparent.png" alt="SCM Baupartner" width={240} height={72} className="pointer-events-none h-10 w-auto select-none" draggable={false} />
             <Link
               href="/offerte"
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
@@ -93,15 +108,13 @@ export function SiteFooter() {
 
           <section>
             <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Kontakt</h3>
-            <div className="space-y-1.5 text-sm text-[var(--color-soft-graphite)]">
-              <a className="block font-medium text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href={`mailto:${siteConfig.email}`}>
-                {siteConfig.email}
-              </a>
-              <a className="block font-medium text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href={`tel:${siteConfig.phoneTechnical}`}>
-                {siteConfig.phoneDisplay}
-              </a>
-            </div>
-            <ul className="mt-3 space-y-0.5">
+            <ul className="space-y-0.5">
+              <li>
+                <ArrowAnchor href={`mailto:${siteConfig.email}`} label={siteConfig.email} />
+              </li>
+              <li>
+                <ArrowAnchor href={`tel:${siteConfig.phoneTechnical}`} label={siteConfig.phoneDisplay} />
+              </li>
               <li>
                 <ArrowLink href="/offerte" label="Offerte anfragen" />
               </li>
@@ -115,10 +128,10 @@ export function SiteFooter() {
         <div className="mt-8 border-t border-[var(--color-border-green-gray)] pt-5">
           <div className="flex flex-col gap-2 text-sm text-[var(--color-soft-graphite)] sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <Link href="/impressum" className="hover:text-[var(--color-deep-green)]">
+              <Link href="/impressum" className="scm-text-link inline-flex items-center text-sm">
                 Impressum
               </Link>
-              <Link href="/datenschutz" className="hover:text-[var(--color-deep-green)]">
+              <Link href="/datenschutz" className="scm-text-link inline-flex items-center text-sm">
                 Datenschutz
               </Link>
             </div>

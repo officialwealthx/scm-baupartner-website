@@ -8,15 +8,6 @@ import { mobileAccordionGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-function SearchIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" className="h-4 w-4" aria-hidden="true">
-      <circle cx="11" cy="11" r="6.25" />
-      <path d="m16 16 3.75 3.75" />
-    </svg>
-  );
-}
-
 export function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -44,20 +35,7 @@ export function MobileNavigation() {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      <Link
-        href="/login"
-        className="inline-flex min-h-11 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-3 text-sm font-semibold text-[var(--color-deep-green)]"
-      >
-        Login
-      </Link>
-      <Link
-        href="/ratgeber"
-        aria-label="Suche"
-        className="hidden min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)] min-[420px]:inline-flex"
-      >
-        <SearchIcon />
-      </Link>
+    <div className="flex items-center">
       <button
         type="button"
         aria-label={isOpen ? "Menü schliessen" : "Menü öffnen"}
@@ -81,12 +59,12 @@ export function MobileNavigation() {
               type="button"
               aria-label="Menü schliessen"
               onClick={closeMenu}
-              className="fixed inset-0 z-[1100] bg-[rgba(8,17,13,0.38)]"
+              className="fixed inset-0 z-[1100] bg-[rgba(8,17,13,0.4)]"
             />
             <aside
               id="mobile-navigation-panel"
               aria-label="Mobile Navigation"
-              className="fixed inset-y-0 left-0 z-[1110] flex w-[min(92vw,460px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_24px_55px_-24px_rgba(18,60,46,0.55)]"
+              className="scm-slide-in-left fixed inset-y-0 left-0 z-[1110] flex w-[min(94vw,460px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_24px_55px_-24px_rgba(18,60,46,0.55)]"
             >
               <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
                 <Image
@@ -94,7 +72,8 @@ export function MobileNavigation() {
                   alt="SCM Baupartner"
                   width={186}
                   height={54}
-                  className="h-7 w-auto"
+                  className="pointer-events-none h-7 w-auto select-none"
+                  draggable={false}
                 />
                 <button
                   type="button"
