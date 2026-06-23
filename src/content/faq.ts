@@ -2,7 +2,7 @@ export const faqPlaceholder = [
   {
     question: "Wie läuft eine Offerte ab?",
     answer:
-      "Nach Ihrer Anfrage klärt SCM Baupartner die wichtigsten Eckdaten und plant grundsätzlich zuerst eine Besichtigung ein. Danach erhalten Sie eine nachvollziehbare Offerte passend zum Projektumfang.",
+      "Nach Ihrer Anfrage klären wir die Eckdaten und planen bei Bedarf eine Besichtigung. Danach erhalten Sie eine nachvollziehbare Offerte passend zum Projekt.",
   },
   {
     question: "Gibt es eine Besichtigung?",
@@ -12,17 +12,17 @@ export const faqPlaceholder = [
   {
     question: "Welche Regionen bedient SCM Baupartner?",
     answer:
-      "SCM Baupartner ist hauptsächlich in Zürich und Umgebung tätig. Zusätzlich werden Projekte in Winterthur, Basel, Aargau, Schwyz und Zug geprüft und je nach Umfang eingeplant.",
+      "SCM Baupartner ist hauptsächlich in Zürich und Umgebung tätig. Zusätzlich prüfen wir Projekte in Winterthur, Basel, Aargau, Schwyz und Zug.",
   },
   {
     question: "Welche Arbeiten übernimmt SCM Baupartner?",
     answer:
-      "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Verputz, Fassadenarbeiten, Sanierungen, Renovationen sowie Graffitientfernung, Graffitischutz, Schimmelbehandlung, Spritzlackierung und Ausbesserungen.",
+      "SCM Baupartner übernimmt Malerarbeiten, Gipserarbeiten, Verputz, Fassadenarbeiten, Renovationen, Graffitientfernung, Graffitischutz, Schimmelbehandlung, Spritzlackierung und Ausbesserungen.",
   },
   {
     question: "Wozu ist das Portal geplant und wie nutze ich es später?",
     answer:
-      "Das Portal ist als digitale Projektkommunikation geplant. Künftig bündelt SCM Baupartner dort Offerten, Termine, Dokumente, Projektstatus und Rückfragen übersichtlich.",
+      "Das Portal ist als digitale Projektkommunikation geplant. Künftig bündeln wir dort Offerten, Termine, Dokumente, Projektstatus und Rückfragen.",
   },
   {
     question: "Übernimmt SCM Baupartner auch kleinere Arbeiten?",

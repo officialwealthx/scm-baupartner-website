@@ -7,7 +7,7 @@ import { SectionShell } from "@/components/layout/SectionShell";
 const steps = [
   {
     title: "Anfrage",
-    description: "Sie senden die Eckdaten. Wir klären Umfang, Prioritäten und nächste Schritte.",
+    description: "Sie senden die Eckdaten. Wir klären Umfang, Prioritäten und den nächsten Schritt.",
   },
   {
     title: "Besichtigung",
@@ -137,8 +137,8 @@ export function ProcessTimelineSection() {
   return (
     <SectionShell
       id="ablauf"
-      title="Ein Ablauf, der Ihnen von Anfang bis Ende Überblick gibt."
-      description="Von der Anfrage bis zur Übergabe sind alle Schritte klar aufgebaut und sauber abgestimmt."
+      title="Ein Ablauf, der den Überblick sichert."
+      description="Von der Anfrage bis zur Übergabe sind Zuständigkeiten, Termine und Ausführung klar abgestimmt."
     >
       <div className="mt-10 hidden lg:block">
         <div ref={sectionRef} className="relative min-h-[250vh]">

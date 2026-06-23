@@ -5,8 +5,8 @@ import { guideArticles } from "@/content/guide";
 export function GuideSection() {
   return (
     <SectionShell
-      title="Ratgeber für bessere Projektentscheidungen."
-      description="Kompakte Beiträge zu Vorbereitung, Ablauf und sauberer Ausführung."
+      title="Ratgeber für klare Entscheidungen."
+      description="Kurze Beiträge zu Vorbereitung, Ablauf und Ausführung."
     >
       <div data-reveal-stagger className="mt-8 grid gap-4 md:grid-cols-3">
         {guideArticles.map((article) => (

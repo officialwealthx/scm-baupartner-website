@@ -42,8 +42,8 @@ const imageSlots = [
 export function InsightsSection() {
   return (
     <SectionShell
-      title="Projekt Einblicke aus der Praxis."
-      description="Bereiche, die wir bei Malerarbeiten, Gipserarbeiten und Renovationen regelmässig umsetzen."
+      title="Projekt Einblicke aus der Ausführung."
+      description="Typische Bereiche aus Malerarbeiten, Gipserarbeiten und Renovationen."
       width="wide"
     >
       <div data-reveal-stagger className="mt-10 grid auto-rows-min gap-4 sm:grid-cols-2 lg:grid-cols-6">
