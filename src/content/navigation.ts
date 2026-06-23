@@ -11,9 +11,9 @@ export type NavigationGroup = {
 };
 
 export const desktopQuickLinks: readonly NavigationLeaf[] = [
-  { href: "/leistungen", label: "Leistungen" },
-  { href: "/projekte", label: "Projekte" },
-  { href: "/ratgeber", label: "Ratgeber" },
+  { href: "/leistungen", label: "Malerarbeiten" },
+  { href: "/leistungen", label: "Gipserarbeiten" },
+  { href: "/leistungen", label: "Renovationen" },
   { href: "/portal", label: "Portal und App" },
 ] as const;
 

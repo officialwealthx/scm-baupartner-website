@@ -18,7 +18,7 @@ export function GuideSection() {
             <p className="mt-2 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{article.excerpt}</p>
             <Link
               href="/ratgeber"
-              className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]"
+              className="scm-text-link mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold"
             >
               Zum Ratgeber
             </Link>
