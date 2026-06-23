@@ -1,7 +1,7 @@
 const trustFacts = [
   {
-    value: "8",
-    description: "Mitarbeitende",
+    value: "8 Mitarbeitende",
+    description: "Eingespieltes Team für Innen- und Aussenarbeiten.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
@@ -10,8 +10,8 @@ const trustFacts = [
     ),
   },
   {
-    value: "30+",
-    description: "Kunden",
+    value: "30+ Kunden",
+    description: "Privat- und Gewerbeprojekte in Zürich und Umgebung.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <circle cx="9" cy="8" r="2.25" />
@@ -21,8 +21,8 @@ const trustFacts = [
     ),
   },
   {
-    value: "200+",
-    description: "Aufträge",
+    value: "200+ Aufträge",
+    description: "Sauber koordinierte Einsätze bei Renovation und Unterhalt.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <path d="M7.25 12.25 10.5 15.5l6.25-6.25" />
@@ -31,8 +31,8 @@ const trustFacts = [
     ),
   },
   {
-    value: "Seit 1981",
-    description: "Handwerkserfahrung",
+    value: "Handwerkserfahrung seit 1981",
+    description: "Erfahrung im Ausbau und in Oberflächenarbeiten.",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <path d="M4.5 16.5h15M7.5 16.5v-8M12 16.5V6M16.5 16.5V9.5" />
@@ -60,9 +60,9 @@ export function TrustBarSection() {
           {trustFacts.map((fact) => (
             <li
               key={`${fact.value}-${fact.description}`}
-              className="scm-lift flex min-h-[11.5rem] flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-[12.4rem] sm:px-6 sm:py-6"
+              className="scm-lift grid min-h-[12.8rem] grid-rows-[3rem_minmax(2.8rem,auto)_minmax(2.9rem,auto)] rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-[13.2rem] sm:px-6 sm:py-6"
             >
-              <div className="flex h-12 items-center">
+              <div className="flex items-center">
                 <span
                   aria-hidden="true"
                   className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-[0.9rem] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
@@ -70,10 +70,12 @@ export function TrustBarSection() {
                   {fact.icon}
                 </span>
               </div>
-              <div className="mt-4 flex min-h-[3.25rem] items-start">
-                <p className="text-2xl font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.72rem]">{fact.value}</p>
+              <div className="mt-3.5 flex items-start">
+                <p className="text-pretty text-[1.34rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.46rem]">
+                  {fact.value}
+                </p>
               </div>
-              <div className="mt-2.5 flex min-h-[2.7rem] items-start">
+              <div className="mt-2.5 flex items-start">
                 <p className="text-sm leading-snug text-[var(--color-soft-graphite)] sm:text-[0.96rem]">{fact.description}</p>
               </div>
             </li>

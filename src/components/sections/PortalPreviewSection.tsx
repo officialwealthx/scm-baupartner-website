@@ -60,15 +60,15 @@ export function PortalPreviewSection() {
               <div className="space-y-2">
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Projektstatus</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Offerte bestätigt · Start wird koordiniert</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Offerte bestätigt · Start wird sauber koordiniert</p>
                 </div>
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Termine</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Besichtigung, Start und Übergabe strukturiert</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Besichtigung, Start und Übergabe klar abgestimmt</p>
                 </div>
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Rückfragen</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Klärungen gebündelt dokumentiert</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Rückfragen gebündelt dokumentiert</p>
                 </div>
               </div>
               <div className="space-y-2">
@@ -81,7 +81,7 @@ export function PortalPreviewSection() {
                 </div>
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white px-3.5 py-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-soft-graphite)]">Fotos und Übergabe</p>
-                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Projektfortschritt und Abschluss geordnet dokumentiert</p>
+                  <p className="mt-1 text-sm text-[var(--color-deep-green)]">Projektfortschritt und Übergabe geordnet dokumentiert</p>
                   <span className="mt-2 inline-flex rounded-full border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-wide text-[var(--color-soft-graphite)]">
                     geplant
                   </span>

@@ -4,7 +4,7 @@ import { SectionShell } from "@/components/layout/SectionShell";
 const services = [
   {
     title: "Malerarbeiten",
-    description: "Wände, Decken und Innenräume sauber vorbereitet und präzise gestrichen.",
+    description: "Wände, Decken und Innenräume sauber vorbereitet und präzise ausgeführt.",
   },
   {
     title: "Gipserarbeiten und Verputz",
@@ -12,11 +12,11 @@ const services = [
   },
   {
     title: "Fassaden und Renovationen",
-    description: "Fassaden pflegen, Schäden beheben und Gebäude geordnet erneuern.",
+    description: "Fassaden schützen, Schäden beheben und Gebäude schrittweise erneuern.",
   },
   {
     title: "Schutz und Spezialarbeiten",
-    description: "Graffiti entfernen, Schimmel behandeln und Spezialflächen sauber ausführen.",
+    description: "Graffiti entfernen, Schimmel behandeln und Spezialflächen kontrolliert ausführen.",
   },
 ] as const;
 
@@ -25,7 +25,7 @@ export function ServiceCompassSection() {
     <SectionShell
       id="leistungen"
       title="Leistungen für saubere Oberflächen."
-      description="Malerarbeiten, Gipserarbeiten, Fassadenarbeiten und Renovationen mit klaren Abläufen."
+      description="Malerarbeiten, Gipserarbeiten, Fassadenarbeiten und Renovationen mit klaren Abläufen und sauberer Koordination."
     >
       <div data-reveal-stagger className="mt-10 grid gap-4 md:grid-cols-2">
         {services.map((service) => (

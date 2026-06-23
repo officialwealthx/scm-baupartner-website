@@ -22,17 +22,17 @@ export function SiteFooter() {
                 Kostenlose Offerte
               </Button>
               <div className="mt-3 rounded-[var(--radius-md)] border border-[var(--color-border-green-gray)] bg-white p-3 sm:p-4">
-                <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-3">
-                  <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center">
+                <div className="grid gap-3 sm:grid-cols-1 xl:grid-cols-3">
+                  <Button href="/kontakt" variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
                     Kontaktformular
                   </Button>
-                  <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center">
+                  <Button href={siteConfig.whatsappUrl} variant="secondaryLight" className="w-full justify-center whitespace-nowrap">
                     WhatsApp schreiben
                   </Button>
                   <Button
                     href={`tel:${siteConfig.phoneTechnical}`}
                     variant="secondaryLight"
-                    className="w-full justify-center border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
+                    className="w-full justify-center whitespace-nowrap border-[var(--color-border-green-gray)] bg-white hover:bg-[var(--color-mist-green)]"
                   >
                     Anrufen
                   </Button>
@@ -90,10 +90,16 @@ export function SiteFooter() {
           </section>
 
           <section>
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Unternehmen</h3>
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-deep-green)]">Navigation</h3>
             <div className="space-y-2 text-sm">
+              <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/">
+                Startseite
+              </Link>
               <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/ueber-uns">
-                Über SCM Baupartner
+                Unternehmen
+              </Link>
+              <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/leistungen">
+                Leistungen
               </Link>
               <Link className="block text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]" href="/projekte">
                 Projekte

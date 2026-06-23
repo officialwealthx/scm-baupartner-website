@@ -111,7 +111,7 @@ export function MainNavigation() {
                 const isActive = isHashLink ? false : normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
                 const hasChildren = Boolean(item.children?.length);
                 const isOpen = openMenu === item.label;
-                const menuColumns = item.children && item.children.length > 8 ? 3 : 2;
+                const menuColumns = item.children && item.children.length > 9 ? 3 : 2;
                 const menuId = `mega-${item.label.toLowerCase().replaceAll(" ", "-")}`;
                 return (
                   <li
@@ -159,13 +159,13 @@ export function MainNavigation() {
                       <div
                         id={menuId}
                         role="menu"
-                        className="absolute left-1/2 top-[calc(100%+0.6rem)] z-50 w-[min(50rem,74vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
+                        className="absolute left-1/2 top-[calc(100%+0.6rem)] z-50 w-[min(46rem,70vw)] -translate-x-1/2 rounded-[1.15rem] border border-[var(--color-border-green-gray)] bg-white p-5 shadow-[0_28px_60px_-32px_rgba(18,60,46,0.42)]"
                       >
                         <div className="mb-4 border-b border-[var(--color-border-green-gray)] pb-3.5">
                           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-fresh-green)]">{item.label}</p>
-                          <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">Übersicht der vorgesehenen Bereiche.</p>
+                          <p className="mt-1 text-xs text-[var(--color-soft-graphite)]">Geordnet nach Themenbereichen.</p>
                         </div>
-                        <div className={cn("grid gap-4", menuColumns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
+                        <div className={cn("grid gap-3", menuColumns === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2")}>
                           {splitIntoColumns(item.children ?? [], menuColumns).map((column, columnIndex) => (
                             <ul key={`${item.label}-column-${columnIndex}`} className="space-y-1.5">
                               {column.map((child) => (
