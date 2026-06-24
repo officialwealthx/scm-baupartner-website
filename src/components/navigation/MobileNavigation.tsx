@@ -4,13 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import { mobileAccordionGroups } from "@/content/navigation";
+import { desktopQuickLinks, mobileAccordionGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-export function MobileNavigation() {
+export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const isDark = tone === "dark";
 
   useEffect(() => {
     if (!isOpen || typeof document === "undefined") return;
@@ -42,14 +43,18 @@ export function MobileNavigation() {
         aria-expanded={isOpen}
         aria-controls="mobile-navigation-panel"
         onClick={() => setIsOpen((previous) => !previous)}
-        className="inline-flex min-h-11 items-center gap-2 rounded-full border border-[var(--color-border-green-gray)] bg-white px-3.5 text-sm font-semibold text-[var(--color-deep-green)]"
+        className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-sm font-semibold transition-colors ${
+          isDark
+            ? "border-white/30 bg-white/12 text-white hover:bg-white/18"
+            : "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)] hover:bg-[var(--color-soft-green)]"
+        }`}
       >
         <span aria-hidden="true" className="flex h-4 w-4 flex-col justify-between">
-          <span className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-transform ${isOpen ? "translate-y-[3px] rotate-45" : ""}`} />
-          <span className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-opacity ${isOpen ? "opacity-0" : ""}`} />
-          <span className={`h-0.5 w-full rounded bg-[var(--color-deep-green)] transition-transform ${isOpen ? "-translate-y-[3px] -rotate-45" : ""}`} />
+          <span className={`h-0.5 w-full rounded transition-transform ${isDark ? "bg-white" : "bg-[var(--color-deep-green)]"} ${isOpen ? "translate-y-[3px] rotate-45" : ""}`} />
+          <span className={`h-0.5 w-full rounded transition-opacity ${isDark ? "bg-white" : "bg-[var(--color-deep-green)]"} ${isOpen ? "opacity-0" : ""}`} />
+          <span className={`h-0.5 w-full rounded transition-transform ${isDark ? "bg-white" : "bg-[var(--color-deep-green)]"} ${isOpen ? "-translate-y-[3px] -rotate-45" : ""}`} />
         </span>
-        {isOpen ? "Schliessen" : "Menü"}
+        Menü
       </button>
 
       {isOpen && typeof document !== "undefined"
@@ -64,7 +69,7 @@ export function MobileNavigation() {
             <aside
               id="mobile-navigation-panel"
               aria-label="Mobile Navigation"
-              className="scm-slide-in-left fixed inset-y-0 left-0 z-[1110] flex w-[min(94vw,460px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_24px_55px_-24px_rgba(18,60,46,0.55)]"
+              className="scm-slide-in-left fixed bottom-0 left-0 top-0 z-[1110] flex h-[100dvh] w-[100vw] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_24px_55px_-24px_rgba(18,60,46,0.55)] md:w-[100vw] min-[1200px]:hidden"
             >
               <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
                 <Image
@@ -78,13 +83,30 @@ export function MobileNavigation() {
                 <button
                   type="button"
                   onClick={closeMenu}
-                  className="inline-flex min-h-10 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-deep-green)]"
+                  className="inline-flex min-h-11 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-3 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-deep-green)]"
                 >
                   Schliessen
                 </button>
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
+                <div className="mb-4 rounded-[16px] border border-[var(--color-border-green-gray)] bg-white p-3.5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-fresh-green)]">Schnellzugriff</p>
+                  <ul className="mt-2 grid gap-1">
+                    {desktopQuickLinks.map((item) => (
+                      <li key={`quick-${item.label}`}>
+                        <Link
+                          href={item.href}
+                          onClick={closeMenu}
+                          className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm font-semibold"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
                 <ul className="divide-y divide-[var(--color-border-green-gray)] rounded-[22px] border border-[var(--color-border-green-gray)] bg-white">
                   {mobileAccordionGroups.map((group) => {
                     const groupId = `mobile-${group.title.toLowerCase().replaceAll(" ", "-")}`;

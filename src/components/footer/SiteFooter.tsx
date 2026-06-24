@@ -78,8 +78,15 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="rounded-[var(--radius-xl)] bg-[linear-gradient(150deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white sm:p-8">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <Image src="/brand/scm-logo-white-transparent.png" alt="SCM Baupartner" width={240} height={72} className="pointer-events-none h-10 w-auto select-none" draggable={false} />
+          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+            <Image
+              src="/brand/scm-logo-white-transparent.png"
+              alt="SCM Baupartner"
+              width={240}
+              height={72}
+              className="pointer-events-none h-10 w-auto max-w-full select-none sm:h-11"
+              draggable={false}
+            />
             <Link
               href="/offerte"
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
@@ -128,10 +135,10 @@ export function SiteFooter() {
         <div className="mt-8 border-t border-[var(--color-border-green-gray)] pt-5">
           <div className="flex flex-col gap-2 text-sm text-[var(--color-soft-graphite)] sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <Link href="/impressum" className="scm-text-link inline-flex items-center text-sm">
+              <Link href="/impressum" className="scm-text-link scm-text-link-arrow inline-flex items-center text-sm">
                 Impressum
               </Link>
-              <Link href="/datenschutz" className="scm-text-link inline-flex items-center text-sm">
+              <Link href="/datenschutz" className="scm-text-link scm-text-link-arrow inline-flex items-center text-sm">
                 Datenschutz
               </Link>
             </div>
