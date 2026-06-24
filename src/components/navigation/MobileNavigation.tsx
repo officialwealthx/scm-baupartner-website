@@ -6,7 +6,6 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { MainLogo } from "@/components/brand/BrandImageLogo";
 import { desktopQuickLinks, mobileAccordionGroups } from "@/content/navigation";
-import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -43,7 +42,7 @@ function ChevronIcon({ open }: { open: boolean }) {
       fill="none"
       stroke="currentColor"
       strokeWidth="1.9"
-      className={cn("h-4 w-4 text-[var(--color-deep-green)] transition-transform", open ? "rotate-180" : "rotate-0")}
+      className={cn("h-4 w-4 transition-transform", open ? "rotate-180" : "rotate-0")}
       aria-hidden="true"
     >
       <path d="m5 7 5 6 5-6" />
@@ -78,12 +77,15 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
       }
     };
 
-    const previousOverflow = document.body.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     window.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
       window.removeEventListener("keydown", handleEscape);
     };
   }, [isMenuOpen, isSearchOpen]);
@@ -228,7 +230,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           <aside
             id="mobile-navigation-panel"
             aria-label="Mobile Navigation"
-            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-full max-w-none flex-col overflow-x-hidden bg-[var(--color-warm-off-white)]"
+            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-[100vw] max-w-none flex-col overflow-x-hidden overscroll-contain bg-[var(--color-warm-off-white)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
               <MainLogo tone="light" onClick={closePanels} />
@@ -242,21 +244,8 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
               </button>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
-              <div className="mb-5 border border-[var(--color-border-green-gray)] bg-white p-3.5">
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-fresh-green)]">Schnellzugriff</p>
-                <ul className="mt-2 grid gap-1">
-                  {desktopQuickLinks.map((item) => (
-                    <li key={`quick-${item.label}`}>
-                      <Link href={item.href} onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm font-semibold">
-                        {item.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <ul className="divide-y divide-[var(--color-border-green-gray)] border border-[var(--color-border-green-gray)] bg-white">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">
+              <ul className="divide-y divide-[var(--color-border-green-gray)] border-y border-[var(--color-border-green-gray)]">
                 {mobileAccordionGroups.map((group) => {
                   const groupId = `mobile-${group.title.toLowerCase().replaceAll(" ", "-")}`;
                   const open = openGroup === group.title;
@@ -267,13 +256,15 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
                         aria-expanded={open}
                         aria-controls={groupId}
                         onClick={() => setOpenGroup((previous) => (previous === group.title ? null : group.title))}
-                        className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-2 text-left"
+                        className="group flex min-h-16 w-full items-center justify-between gap-3 py-3 text-left text-[var(--color-deep-green)] transition-colors hover:text-[var(--color-fresh-green)]"
                       >
-                        <span className="text-base font-semibold text-[var(--color-deep-green)]">{group.title}</span>
-                        <ChevronIcon open={open} />
+                        <span className={cn("text-[1.08rem] font-semibold", open ? "text-[var(--color-fresh-green)]" : "")}>{group.title}</span>
+                        <span className={cn("transition-colors", open ? "text-[var(--color-fresh-green)]" : "group-hover:text-[var(--color-fresh-green)]")}>
+                          <ChevronIcon open={open} />
+                        </span>
                       </button>
                       {open ? (
-                        <ul id={groupId} className="grid gap-1 border-t border-[var(--color-border-green-gray)] px-4 pb-3">
+                        <ul id={groupId} className="grid gap-0.5 border-t border-[var(--color-border-green-gray)] pb-3 pl-2">
                           {group.items.map((item) => (
                             <li key={`${group.title}-${item.label}`}>
                               {isExternalLink(item.href) ? (
@@ -282,12 +273,12 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
                                   target={item.href.startsWith("http") ? "_blank" : undefined}
                                   rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                                   onClick={closeMenu}
-                                  className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm"
+                                  className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center text-sm"
                                 >
                                   {item.label}
                                 </a>
                               ) : (
-                                <Link href={item.href} onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm">
+                                <Link href={item.href} onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center text-sm">
                                   {item.label}
                                 </Link>
                               )}
@@ -300,53 +291,16 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
                 })}
               </ul>
 
-              <div className="mt-5 space-y-2">
-                <Link
-                  href="/offerte"
-                  onClick={closeMenu}
-                  className="inline-flex min-h-12 w-full items-center justify-center rounded-[14px] border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold whitespace-nowrap text-white"
-                >
-                  Offerte anfragen
-                </Link>
-                <a
-                  href={siteConfig.whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={closeMenu}
-                  className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
-                >
-                  WhatsApp schreiben
-                </a>
-                <a
-                  href={`tel:${siteConfig.phoneTechnical}`}
-                  onClick={closeMenu}
-                  className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
-                >
-                  Anrufen
-                </a>
-              </div>
-
-              <div className="mt-5 border border-[var(--color-border-green-gray)] bg-white p-3.5">
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-fresh-green)]">Login</p>
-                <Link
-                  href="/login"
-                  onClick={closeMenu}
-                  className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-[12px] border border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] px-3.5 text-sm font-semibold text-[var(--color-deep-green)]"
-                >
-                  Login
-                </Link>
-              </div>
-
-              <div className="mt-5 border border-[var(--color-border-green-gray)] bg-white p-3.5">
+              <div className="mt-5 border-t border-[var(--color-border-green-gray)] pt-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-fresh-green)]">Sprache</p>
                 <LanguageSwitcher className="mt-2" />
               </div>
 
-              <nav aria-label="Rechtliches" className="mt-5 grid gap-2">
-                <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm font-medium">
+              <nav aria-label="Rechtliches" className="mt-5 grid gap-1 border-t border-[var(--color-border-green-gray)] pt-4">
+                <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center text-sm font-medium">
                   Impressum
                 </Link>
-                <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm font-medium">
+                <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center text-sm font-medium">
                   Datenschutz
                 </Link>
               </nav>

@@ -103,7 +103,10 @@ export function SiteFooter() {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   return (
-    <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
+    <footer
+      className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[linear-gradient(180deg,var(--color-warm-off-white)_0%,var(--color-porcelain-surface)_100%)] sm:mt-24"
+      data-reveal="fade-up"
+    >
       <div className="mx-auto w-full max-w-[1280px] overflow-x-clip px-4 py-12 sm:px-6 lg:px-8">
         <div className="rounded-[var(--radius-xl)] bg-[linear-gradient(150deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white sm:p-8">
           <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
