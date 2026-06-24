@@ -13,8 +13,8 @@ export type NavigationGroup = {
 export const desktopQuickLinks: readonly NavigationLeaf[] = [
   { href: "/ablauf", label: "Ablauf" },
   { href: "/#einsatzgebiete", label: "Einsatzgebiete" },
-  { href: "/ueber-uns#geschichte", label: "Unsere Geschichte" },
-  { href: "/ueber-uns#qualitaet", label: "Qualität" },
+  { href: "/ueber-uns", label: "Unsere Geschichte" },
+  { href: "/ueber-uns", label: "Qualität" },
 ] as const;
 
 export const menuPanelGroups: readonly NavigationGroup[] = [
@@ -79,29 +79,29 @@ export const menuPanelGroups: readonly NavigationGroup[] = [
     href: "/ueber-uns",
     items: [
       { href: "/ueber-uns", label: "Über SCM Baupartner" },
-      { href: "/ueber-uns#geschichte", label: "Unsere Geschichte" },
-      { href: "/ueber-uns#team", label: "Team" },
-      { href: "/ueber-uns#qualitaet", label: "Qualität und Sicherheit" },
-      { href: "/ueber-uns#versicherung", label: "Versicherungsschutz in Vorbereitung" },
-      { href: "/ueber-uns#karriere", label: "Karriere" },
-      { href: "/ueber-uns#lehrstellen", label: "Lehrstellen" },
+      { href: "/ueber-uns", label: "Unsere Geschichte" },
+      { href: "/ueber-uns", label: "Team" },
+      { href: "/ueber-uns", label: "Qualität und Sicherheit" },
+      { href: "/ueber-uns", label: "Versicherungsschutz in Vorbereitung" },
+      { href: "/ueber-uns", label: "Karriere" },
+      { href: "/ueber-uns", label: "Lehrstellen" },
     ],
   },
   {
-    title: "Kontakt und Rechtliches",
+    title: "Kontakt",
     href: "/kontakt",
     items: [
       { href: "/kontakt", label: "Kontakt" },
       { href: "/offerte", label: "Offerte anfragen" },
+      { href: "https://wa.me/41764691418", label: "WhatsApp schreiben" },
+      { href: "tel:+41764691418", label: "Anrufen" },
       { href: "/impressum", label: "Impressum" },
       { href: "/datenschutz", label: "Datenschutz" },
     ],
   },
 ] as const;
 
-export const mobileAccordionGroups: readonly NavigationGroup[] = menuPanelGroups.filter(
-  (group) => group.title !== "Kontakt und Rechtliches",
-);
+export const mobileAccordionGroups: readonly NavigationGroup[] = menuPanelGroups;
 
 export const primaryCtas = [
   { href: "/offerte", label: "Offerte anfragen" },

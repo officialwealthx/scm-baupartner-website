@@ -36,14 +36,6 @@ export function buildOrganizationSchema() {
     },
     email: siteConfig.email,
     telephone: siteConfig.phoneDisplay,
-    address: {
-      "@type": "PostalAddress",
-      name: "Postadresse",
-      streetAddress: siteConfig.address.line1,
-      postalCode: "8051",
-      addressLocality: "Zürich",
-      addressCountry: "CH",
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Leistungen SCM Baupartner",
