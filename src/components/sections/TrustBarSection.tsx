@@ -81,7 +81,7 @@ export function TrustBarSection() {
           {trustFacts.map((fact) => (
             <li
               key={fact.key}
-              className="scm-lift flex min-h-[15.5rem] flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:px-6 sm:py-6"
+              className="flex min-h-[15.5rem] flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:px-6 sm:py-6"
             >
               <div className="flex items-center gap-2">
                 <span

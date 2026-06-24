@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 import { siteConfig } from "@/content/site";
 
 const footerColumns = [
@@ -68,31 +68,45 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="rounded-[var(--radius-xl)] bg-[linear-gradient(150deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white sm:p-8">
-          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:text-left">
-            <div className="flex w-full justify-center sm:w-auto sm:justify-start">
-              <div className="inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-3 py-2">
-                <Image
-                  src="/brand/scm-icon-white-transparent.png"
-                  alt=""
-                  aria-hidden="true"
-                  width={48}
-                  height={48}
-                  className="pointer-events-none h-9 w-9 select-none"
-                  draggable={false}
-                />
-                <span className="text-base font-semibold tracking-[0.01em] text-white sm:text-lg">SCM Baupartner</span>
+          <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <BrandLockup tone="dark" className="h-11 min-w-[11.9rem]" />
+              <h2 className="mt-4 text-balance text-[1.62rem] font-semibold leading-tight text-white sm:text-[1.9rem]">
+                Bereit für eine saubere Umsetzung?
+              </h2>
+              <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/85 sm:text-base">
+                Saubere Oberflächen, klare Abläufe und verlässliche Umsetzung für Projekte in Zürich und ausgewählten Regionen.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 lg:items-end">
+              <Link
+                href="/offerte"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/20 lg:w-auto"
+              >
+                Offerte anfragen
+              </Link>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                <Link href="/kontakt" className="inline-flex min-h-10 items-center gap-1 text-sm text-white transition-colors hover:text-white/80">
+                  Kontaktformular
+                  <span aria-hidden="true">›</span>
+                </Link>
+                <a
+                  href={siteConfig.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-10 items-center gap-1 text-sm text-white transition-colors hover:text-white/80"
+                >
+                  WhatsApp schreiben
+                  <span aria-hidden="true">›</span>
+                </a>
+                <a href={`tel:${siteConfig.phoneTechnical}`} className="inline-flex min-h-10 items-center gap-1 text-sm text-white transition-colors hover:text-white/80">
+                  Anrufen
+                  <span aria-hidden="true">›</span>
+                </a>
               </div>
             </div>
-            <Link
-              href="/offerte"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/20"
-            >
-              Offerte anfragen
-            </Link>
           </div>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/85">
-            Saubere Oberflächen, klare Abläufe und verlässliche Umsetzung für Projekte in Zürich und ausgewählten Regionen.
-          </p>
         </div>
 
         <div className="mt-10 grid gap-8 md:grid-cols-2 xl:grid-cols-5">
