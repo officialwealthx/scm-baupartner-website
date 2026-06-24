@@ -16,6 +16,19 @@ function CloseIcon() {
   );
 }
 
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] transition-transform ${open ? "rotate-180" : "rotate-0"}`}
+    >
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.9" className="h-4 w-4">
+        <path d="m5 7 5 6 5-6" />
+      </svg>
+    </span>
+  );
+}
+
 function isExternalLink(href: string) {
   return href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:");
 }
@@ -55,7 +68,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
         aria-expanded={isOpen}
         aria-controls="mobile-navigation-panel"
         onClick={() => setIsOpen((previous) => !previous)}
-        className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-3.5 text-sm font-semibold transition-colors ${
+        className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-4 text-sm font-semibold transition-colors ${
           isDark
             ? "border-white/30 bg-white/12 text-white hover:bg-white/18"
             : "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)] hover:bg-[var(--color-soft-green)]"
@@ -66,7 +79,6 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           <span className={`h-0.5 w-full rounded transition-opacity ${isDark ? "bg-white" : "bg-[var(--color-deep-green)]"} ${isOpen ? "opacity-0" : ""}`} />
           <span className={`h-0.5 w-full rounded transition-transform ${isDark ? "bg-white" : "bg-[var(--color-deep-green)]"} ${isOpen ? "-translate-y-[3px] -rotate-45" : ""}`} />
         </span>
-        Menü
       </button>
 
       {isOpen && typeof document !== "undefined"
@@ -74,7 +86,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           <aside
             id="mobile-navigation-panel"
             aria-label="Mobile Navigation"
-            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-[100vw] flex-col overflow-x-hidden bg-[var(--color-warm-off-white)] min-[1200px]:hidden"
+            className="scm-slide-in-left fixed inset-0 left-0 right-0 top-0 bottom-0 z-[9999] flex h-[100dvh] w-screen max-w-none flex-col overflow-x-hidden bg-[var(--color-warm-off-white)] min-[1200px]:hidden"
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
               <Image
@@ -127,9 +139,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
                         className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-2 text-left"
                       >
                         <span className="text-base font-semibold text-[var(--color-deep-green)]">{group.title}</span>
-                        <span aria-hidden="true" className="text-lg text-[var(--color-soft-graphite)]">
-                          {open ? "−" : "+"}
-                        </span>
+                        <ChevronIcon open={open} />
                       </button>
                       {open ? (
                         <ul id={groupId} className="grid gap-1 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] p-3">
@@ -211,14 +221,14 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
                 <Link
                   href="/impressum"
                   onClick={closeMenu}
-                  className="inline-flex min-h-11 items-center rounded-[12px] border border-[var(--color-border-green-gray)] bg-white px-3.5 text-sm font-medium text-[var(--color-deep-green)]"
+                  className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm font-medium"
                 >
                   Impressum
                 </Link>
                 <Link
                   href="/datenschutz"
                   onClick={closeMenu}
-                  className="inline-flex min-h-11 items-center rounded-[12px] border border-[var(--color-border-green-gray)] bg-white px-3.5 text-sm font-medium text-[var(--color-deep-green)]"
+                  className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm font-medium"
                 >
                   Datenschutz
                 </Link>

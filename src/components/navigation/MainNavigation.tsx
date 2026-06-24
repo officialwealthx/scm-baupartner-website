@@ -57,6 +57,14 @@ function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
+function LinkArrowIcon() {
+  return (
+    <span aria-hidden="true" className="text-[var(--color-fresh-green)] transition-transform group-hover/link:translate-x-0.5">
+      ›
+    </span>
+  );
+}
+
 function isExternalLink(href: string) {
   return href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:");
 }
@@ -156,14 +164,16 @@ export function MainNavigation() {
         className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-x-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]"
       >
         <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
-          <Image
-            src="/brand/scm-logo-green-transparent.png"
-            alt="SCM Baupartner"
-            width={210}
-            height={60}
-            className="pointer-events-none h-8 w-auto select-none"
-            draggable={false}
-          />
+          <Link href="/" onClick={closeMenu} className="inline-flex h-11 min-w-[11.9rem] shrink-0 cursor-pointer select-none items-center justify-start">
+            <Image
+              src="/brand/scm-logo-green-transparent.png"
+              alt="SCM Baupartner"
+              width={210}
+              height={60}
+              className="pointer-events-none h-[2.4rem] w-auto select-none object-contain"
+              draggable={false}
+            />
+          </Link>
           <button
             type="button"
             onClick={closeMenu}
@@ -176,7 +186,7 @@ export function MainNavigation() {
         </div>
 
         <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
-          <ul className="space-y-3">
+          <ul className="space-y-2.5">
             {menuPanelGroups.map((group) => {
               const open = openDesktopGroup === group.title;
               const groupId = `desktop-${group.title.toLowerCase().replaceAll(" ", "-")}`;
@@ -203,18 +213,18 @@ export function MainNavigation() {
                               target={item.href.startsWith("http") ? "_blank" : undefined}
                               rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                               onClick={closeMenu}
-                              className="flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
+                              className="group/link flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
                             >
-                              <span aria-hidden="true" className="text-[var(--color-fresh-green)]">›</span>
+                              <LinkArrowIcon />
                               <span>{item.label}</span>
                             </a>
                           ) : (
                             <Link
                               href={item.href}
                               onClick={closeMenu}
-                              className="flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
+                              className="group/link flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
                             >
-                              <span aria-hidden="true" className="text-[var(--color-fresh-green)]">›</span>
+                              <LinkArrowIcon />
                               <span>{item.label}</span>
                             </Link>
                           )}
@@ -245,6 +255,18 @@ export function MainNavigation() {
               WhatsApp schreiben
             </a>
           </div>
+
+          <div className="mt-4 flex items-center justify-between gap-3 rounded-[18px] border border-[var(--color-border-green-gray)] bg-white px-3 py-2.5">
+            <LanguageSwitcher />
+            <div className="flex items-center gap-3 text-sm">
+              <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
+                Impressum
+              </Link>
+              <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
+                Datenschutz
+              </Link>
+            </div>
+          </div>
         </nav>
       </aside>
     </div>
@@ -265,9 +287,9 @@ export function MainNavigation() {
             href="/"
             onClick={handleHomeClick}
             aria-label={`${siteConfig.name} — zur Startseite`}
-            className="inline-flex h-10 shrink-0 cursor-pointer select-none items-center justify-start"
+            className="inline-flex h-11 min-w-[11.9rem] shrink-0 cursor-pointer select-none items-center justify-start"
           >
-            <span className="relative inline-flex h-10 w-[11.2rem] shrink-0 items-center justify-start">
+            <span className="relative inline-flex h-11 w-[11.9rem] shrink-0 items-center justify-start">
               <Image
                 src="/brand/scm-logo-white-transparent.png"
                 alt="SCM Baupartner"
@@ -373,7 +395,7 @@ export function MainNavigation() {
                 id="desktop-search-panel"
                 className="absolute right-0 top-[calc(100%+0.5rem)] z-[1020] w-[min(92vw,340px)] rounded-[16px] border border-[var(--color-border-green-gray)] bg-white p-4 shadow-[0_18px_36px_-24px_rgba(18,60,46,0.5)]"
               >
-                <p className="text-sm font-semibold text-[var(--color-deep-green)]">Suche in Vorbereitung</p>
+                <p className="text-sm font-semibold text-[var(--color-deep-green)]">Suche vorbereiten</p>
                 <p className="mt-1 text-sm leading-relaxed text-[var(--color-soft-graphite)]">
                   Die Suche wird vorbereitet. Bis dahin finden Sie die wichtigsten Themen im Menü und im Ratgeber.
                 </p>
