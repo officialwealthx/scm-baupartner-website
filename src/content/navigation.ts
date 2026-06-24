@@ -11,10 +11,10 @@ export type NavigationGroup = {
 };
 
 export const desktopQuickLinks: readonly NavigationLeaf[] = [
-  { href: "/ablauf", label: "Ablauf" },
-  { href: "/#einsatzgebiete", label: "Einsatzgebiete" },
-  { href: "/ueber-uns", label: "Unsere Geschichte" },
-  { href: "/ueber-uns", label: "Qualität" },
+  { href: "/leistungen", label: "Leistungen" },
+  { href: "/projekte", label: "Projekte" },
+  { href: "/ratgeber", label: "Ratgeber" },
+  { href: "/portal", label: "Portal und App" },
 ] as const;
 
 export const menuPanelGroups: readonly NavigationGroup[] = [
@@ -51,6 +51,7 @@ export const menuPanelGroups: readonly NavigationGroup[] = [
     title: "Ratgeber",
     href: "/ratgeber",
     items: [
+      { href: "/blog", label: "Blog" },
       { href: "/ratgeber", label: "Malerarbeiten" },
       { href: "/ratgeber", label: "Gipserarbeiten und Verputz" },
       { href: "/ratgeber", label: "Fassaden" },

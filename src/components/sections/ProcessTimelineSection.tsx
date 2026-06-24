@@ -28,15 +28,10 @@ const steps = [
 ] as const;
 
 export function ProcessTimelineSection() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const mobileRailRef = useRef<HTMLOListElement | null>(null);
+  const desktopItemRefs = useRef<Array<HTMLElement | null>>([]);
   const mobileItemRefs = useRef<Array<HTMLLIElement | null>>([]);
-  const rafDesktopRef = useRef<number | null>(null);
-  const rafMobileRef = useRef<number | null>(null);
 
-  const [desktopProgress, setDesktopProgress] = useState(0);
   const [desktopActiveStep, setDesktopActiveStep] = useState(0);
-  const [mobileProgress, setMobileProgress] = useState(0);
   const [mobileActiveStep, setMobileActiveStep] = useState(0);
 
   useEffect(() => {
@@ -44,44 +39,24 @@ export function ProcessTimelineSection() {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
+    const desktopItems = desktopItemRefs.current.filter((item): item is HTMLElement => item !== null);
+    if (desktopItems.length === 0) return;
 
-    const computeDesktop = () => {
-      const el = sectionRef.current;
-      if (!el || window.innerWidth < 1024) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let nextIndex = -1;
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = Number((entry.target as HTMLElement).dataset.stepIndex);
+          if (Number.isFinite(index) && index > nextIndex) nextIndex = index;
+        });
+        if (nextIndex >= 0) setDesktopActiveStep(nextIndex);
+      },
+      { threshold: 0.6, rootMargin: "-14% 0px -28% 0px" },
+    );
 
-      const rect = el.getBoundingClientRect();
-      const start = rect.top;
-      const end = rect.bottom - window.innerHeight;
-      const range = end - start;
-      if (range <= 0) return;
-
-      const raw = (0 - start) / range;
-      const nextProgress = Math.max(0, Math.min(1, raw));
-      const nextStep = Math.min(steps.length - 1, Math.floor(nextProgress * steps.length));
-
-      setDesktopProgress((prev) => (Math.abs(prev - nextProgress) > 0.003 ? nextProgress : prev));
-      setDesktopActiveStep((prev) => (prev !== nextStep ? nextStep : prev));
-    };
-
-    const onScroll = () => {
-      if (rafDesktopRef.current !== null) return;
-      rafDesktopRef.current = window.requestAnimationFrame(() => {
-        computeDesktop();
-        rafDesktopRef.current = null;
-      });
-    };
-
-    computeDesktop();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      if (rafDesktopRef.current !== null) {
-        window.cancelAnimationFrame(rafDesktopRef.current);
-      }
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+    desktopItems.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -89,50 +64,28 @@ export function ProcessTimelineSection() {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReduced) return;
+    const mobileItems = mobileItemRefs.current.filter((item): item is HTMLLIElement => item !== null);
+    if (mobileItems.length === 0) return;
 
-    const computeMobile = () => {
-      const rail = mobileRailRef.current;
-      if (!rail || window.innerWidth >= 1024) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let nextIndex = -1;
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const index = Number((entry.target as HTMLElement).dataset.stepIndex);
+          if (Number.isFinite(index) && index > nextIndex) nextIndex = index;
+        });
+        if (nextIndex >= 0) setMobileActiveStep(nextIndex);
+      },
+      { threshold: 0.45, rootMargin: "-16% 0px -34% 0px" },
+    );
 
-      const railRect = rail.getBoundingClientRect();
-      const start = window.innerHeight * 0.8;
-      const total = railRect.height + window.innerHeight * 0.28;
-      const raw = (start - railRect.top) / Math.max(total, 1);
-      const nextProgress = Math.max(0, Math.min(1, raw));
-
-      let nextStep = 0;
-      mobileItemRefs.current.forEach((item, index) => {
-        if (!item) return;
-        const rect = item.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.6) {
-          nextStep = index;
-        }
-      });
-
-      setMobileProgress((prev) => (Math.abs(prev - nextProgress) > 0.01 ? nextProgress : prev));
-      setMobileActiveStep((prev) => (prev !== nextStep ? nextStep : prev));
-    };
-
-    const onScroll = () => {
-      if (rafMobileRef.current !== null) return;
-      rafMobileRef.current = window.requestAnimationFrame(() => {
-        computeMobile();
-        rafMobileRef.current = null;
-      });
-    };
-
-    computeMobile();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      if (rafMobileRef.current !== null) {
-        window.cancelAnimationFrame(rafMobileRef.current);
-      }
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
+    mobileItems.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
   }, []);
+
+  const desktopProgress = steps.length > 1 ? desktopActiveStep / (steps.length - 1) : 0;
+  const mobileProgress = steps.length > 1 ? mobileActiveStep / (steps.length - 1) : 0;
 
   return (
     <SectionShell
@@ -141,7 +94,7 @@ export function ProcessTimelineSection() {
       description="Von der Anfrage bis zur Übergabe bleiben Zuständigkeiten, Termine und Ausführung klar abgestimmt."
     >
       <div className="mt-10 hidden lg:block">
-        <div ref={sectionRef} className="relative min-h-[250vh]">
+        <div className="relative min-h-[250vh]">
           <div className="sticky top-24 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-white shadow-[var(--shadow-soft)]">
             <div className="grid grid-cols-[18rem_1fr] gap-0">
               <div className="relative border-r border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] p-7">
@@ -186,6 +139,10 @@ export function ProcessTimelineSection() {
                     return (
                       <article
                         key={step.title}
+                        data-step-index={index}
+                        ref={(element) => {
+                          desktopItemRefs.current[index] = element;
+                        }}
                         className={`rounded-[var(--radius-lg)] border p-5 transition-colors ${
                           isActive
                             ? "border-[var(--color-fresh-green)] bg-[var(--color-soft-green)]"
@@ -211,7 +168,7 @@ export function ProcessTimelineSection() {
       </div>
 
       <div className="mt-10 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-white p-5 lg:hidden">
-        <ol ref={mobileRailRef} data-reveal-stagger className="relative grid gap-8">
+        <ol data-reveal-stagger className="relative grid gap-8">
           <span
             aria-hidden="true"
             className="absolute bottom-6 left-5 top-5 w-px bg-[var(--color-border-green-gray)]"
@@ -229,6 +186,7 @@ export function ProcessTimelineSection() {
                 ref={(element) => {
                   mobileItemRefs.current[index] = element;
                 }}
+                data-step-index={index}
                 className="relative pl-16"
               >
                 <span
