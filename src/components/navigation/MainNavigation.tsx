@@ -397,7 +397,7 @@ export function MainNavigation() {
             <UserIcon />
           </Link>
 
-          <LanguageSwitcher tone={headerDark ? "dark" : "light" />}
+          <LanguageSwitcher tone={headerDark ? "dark" : "light"} />
         </div>
 
         <div className="min-[1200px]:hidden">
