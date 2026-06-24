@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 type TrustFact = {
+  key: string;
   value: ReactNode;
   description: string;
   icon: ReactNode;
@@ -9,6 +10,7 @@ type TrustFact = {
 
 const trustFacts: readonly TrustFact[] = [
   {
+    key: "team",
     value: "8 Mitarbeitende",
     description: "Ein eingespieltes Team für saubere Innen- und Aussenarbeiten.",
     icon: (
@@ -19,6 +21,7 @@ const trustFacts: readonly TrustFact[] = [
     ),
   },
   {
+    key: "clients",
     value: "30+ Kunden",
     description: "Privat- und Gewerbeprojekte mit klarer Abstimmung.",
     icon: (
@@ -30,6 +33,7 @@ const trustFacts: readonly TrustFact[] = [
     ),
   },
   {
+    key: "projects",
     value: "200+ Aufträge",
     description: "Koordinierte Einsätze bei Renovation, Schutz und Unterhalt.",
     icon: (
@@ -40,6 +44,7 @@ const trustFacts: readonly TrustFact[] = [
     ),
   },
   {
+    key: "experience",
     value: (
       <>
         Handwerkserfahrung
@@ -48,7 +53,7 @@ const trustFacts: readonly TrustFact[] = [
       </>
     ),
     description: "Familiäre Handwerkswurzeln als verlässliche Grundlage der Ausführung.",
-    valueClassName: "text-[1.05rem] sm:text-[1.16rem]",
+    valueClassName: "text-[1rem] sm:text-[1.1rem]",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <path d="M4.5 16.5h15M7.5 16.5v-8M12 16.5V6M16.5 16.5V9.5" />
@@ -75,7 +80,7 @@ export function TrustBarSection() {
         <ul data-reveal-stagger className="grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {trustFacts.map((fact) => (
             <li
-              key={`${fact.value}-${fact.description}`}
+              key={fact.key}
               className="scm-lift flex min-h-[15rem] flex-col rounded-[var(--radius-lg)] border border-[var(--color-border-green-gray)] bg-white px-5 py-5 shadow-[0_18px_36px_-32px_rgba(18,60,46,0.5)] sm:min-h-[15.5rem] sm:px-6 sm:py-6"
             >
               <div className="flex items-center gap-2">
@@ -87,7 +92,7 @@ export function TrustBarSection() {
                 </span>
               </div>
 
-              <p className={`mt-4 text-[1.2rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.28rem] ${fact.valueClassName ?? ""}`}>
+              <p className={`mt-4 text-[1.2rem] font-semibold leading-tight break-words text-[var(--color-deep-green)] sm:text-[1.28rem] ${fact.valueClassName ?? ""}`}>
                 {fact.value}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{fact.description}</p>

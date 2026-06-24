@@ -17,12 +17,12 @@ const footerColumns = [
     title: "Unternehmen",
     links: [
       { label: "Über SCM Baupartner", href: "/ueber-uns" },
-      { label: "Unsere Geschichte", href: "/ueber-uns#geschichte" },
-      { label: "Team", href: "/ueber-uns#team" },
-      { label: "Qualität und Sicherheit", href: "/ueber-uns#qualitaet" },
-      { label: "Versicherungsschutz in Vorbereitung", href: "/ueber-uns#versicherung" },
-      { label: "Karriere", href: "/ueber-uns#karriere" },
-      { label: "Lehrstellen", href: "/ueber-uns#lehrstellen" },
+      { label: "Unsere Geschichte", href: "/ueber-uns" },
+      { label: "Team", href: "/ueber-uns" },
+      { label: "Qualität und Sicherheit", href: "/ueber-uns" },
+      { label: "Versicherungsschutz in Vorbereitung", href: "/ueber-uns" },
+      { label: "Karriere", href: "/ueber-uns" },
+      { label: "Lehrstellen", href: "/ueber-uns" },
     ],
   },
   {
@@ -79,14 +79,16 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="rounded-[var(--radius-xl)] bg-[linear-gradient(150deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white sm:p-8">
           <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-            <Image
-              src="/brand/scm-logo-white-transparent.png"
-              alt="SCM Baupartner"
-              width={240}
-              height={72}
-              className="pointer-events-none h-10 w-auto max-w-full select-none sm:h-11"
-              draggable={false}
-            />
+            <div className="flex w-full justify-center sm:w-auto sm:justify-start">
+              <Image
+                src="/brand/scm-logo-white-transparent.png"
+                alt="SCM Baupartner"
+                width={240}
+                height={72}
+                className="pointer-events-none h-10 w-auto max-w-[min(15rem,100%)] select-none sm:h-11"
+                draggable={false}
+              />
+            </div>
             <Link
               href="/offerte"
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white transition-colors hover:bg-white/20"

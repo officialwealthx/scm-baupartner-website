@@ -33,11 +33,40 @@ function UserIcon() {
   );
 }
 
+function CloseIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-[1.1rem] w-[1.1rem]" aria-hidden="true">
+      <path d="M6 6 18 18M18 6 6 18" />
+    </svg>
+  );
+}
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        "inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] transition-transform",
+        open ? "rotate-180" : "rotate-0",
+      )}
+    >
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.9" className="h-4 w-4">
+        <path d="m5 7 5 6 5-6" />
+      </svg>
+    </span>
+  );
+}
+
+function isExternalLink(href: string) {
+  return href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:");
+}
+
 export function MainNavigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [openDesktopGroup, setOpenDesktopGroup] = useState<string>(menuPanelGroups[0]?.title ?? "");
   const searchPanelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -114,79 +143,111 @@ export function MainNavigation() {
 
   const menuPanel = (
     <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block">
-        <button
-          type="button"
-          aria-label="Menü schliessen"
-          className="absolute inset-0 bg-[rgba(6,16,11,0.35)] backdrop-blur-[1px]"
-          onClick={closeMenu}
-        />
+      <button
+        type="button"
+        aria-label="Menü schliessen"
+        className="absolute inset-0 bg-[rgba(6,16,11,0.38)]"
+        onClick={closeMenu}
+      />
 
-        <aside
-          id="desktop-menu-panel"
-          aria-label="Desktop Menü"
-          className="scm-slide-in-left relative flex h-[100dvh] w-[min(92vw,470px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]"
-        >
-          <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
-            <Image
-              src="/brand/scm-logo-green-transparent.png"
-              alt="SCM Baupartner"
-              width={210}
-              height={60}
-              className="pointer-events-none h-8 w-auto select-none"
-              draggable={false}
-            />
-            <div className="flex items-center gap-2">
-              <Link
-                href="/offerte"
-                onClick={closeMenu}
-                className="inline-flex min-h-11 items-center justify-center rounded-full border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold text-white transition-colors hover:bg-[var(--color-active-green)]"
-              >
-                Offerte anfragen
-              </Link>
-              <button
-                type="button"
-                onClick={closeMenu}
-                autoFocus
-                className="inline-flex min-h-11 items-center rounded-full border border-[var(--color-border-green-gray)] bg-white px-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-deep-green)]"
-              >
-                Schliessen
-              </button>
-            </div>
-          </div>
+      <aside
+        id="desktop-menu-panel"
+        aria-label="Desktop Menü"
+        className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-x-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]"
+      >
+        <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
+          <Image
+            src="/brand/scm-logo-green-transparent.png"
+            alt="SCM Baupartner"
+            width={210}
+            height={60}
+            className="pointer-events-none h-8 w-auto select-none"
+            draggable={false}
+          />
+          <button
+            type="button"
+            onClick={closeMenu}
+            autoFocus
+            aria-label="Menü schliessen"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)]"
+          >
+            <CloseIcon />
+          </button>
+        </div>
 
-          <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
-            <ul className="space-y-4">
-              {menuPanelGroups.map((group) => (
-                <li key={group.title} className="rounded-[18px] border border-[var(--color-border-green-gray)] bg-white p-4">
-                  <Link
-                    href={group.href}
-                    onClick={closeMenu}
-                    className="mb-3 inline-flex text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-deep-green)]"
+        <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+          <ul className="space-y-3">
+            {menuPanelGroups.map((group) => {
+              const open = openDesktopGroup === group.title;
+              const groupId = `desktop-${group.title.toLowerCase().replaceAll(" ", "-")}`;
+              return (
+                <li key={group.title} className="rounded-[18px] border border-[var(--color-border-green-gray)] bg-white">
+                  <button
+                    type="button"
+                    aria-expanded={open}
+                    aria-controls={groupId}
+                    onClick={() => setOpenDesktopGroup((previous) => (previous === group.title ? "" : group.title))}
+                    className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left"
                   >
-                    {group.title}
-                  </Link>
-                  <ul className="space-y-1.5">
-                    {group.items.map((item) => (
-                      <li key={`${group.title}-${item.label}`}>
-                        <Link
-                          href={item.href}
-                          onClick={closeMenu}
-                          className="flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
-                        >
-                          <span aria-hidden="true" className="text-[var(--color-fresh-green)]">
-                            ›
-                          </span>
-                          <span>{item.label}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                    <span className="text-xl font-semibold leading-tight text-[var(--color-deep-green)]">{group.title}</span>
+                    <ChevronIcon open={open} />
+                  </button>
+
+                  {open ? (
+                    <ul id={groupId} className="space-y-1 border-t border-[var(--color-border-green-gray)] px-3 py-3">
+                      {group.items.map((item) => (
+                        <li key={`${group.title}-${item.label}`}>
+                          {isExternalLink(item.href) ? (
+                            <a
+                              href={item.href}
+                              target={item.href.startsWith("http") ? "_blank" : undefined}
+                              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                              onClick={closeMenu}
+                              className="flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
+                            >
+                              <span aria-hidden="true" className="text-[var(--color-fresh-green)]">›</span>
+                              <span>{item.label}</span>
+                            </a>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              onClick={closeMenu}
+                              className="flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
+                            >
+                              <span aria-hidden="true" className="text-[var(--color-fresh-green)]">›</span>
+                              <span>{item.label}</span>
+                            </Link>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                 </li>
-              ))}
-            </ul>
-          </nav>
-        </aside>
-      </div>
+              );
+            })}
+          </ul>
+
+          <div className="mt-5 space-y-2 rounded-[18px] border border-[var(--color-border-green-gray)] bg-white p-3">
+            <Link
+              href="/offerte"
+              onClick={closeMenu}
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-[14px] border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold whitespace-nowrap text-white"
+            >
+              Offerte anfragen
+            </Link>
+            <a
+              href={siteConfig.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={closeMenu}
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
+            >
+              WhatsApp schreiben
+            </a>
+          </div>
+        </nav>
+      </aside>
+    </div>
   );
 
   return (
@@ -204,9 +265,9 @@ export function MainNavigation() {
             href="/"
             onClick={handleHomeClick}
             aria-label={`${siteConfig.name} — zur Startseite`}
-            className="inline-flex shrink-0 cursor-pointer select-none items-center"
+            className="inline-flex h-10 shrink-0 cursor-pointer select-none items-center justify-start"
           >
-            <span className="relative inline-flex h-8 w-[11.2rem] shrink-0 items-center">
+            <span className="relative inline-flex h-10 w-[11.2rem] shrink-0 items-center justify-start">
               <Image
                 src="/brand/scm-logo-white-transparent.png"
                 alt="SCM Baupartner"
@@ -215,7 +276,7 @@ export function MainNavigation() {
                 priority
                 draggable={false}
                 className={cn(
-                  "pointer-events-none absolute inset-0 h-8 w-full shrink-0 select-none object-contain object-left transition-opacity duration-200",
+                  "pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-left transition-opacity duration-200",
                   headerDark ? "opacity-100" : "opacity-0",
                 )}
               />
@@ -228,7 +289,7 @@ export function MainNavigation() {
                 priority
                 draggable={false}
                 className={cn(
-                  "pointer-events-none absolute inset-0 h-8 w-full shrink-0 select-none object-contain object-left transition-opacity duration-200",
+                  "pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-left transition-opacity duration-200",
                   headerDark ? "opacity-0" : "opacity-100",
                 )}
               />
@@ -310,11 +371,11 @@ export function MainNavigation() {
             {isSearchOpen ? (
               <div
                 id="desktop-search-panel"
-                className="absolute right-0 top-[calc(100%+0.5rem)] z-[1020] w-[min(92vw,320px)] rounded-[16px] border border-[var(--color-border-green-gray)] bg-white p-4 shadow-[0_18px_36px_-24px_rgba(18,60,46,0.5)]"
+                className="absolute right-0 top-[calc(100%+0.5rem)] z-[1020] w-[min(92vw,340px)] rounded-[16px] border border-[var(--color-border-green-gray)] bg-white p-4 shadow-[0_18px_36px_-24px_rgba(18,60,46,0.5)]"
               >
-                <p className="text-sm font-semibold text-[var(--color-deep-green)]">Suche vorbereiten</p>
+                <p className="text-sm font-semibold text-[var(--color-deep-green)]">Suche in Vorbereitung</p>
                 <p className="mt-1 text-sm leading-relaxed text-[var(--color-soft-graphite)]">
-                  Die Suche wird ausgebaut. Bis dahin finden Sie Themen im Ratgeber.
+                  Die Suche wird vorbereitet. Bis dahin finden Sie die wichtigsten Themen im Menü und im Ratgeber.
                 </p>
                 <Link href="/ratgeber" onClick={() => setIsSearchOpen(false)} className="scm-text-link scm-text-link-arrow mt-3 inline-flex">
                   Zum Ratgeber
@@ -336,7 +397,7 @@ export function MainNavigation() {
             <UserIcon />
           </Link>
 
-          <LanguageSwitcher tone={headerDark ? "dark" : "light"} />
+          <LanguageSwitcher tone={headerDark ? "dark" : "light" />}
         </div>
 
         <div className="min-[1200px]:hidden">
