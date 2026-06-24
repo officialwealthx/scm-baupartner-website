@@ -1,15 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { MouseEvent as ReactMouseEvent } from "react";
+import { BrandLockup } from "@/components/brand/BrandLockup";
 import { desktopQuickLinks, menuPanelGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
-import { MobileNavigation } from "./MobileNavigation";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { MobileNavigation } from "./MobileNavigation";
 
 function normalizePath(href: string) {
   return href.split("#")[0] || "/";
@@ -43,25 +42,16 @@ function CloseIcon() {
 
 function ChevronIcon({ open }: { open: boolean }) {
   return (
-    <span
+    <svg
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.9"
+      className={cn("h-4 w-4 transition-transform", open ? "rotate-180" : "rotate-0")}
       aria-hidden="true"
-      className={cn(
-        "inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] transition-transform",
-        open ? "rotate-180" : "rotate-0",
-      )}
     >
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.9" className="h-4 w-4">
-        <path d="m5 7 5 6 5-6" />
-      </svg>
-    </span>
-  );
-}
-
-function LinkArrowIcon() {
-  return (
-    <span aria-hidden="true" className="text-[var(--color-fresh-green)] transition-transform group-hover/link:translate-x-0.5">
-      ›
-    </span>
+      <path d="m5 7 5 6 5-6" />
+    </svg>
   );
 }
 
@@ -79,20 +69,16 @@ export function MainNavigation() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-
     let ticking = false;
-
     const update = () => {
       setIsScrolled(window.scrollY > 12);
       ticking = false;
     };
-
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(update);
     };
-
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -114,10 +100,8 @@ export function MainNavigation() {
 
   useEffect(() => {
     if (!isMenuOpen || typeof document === "undefined") return;
-
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
     return () => {
       document.body.style.overflow = previousOverflow;
     };
@@ -125,225 +109,63 @@ export function MainNavigation() {
 
   useEffect(() => {
     if (!isSearchOpen) return;
-
     const onPointerDown = (event: MouseEvent) => {
       if (!searchPanelRef.current) return;
-      if (!searchPanelRef.current.contains(event.target as Node)) {
-        setIsSearchOpen(false);
-      }
+      if (!searchPanelRef.current.contains(event.target as Node)) setIsSearchOpen(false);
     };
-
     window.addEventListener("mousedown", onPointerDown);
     return () => window.removeEventListener("mousedown", onPointerDown);
   }, [isSearchOpen]);
 
-  const handleHomeClick = (event: ReactMouseEvent<HTMLAnchorElement>) => {
-    if (pathname === "/" && typeof window !== "undefined") {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
-    setIsMenuOpen(false);
-    setIsSearchOpen(false);
-  };
-
   const closeMenu = () => setIsMenuOpen(false);
   const headerDark = !isScrolled && !isMenuOpen;
-
-  const menuPanel = (
-    <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block">
-      <button
-        type="button"
-        aria-label="Menü schliessen"
-        className="absolute inset-0 bg-[rgba(6,16,11,0.38)]"
-        onClick={closeMenu}
-      />
-
-      <aside
-        id="desktop-menu-panel"
-        aria-label="Desktop Menü"
-        className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-x-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]"
-      >
-        <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
-          <Link href="/" onClick={closeMenu} className="inline-flex h-11 min-w-[11.9rem] shrink-0 cursor-pointer select-none items-center justify-start">
-            <Image
-              src="/brand/scm-logo-green-transparent.png"
-              alt="SCM Baupartner"
-              width={210}
-              height={60}
-              className="pointer-events-none h-[2.4rem] w-auto select-none object-contain"
-              draggable={false}
-            />
-          </Link>
-          <button
-            type="button"
-            onClick={closeMenu}
-            autoFocus
-            aria-label="Menü schliessen"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)]"
-          >
-            <CloseIcon />
-          </button>
-        </div>
-
-        <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
-          <ul className="space-y-2.5">
-            {menuPanelGroups.map((group) => {
-              const open = openDesktopGroup === group.title;
-              const groupId = `desktop-${group.title.toLowerCase().replaceAll(" ", "-")}`;
-              return (
-                <li key={group.title} className="rounded-[18px] border border-[var(--color-border-green-gray)] bg-white">
-                  <button
-                    type="button"
-                    aria-expanded={open}
-                    aria-controls={groupId}
-                    onClick={() => setOpenDesktopGroup((previous) => (previous === group.title ? "" : group.title))}
-                    className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left"
-                  >
-                    <span className="text-xl font-semibold leading-tight text-[var(--color-deep-green)]">{group.title}</span>
-                    <ChevronIcon open={open} />
-                  </button>
-
-                  {open ? (
-                    <ul id={groupId} className="space-y-1 border-t border-[var(--color-border-green-gray)] px-3 py-3">
-                      {group.items.map((item) => (
-                        <li key={`${group.title}-${item.label}`}>
-                          {isExternalLink(item.href) ? (
-                            <a
-                              href={item.href}
-                              target={item.href.startsWith("http") ? "_blank" : undefined}
-                              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                              onClick={closeMenu}
-                              className="group/link flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
-                            >
-                              <LinkArrowIcon />
-                              <span>{item.label}</span>
-                            </a>
-                          ) : (
-                            <Link
-                              href={item.href}
-                              onClick={closeMenu}
-                              className="group/link flex min-h-11 items-center gap-2 rounded-[12px] px-2.5 py-1.5 text-sm text-[var(--color-soft-graphite)] transition-colors hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]"
-                            >
-                              <LinkArrowIcon />
-                              <span>{item.label}</span>
-                            </Link>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </li>
-              );
-            })}
-          </ul>
-
-          <div className="mt-5 space-y-2 rounded-[18px] border border-[var(--color-border-green-gray)] bg-white p-3">
-            <Link
-              href="/offerte"
-              onClick={closeMenu}
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-[14px] border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold whitespace-nowrap text-white"
-            >
-              Offerte anfragen
-            </Link>
-            <a
-              href={siteConfig.whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              onClick={closeMenu}
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
-            >
-              WhatsApp schreiben
-            </a>
-          </div>
-
-          <div className="mt-4 flex items-center justify-between gap-3 rounded-[18px] border border-[var(--color-border-green-gray)] bg-white px-3 py-2.5">
-            <LanguageSwitcher />
-            <div className="flex items-center gap-3 text-sm">
-              <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
-                Impressum
-              </Link>
-              <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
-                Datenschutz
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </aside>
-    </div>
-  );
 
   return (
     <header
       className={cn(
         "sticky top-0 z-[1010] border-b transition-colors duration-300",
         headerDark
-          ? "border-white/16 bg-[var(--color-deep-green)] text-white"
-          : "border-[var(--color-border-green-gray)] bg-white/95 text-[var(--color-deep-green)] backdrop-blur supports-[backdrop-filter]:bg-white/88",
+          ? "border-white/18 bg-[var(--color-deep-green)] text-white"
+          : "border-[var(--color-border-green-gray)] bg-white/96 text-[var(--color-deep-green)] backdrop-blur supports-[backdrop-filter]:bg-white/92",
       )}
     >
-      <div className="mx-auto flex h-[73px] w-full max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <div className="flex min-w-0 items-center gap-2.5 lg:gap-3">
-          <Link
-            href="/"
-            onClick={handleHomeClick}
-            aria-label={`${siteConfig.name} — zur Startseite`}
-            className="inline-flex h-11 min-w-[11.9rem] shrink-0 cursor-pointer select-none items-center justify-start"
+      <div className="mx-auto hidden h-[73px] w-full max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 min-[1200px]:flex">
+        <div className="flex min-w-0 items-center gap-3">
+          <BrandLockup
+            tone={headerDark ? "dark" : "light"}
+            onClick={() => {
+              setIsSearchOpen(false);
+              setIsMenuOpen(false);
+            }}
+            className="h-11 min-w-[11.9rem]"
+          />
+
+          <span aria-hidden="true" className={cn("h-8 w-px", headerDark ? "bg-white/30" : "bg-[var(--color-border-green-gray)]")} />
+
+          <button
+            type="button"
+            aria-expanded={isMenuOpen}
+            aria-controls="desktop-menu-panel"
+            onClick={() => {
+              setIsMenuOpen((previous) => !previous);
+              setIsSearchOpen(false);
+            }}
+            className={cn(
+              "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors",
+              headerDark
+                ? "border-white/30 bg-white/12 text-white hover:bg-white/18"
+                : "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)] hover:bg-[var(--color-soft-green)]",
+            )}
           >
-            <span className="relative inline-flex h-11 w-[11.9rem] shrink-0 items-center justify-start">
-              <Image
-                src="/brand/scm-logo-white-transparent.png"
-                alt="SCM Baupartner"
-                width={210}
-                height={60}
-                priority
-                draggable={false}
-                className={cn(
-                  "pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-left transition-opacity duration-200",
-                  headerDark ? "opacity-100" : "opacity-0",
-                )}
-              />
-              <Image
-                src="/brand/scm-logo-green-transparent.png"
-                alt=""
-                width={210}
-                height={60}
-                aria-hidden="true"
-                priority
-                draggable={false}
-                className={cn(
-                  "pointer-events-none absolute inset-0 h-full w-full select-none object-contain object-left transition-opacity duration-200",
-                  headerDark ? "opacity-0" : "opacity-100",
-                )}
-              />
+            <span aria-hidden="true" className="flex h-4 w-4 flex-col justify-between">
+              <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
+              <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
+              <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
             </span>
-          </Link>
+            Menü
+          </button>
 
-          <span aria-hidden="true" className={cn("hidden h-8 w-px min-[1200px]:block", headerDark ? "bg-white/30" : "bg-[var(--color-border-green-gray)]")} />
-
-          <div className="hidden min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-2">
-            <button
-              type="button"
-              aria-expanded={isMenuOpen}
-              aria-controls="desktop-menu-panel"
-              onClick={() => {
-                setIsMenuOpen((previous) => !previous);
-                setIsSearchOpen(false);
-              }}
-              className={cn(
-                "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors",
-                headerDark
-                  ? "border-white/30 bg-white/12 text-white hover:bg-white/18"
-                  : "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)] hover:bg-[var(--color-soft-green)]",
-              )}
-            >
-              <span aria-hidden="true" className="flex h-4 w-4 flex-col justify-between">
-                <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
-                <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
-                <span className={cn("h-0.5 w-full rounded", headerDark ? "bg-white" : "bg-[var(--color-deep-green)]")} />
-              </span>
-              Menü
-            </button>
-
+          <nav aria-label="Schnellthemen" className="flex items-center gap-4 pl-1">
             {desktopQuickLinks.map((item) => {
               const normalized = normalizePath(item.href);
               const isActive = normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
@@ -352,24 +174,19 @@ export function MainNavigation() {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "inline-flex min-h-11 items-center rounded-full border px-3.5 text-sm font-medium transition-colors",
-                    headerDark
-                      ? isActive
-                        ? "border-white/40 bg-white/16 text-white"
-                        : "border-white/24 text-white/92 hover:bg-white/12"
-                      : isActive
-                        ? "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
-                        : "border-[var(--color-border-green-gray)] text-[var(--color-soft-graphite)] hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]",
+                    "inline-flex min-h-11 items-center text-sm font-medium transition-colors",
+                    headerDark ? "text-white/92 hover:text-white" : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
+                    isActive && (headerDark ? "text-white" : "text-[var(--color-deep-green)]"),
                   )}
                 >
                   {item.label}
                 </Link>
               );
             })}
-          </div>
+          </nav>
         </div>
 
-        <div className="hidden min-[1200px]:flex min-[1200px]:items-center min-[1200px]:gap-2">
+        <div className="flex items-center gap-2">
           <div className="relative" ref={searchPanelRef}>
             <button
               type="button"
@@ -380,13 +197,13 @@ export function MainNavigation() {
                 setIsMenuOpen(false);
               }}
               className={cn(
-                "inline-flex min-h-11 items-center gap-2 border-b px-2 text-sm font-medium transition-colors",
+                "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border transition-colors",
                 headerDark
-                  ? "border-white/45 text-white hover:border-white"
-                  : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:border-[var(--color-fresh-green)]",
+                  ? "border-white/24 text-white hover:bg-white/12"
+                  : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]",
               )}
+              aria-label="Suche"
             >
-              Suche
               <SearchIcon />
             </button>
 
@@ -409,7 +226,7 @@ export function MainNavigation() {
           <Link
             href="/login"
             className={cn(
-              "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border px-3.5 text-sm font-medium transition-colors",
+              "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border transition-colors",
               headerDark
                 ? "border-white/24 text-white hover:bg-white/12"
                 : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]",
@@ -421,13 +238,119 @@ export function MainNavigation() {
 
           <LanguageSwitcher tone={headerDark ? "dark" : "light"} />
         </div>
-
-        <div className="min-[1200px]:hidden">
-          <MobileNavigation tone={headerDark ? "dark" : "light"} />
-        </div>
       </div>
 
-      {isMenuOpen ? menuPanel : null}
+      <div className="min-[1200px]:hidden">
+        <MobileNavigation tone={headerDark ? "dark" : "light"} />
+      </div>
+
+      {isMenuOpen ? (
+        <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block">
+          <button
+            type="button"
+            aria-label="Menü schliessen"
+            className="absolute inset-0 bg-[rgba(6,16,11,0.42)]"
+            onClick={closeMenu}
+          />
+
+          <aside
+            id="desktop-menu-panel"
+            aria-label="Desktop Menü"
+            className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)]"
+          >
+            <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
+              <BrandLockup tone="light" onClick={closeMenu} className="h-11 min-w-[11.9rem]" />
+              <button
+                type="button"
+                onClick={closeMenu}
+                autoFocus
+                aria-label="Menü schliessen"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[var(--color-border-green-gray)] bg-white text-[var(--color-deep-green)]"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+
+            <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
+              <ul className="divide-y divide-[var(--color-border-green-gray)] border-y border-[var(--color-border-green-gray)] bg-white">
+                {menuPanelGroups.map((group) => {
+                  const open = openDesktopGroup === group.title;
+                  const groupId = `desktop-${group.title.toLowerCase().replaceAll(" ", "-")}`;
+                  return (
+                    <li key={group.title}>
+                      <button
+                        type="button"
+                        aria-expanded={open}
+                        aria-controls={groupId}
+                        onClick={() => setOpenDesktopGroup((previous) => (previous === group.title ? "" : group.title))}
+                        className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                      >
+                        <span className="text-[1.14rem] font-semibold leading-tight text-[var(--color-deep-green)]">{group.title}</span>
+                        <ChevronIcon open={open} />
+                      </button>
+
+                      {open ? (
+                        <ul id={groupId} className="space-y-1 border-t border-[var(--color-border-green-gray)] px-4 pb-3">
+                          {group.items.map((item) => (
+                            <li key={`${group.title}-${item.label}`}>
+                              {isExternalLink(item.href) ? (
+                                <a
+                                  href={item.href}
+                                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                                  rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                                  onClick={closeMenu}
+                                  className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm"
+                                >
+                                  {item.label}
+                                </a>
+                              ) : (
+                                <Link href={item.href} onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm">
+                                  {item.label}
+                                </Link>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <div className="mt-5 space-y-2 border border-[var(--color-border-green-gray)] bg-white p-3">
+                <Link
+                  href="/offerte"
+                  onClick={closeMenu}
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-[14px] border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold whitespace-nowrap text-white"
+                >
+                  Offerte anfragen
+                </Link>
+                <a
+                  href={siteConfig.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={closeMenu}
+                  className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
+                >
+                  WhatsApp schreiben
+                </a>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between gap-3 border border-[var(--color-border-green-gray)] bg-white px-3 py-2.5">
+                <LanguageSwitcher />
+                <div className="flex items-center gap-3 text-sm">
+                  <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
+                    Impressum
+                  </Link>
+                  <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
+                    Datenschutz
+                  </Link>
+                </div>
+              </div>
+            </nav>
+          </aside>
+        </div>
+      ) : null}
     </header>
   );
 }
