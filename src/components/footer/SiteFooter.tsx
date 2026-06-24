@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { BrandImageLogo } from "@/components/brand/BrandImageLogo";
+import { MainLogo } from "@/components/brand/BrandImageLogo";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -42,6 +42,7 @@ const footerColumns = [
   {
     title: "Ratgeber",
     links: [
+      { label: "Blog", href: "/blog" },
       { label: "Malerarbeiten", href: "/ratgeber" },
       { label: "Schimmel und Schäden", href: "/ratgeber" },
       { label: "Graffiti und Schutz", href: "/ratgeber" },
@@ -52,10 +53,12 @@ const footerColumns = [
   {
     title: "Kontakt",
     links: [
-      { label: siteConfig.email, href: `mailto:${siteConfig.email}` },
-      { label: siteConfig.phoneDisplay, href: `tel:${siteConfig.phoneTechnical}` },
+      { label: "Kontakt", href: "/kontakt" },
       { label: "Offerte anfragen", href: "/offerte" },
-      { label: "Kontaktformular", href: "/kontakt" },
+      { label: "WhatsApp schreiben", href: siteConfig.whatsappUrl },
+      { label: "Anrufen", href: `tel:${siteConfig.phoneTechnical}` },
+      { label: "Impressum", href: "/impressum" },
+      { label: "Datenschutz", href: "/datenschutz" },
     ],
   },
 ] as const;
@@ -97,7 +100,7 @@ function ChevronIcon({ open }: { open: boolean }) {
 }
 
 export function SiteFooter() {
-  const [openAccordion, setOpenAccordion] = useState<string | null>(footerColumns[0]?.title ?? null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   return (
     <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
@@ -106,7 +109,7 @@ export function SiteFooter() {
           <div className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div className="text-center lg:text-left">
               <div className="flex justify-center lg:justify-start">
-                <BrandImageLogo tone="dark" className="h-[46px] w-[168px] sm:h-[48px] sm:w-[180px] lg:h-[50px] lg:w-[198px]" />
+                <MainLogo tone="dark" />
               </div>
               <h2 className="mt-4 text-balance text-[1.5rem] font-semibold leading-tight text-white sm:text-[1.72rem] lg:text-[1.9rem]">
                 Bereit für eine saubere Umsetzung?

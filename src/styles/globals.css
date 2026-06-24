@@ -54,6 +54,10 @@ body {
   overflow-x: clip;
 }
 
+main {
+  max-width: 100%;
+}
+
 body {
   background: var(--color-warm-off-white);
   color: var(--foreground);

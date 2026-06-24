@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { BrandImageLogo } from "@/components/brand/BrandImageLogo";
+import { MainLogo } from "@/components/brand/BrandImageLogo";
 import { desktopQuickLinks, menuPanelGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -64,7 +64,7 @@ export function MainNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [openDesktopGroup, setOpenDesktopGroup] = useState<string>(menuPanelGroups[0]?.title ?? "");
+  const [openDesktopGroup, setOpenDesktopGroup] = useState<string>("");
   const searchPanelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -118,6 +118,16 @@ export function MainNavigation() {
   }, [isSearchOpen]);
 
   const closeMenu = () => setIsMenuOpen(false);
+  const closePanels = () => {
+    setIsSearchOpen(false);
+    setIsMenuOpen(false);
+  };
+  const isQuickLinkActive = (href: string) => {
+    const normalized = normalizePath(href);
+    if (normalized === "/portal") return pathname.startsWith("/portal") || pathname.startsWith("/login");
+    if (normalized === "/ratgeber") return pathname.startsWith("/ratgeber") || pathname.startsWith("/blog");
+    return normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
+  };
   const headerDark = !isScrolled && !isMenuOpen;
 
   return (
@@ -131,12 +141,9 @@ export function MainNavigation() {
     >
       <div className="mx-auto hidden h-[73px] w-full max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 min-[1200px]:flex">
         <div className="flex min-w-0 items-center gap-3">
-          <BrandImageLogo
+          <MainLogo
             tone={headerDark ? "dark" : "light"}
-            onClick={() => {
-              setIsSearchOpen(false);
-              setIsMenuOpen(false);
-            }}
+            onClick={closePanels}
           />
 
           <span aria-hidden="true" className={cn("h-8 w-px", headerDark ? "bg-white/30" : "bg-[var(--color-border-green-gray)]")} />
@@ -146,7 +153,11 @@ export function MainNavigation() {
             aria-expanded={isMenuOpen}
             aria-controls="desktop-menu-panel"
             onClick={() => {
-              setIsMenuOpen((previous) => !previous);
+              setIsMenuOpen((previous) => {
+                const next = !previous;
+                if (next) setOpenDesktopGroup("");
+                return next;
+              });
               setIsSearchOpen(false);
             }}
             className={cn(
@@ -166,16 +177,20 @@ export function MainNavigation() {
 
           <nav aria-label="Schnellthemen" className="flex items-center gap-4 pl-1">
             {desktopQuickLinks.map((item) => {
-              const normalized = normalizePath(item.href);
-              const isActive = normalized === "/" ? pathname === "/" : pathname.startsWith(normalized);
+              const isActive = isQuickLinkActive(item.href);
               return (
                 <Link
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "inline-flex min-h-11 items-center text-sm font-medium transition-colors",
-                    headerDark ? "text-white/92 hover:text-white" : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
-                    isActive && (headerDark ? "text-white" : "text-[var(--color-deep-green)]"),
+                    "inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium transition-colors",
+                    headerDark
+                      ? "text-white/92 hover:text-white"
+                      : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
+                    isActive &&
+                      (headerDark
+                        ? "bg-white/18 text-white"
+                        : "bg-[var(--color-soft-green)] text-[var(--color-deep-green)]"),
                   )}
                 >
                   {item.label}
@@ -244,7 +259,7 @@ export function MainNavigation() {
       </div>
 
       {isMenuOpen ? (
-        <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block">
+        <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block" role="dialog" aria-modal="true">
           <button
             type="button"
             aria-label="Menü schliessen"
@@ -258,7 +273,7 @@ export function MainNavigation() {
             className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
-              <BrandImageLogo tone="light" onClick={closeMenu} />
+              <MainLogo tone="light" onClick={closePanels} />
               <button
                 type="button"
                 onClick={closeMenu}
@@ -282,10 +297,15 @@ export function MainNavigation() {
                         aria-expanded={open}
                         aria-controls={groupId}
                         onClick={() => setOpenDesktopGroup((previous) => (previous === group.title ? "" : group.title))}
-                        className="flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left"
+                        className={cn(
+                          "group flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors",
+                          open ? "text-[var(--color-fresh-green)]" : "text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]",
+                        )}
                       >
-                        <span className="text-[1.14rem] font-semibold leading-tight text-[var(--color-deep-green)]">{group.title}</span>
-                        <ChevronIcon open={open} />
+                        <span className="text-[1.14rem] font-semibold leading-tight">{group.title}</span>
+                        <span className={cn("transition-colors", open ? "text-[var(--color-fresh-green)]" : "group-hover:text-[var(--color-fresh-green)]")}>
+                          <ChevronIcon open={open} />
+                        </span>
                       </button>
 
                       {open ? (

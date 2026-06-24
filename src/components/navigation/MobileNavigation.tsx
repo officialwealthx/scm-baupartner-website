@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import { BrandImageLogo } from "@/components/brand/BrandImageLogo";
+import { MainLogo } from "@/components/brand/BrandImageLogo";
 import { desktopQuickLinks, mobileAccordionGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -55,10 +56,17 @@ function isExternalLink(href: string) {
 }
 
 export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }) {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const isDark = tone === "dark";
+
+  const isQuickLinkActive = (href: string) => {
+    if (href === "/portal") return pathname.startsWith("/portal") || pathname.startsWith("/login");
+    if (href === "/ratgeber") return pathname.startsWith("/ratgeber") || pathname.startsWith("/blog");
+    return pathname.startsWith(href);
+  };
 
   useEffect(() => {
     if (!(isMenuOpen || isSearchOpen) || typeof document === "undefined") return;
@@ -84,11 +92,16 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
     setIsMenuOpen(false);
     setOpenGroup(null);
   };
+  const closePanels = () => {
+    setIsSearchOpen(false);
+    setIsMenuOpen(false);
+    setOpenGroup(null);
+  };
 
   return (
     <div className="mx-auto w-full max-w-[1440px] px-4 py-2 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between gap-2">
-        <BrandImageLogo tone={isDark ? "dark" : "light"} />
+        <MainLogo tone={isDark ? "dark" : "light"} onClick={closePanels} />
         <div className="flex items-center gap-1.5">
           <button
             type="button"
@@ -128,7 +141,11 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation-panel"
           onClick={() => {
-            setIsMenuOpen((previous) => !previous);
+            setIsMenuOpen((previous) => {
+              const next = !previous;
+              if (next) setOpenGroup(null);
+              return next;
+            });
             setIsSearchOpen(false);
           }}
           className={cn(
@@ -149,14 +166,18 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
         <span aria-hidden="true" className={cn("h-7 w-px shrink-0", isDark ? "bg-white/25" : "bg-[var(--color-border-green-gray)]")} />
 
         <nav aria-label="Schnellthemen mobil" className="min-w-0 max-w-full flex-1 overflow-x-auto overscroll-x-contain">
-          <ul className="flex w-max min-w-full items-center gap-4 pr-1">
+          <ul className="flex min-w-max items-center gap-2 pr-2">
             {desktopQuickLinks.map((item) => (
               <li key={`mobile-quick-${item.label}`}>
                 <Link
                   href={item.href}
                   className={cn(
-                    "inline-flex min-h-11 items-center whitespace-nowrap text-sm font-medium transition-colors",
+                    "inline-flex min-h-11 items-center rounded-full px-3 whitespace-nowrap text-sm font-medium transition-colors",
                     isDark ? "text-white/92 hover:text-white" : "text-[var(--color-soft-graphite)] hover:text-[var(--color-deep-green)]",
+                    isQuickLinkActive(item.href) &&
+                      (isDark
+                        ? "bg-white/18 text-white"
+                        : "bg-[var(--color-soft-green)] text-[var(--color-deep-green)]"),
                   )}
                 >
                   {item.label}
@@ -207,10 +228,10 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           <aside
             id="mobile-navigation-panel"
             aria-label="Mobile Navigation"
-            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-screen max-w-none flex-col overflow-x-clip bg-[var(--color-warm-off-white)]"
+            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-full max-w-none flex-col overflow-x-hidden bg-[var(--color-warm-off-white)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
-              <BrandImageLogo tone="light" onClick={closeMenu} />
+              <MainLogo tone="light" onClick={closePanels} />
               <button
                 type="button"
                 onClick={closeMenu}
