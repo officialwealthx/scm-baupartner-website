@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function HeroSection() {
   return (
-    <section className="relative isolate left-1/2 right-1/2 -mt-10 w-screen -translate-x-1/2 overflow-hidden bg-[var(--color-warm-off-white)]">
+    <section className="relative isolate -mx-4 -mt-10 overflow-x-clip bg-[var(--color-warm-off-white)] sm:-mx-6 lg:-mx-8">
       <div aria-hidden="true" className="absolute inset-0">
         <Image
           src="/images/hero/af38c578147c774a82688d1913992fc8870252cfa44030da51f4c9d975adba95.png"

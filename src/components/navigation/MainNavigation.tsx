@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { BrandLockup } from "@/components/brand/BrandLockup";
+import { BrandImageLogo } from "@/components/brand/BrandImageLogo";
 import { desktopQuickLinks, menuPanelGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -131,13 +131,12 @@ export function MainNavigation() {
     >
       <div className="mx-auto hidden h-[73px] w-full max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-6 lg:px-8 min-[1200px]:flex">
         <div className="flex min-w-0 items-center gap-3">
-          <BrandLockup
+          <BrandImageLogo
             tone={headerDark ? "dark" : "light"}
             onClick={() => {
               setIsSearchOpen(false);
               setIsMenuOpen(false);
             }}
-            className="h-11 min-w-[11.9rem]"
           />
 
           <span aria-hidden="true" className={cn("h-8 w-px", headerDark ? "bg-white/30" : "bg-[var(--color-border-green-gray)]")} />
@@ -259,7 +258,7 @@ export function MainNavigation() {
             className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
-              <BrandLockup tone="light" onClick={closeMenu} className="h-11 min-w-[11.9rem]" />
+              <BrandImageLogo tone="light" onClick={closeMenu} />
               <button
                 type="button"
                 onClick={closeMenu}
@@ -317,7 +316,7 @@ export function MainNavigation() {
                 })}
               </ul>
 
-              <div className="mt-5 space-y-2 border border-[var(--color-border-green-gray)] bg-white p-3">
+              <div className="mt-5 space-y-2 border-t border-[var(--color-border-green-gray)] pt-4">
                 <Link
                   href="/offerte"
                   onClick={closeMenu}
@@ -336,7 +335,7 @@ export function MainNavigation() {
                 </a>
               </div>
 
-              <div className="mt-4 flex items-center justify-between gap-3 border border-[var(--color-border-green-gray)] bg-white px-3 py-2.5">
+              <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--color-border-green-gray)] pt-4">
                 <LanguageSwitcher />
                 <div className="flex items-center gap-3 text-sm">
                   <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">

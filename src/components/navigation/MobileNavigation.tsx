@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import { BrandLockup } from "@/components/brand/BrandLockup";
+import { BrandImageLogo } from "@/components/brand/BrandImageLogo";
 import { desktopQuickLinks, mobileAccordionGroups } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
@@ -88,7 +88,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
   return (
     <div className="mx-auto w-full max-w-[1440px] px-4 py-2 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between gap-2">
-        <BrandLockup tone={isDark ? "dark" : "light"} />
+        <BrandImageLogo tone={isDark ? "dark" : "light"} />
         <div className="flex items-center gap-1.5">
           <button
             type="button"
@@ -118,11 +118,10 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           >
             <UserIcon />
           </Link>
-          <LanguageSwitcher tone={isDark ? "dark" : "light"} />
         </div>
       </div>
 
-      <div className={cn("mt-2 flex items-center gap-3 border-t pt-2", isDark ? "border-white/15" : "border-[var(--color-border-green-gray)]")}>
+      <div className={cn("mt-2 flex max-w-full items-center gap-3 overflow-hidden border-t pt-2", isDark ? "border-white/15" : "border-[var(--color-border-green-gray)]")}>
         <button
           type="button"
           aria-label={isMenuOpen ? "Menü schliessen" : "Menü öffnen"}
@@ -149,8 +148,8 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
 
         <span aria-hidden="true" className={cn("h-7 w-px shrink-0", isDark ? "bg-white/25" : "bg-[var(--color-border-green-gray)]")} />
 
-        <nav aria-label="Schnellthemen mobil" className="min-w-0 flex-1 overflow-x-auto">
-          <ul className="flex min-w-max items-center gap-4 pr-1">
+        <nav aria-label="Schnellthemen mobil" className="min-w-0 max-w-full flex-1 overflow-x-auto overscroll-x-contain">
+          <ul className="flex w-max min-w-full items-center gap-4 pr-1">
             {desktopQuickLinks.map((item) => (
               <li key={`mobile-quick-${item.label}`}>
                 <Link
@@ -208,10 +207,10 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
           <aside
             id="mobile-navigation-panel"
             aria-label="Mobile Navigation"
-            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-[100vw] max-w-none flex-col overflow-x-hidden bg-[var(--color-warm-off-white)]"
+            className="scm-slide-in-left fixed inset-0 z-[9999] flex h-[100dvh] w-screen max-w-none flex-col overflow-x-clip bg-[var(--color-warm-off-white)]"
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-4 py-4">
-              <BrandLockup tone="light" onClick={closeMenu} />
+              <BrandImageLogo tone="light" onClick={closeMenu} />
               <button
                 type="button"
                 onClick={closeMenu}
