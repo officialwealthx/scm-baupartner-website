@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { MainLogo } from "@/components/brand/BrandImageLogo";
 import { desktopQuickLinks, menuPanelGroups } from "@/content/navigation";
-import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNavigation } from "./MobileNavigation";
@@ -64,8 +64,13 @@ export function MainNavigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [openDesktopGroup, setOpenDesktopGroup] = useState<string>("");
+  const [openDesktopGroup, setOpenDesktopGroup] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const searchPanelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -100,10 +105,13 @@ export function MainNavigation() {
 
   useEffect(() => {
     if (!isMenuOpen || typeof document === "undefined") return;
-    const previousOverflow = document.body.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
     };
   }, [isMenuOpen]);
 
@@ -117,10 +125,14 @@ export function MainNavigation() {
     return () => window.removeEventListener("mousedown", onPointerDown);
   }, [isSearchOpen]);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setOpenDesktopGroup(null);
+  };
   const closePanels = () => {
     setIsSearchOpen(false);
     setIsMenuOpen(false);
+    setOpenDesktopGroup(null);
   };
   const isQuickLinkActive = (href: string) => {
     const normalized = normalizePath(href);
@@ -155,7 +167,7 @@ export function MainNavigation() {
             onClick={() => {
               setIsMenuOpen((previous) => {
                 const next = !previous;
-                if (next) setOpenDesktopGroup("");
+                if (next) setOpenDesktopGroup(null);
                 return next;
               });
               setIsSearchOpen(false);
@@ -190,7 +202,7 @@ export function MainNavigation() {
                     isActive &&
                       (headerDark
                         ? "bg-white/18 text-white"
-                        : "bg-[var(--color-soft-green)] text-[var(--color-deep-green)]"),
+                        : "bg-[var(--color-soft-green)] text-[var(--color-fresh-green)]"),
                   )}
                 >
                   {item.label}
@@ -258,19 +270,21 @@ export function MainNavigation() {
         <MobileNavigation tone={headerDark ? "dark" : "light"} />
       </div>
 
-      {isMenuOpen ? (
-        <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block" role="dialog" aria-modal="true">
+      {isMenuOpen && isMounted
+        ? createPortal(
+          <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block" role="dialog" aria-modal="true">
           <button
             type="button"
             aria-label="Menü schliessen"
-            className="absolute inset-0 bg-[rgba(6,16,11,0.42)]"
+            className="absolute inset-0 bg-[rgba(6,16,11,0.52)] backdrop-blur-[1px]"
             onClick={closeMenu}
           />
 
           <aside
             id="desktop-menu-panel"
             aria-label="Desktop Menü"
-            className="scm-slide-in-left relative left-0 top-0 flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-hidden border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)]"
+            className="scm-slide-in-left fixed left-0 top-0 z-[10000] flex h-[100dvh] w-[clamp(420px,34vw,500px)] max-w-[100vw] flex-col overflow-hidden overscroll-contain border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)]"
+            onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
               <MainLogo tone="light" onClick={closePanels} />
@@ -285,8 +299,8 @@ export function MainNavigation() {
               </button>
             </div>
 
-            <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-              <ul className="divide-y divide-[var(--color-border-green-gray)] border-y border-[var(--color-border-green-gray)] bg-white">
+            <nav aria-label="Menü" className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4">
+              <ul className="divide-y divide-[var(--color-border-green-gray)] border-y border-[var(--color-border-green-gray)]">
                 {menuPanelGroups.map((group) => {
                   const open = openDesktopGroup === group.title;
                   const groupId = `desktop-${group.title.toLowerCase().replaceAll(" ", "-")}`;
@@ -296,9 +310,9 @@ export function MainNavigation() {
                         type="button"
                         aria-expanded={open}
                         aria-controls={groupId}
-                        onClick={() => setOpenDesktopGroup((previous) => (previous === group.title ? "" : group.title))}
+                        onClick={() => setOpenDesktopGroup((previous) => (previous === group.title ? null : group.title))}
                         className={cn(
-                          "group flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors",
+                          "group flex min-h-16 w-full items-center justify-between gap-3 px-1 py-3 text-left transition-colors",
                           open ? "text-[var(--color-fresh-green)]" : "text-[var(--color-deep-green)] hover:text-[var(--color-fresh-green)]",
                         )}
                       >
@@ -309,7 +323,7 @@ export function MainNavigation() {
                       </button>
 
                       {open ? (
-                        <ul id={groupId} className="space-y-1 border-t border-[var(--color-border-green-gray)] px-4 pb-3">
+                        <ul id={groupId} className="space-y-0.5 border-t border-[var(--color-border-green-gray)] px-1 pb-3">
                           {group.items.map((item) => (
                             <li key={`${group.title}-${item.label}`}>
                               {isExternalLink(item.href) ? (
@@ -318,12 +332,12 @@ export function MainNavigation() {
                                   target={item.href.startsWith("http") ? "_blank" : undefined}
                                   rel={item.href.startsWith("http") ? "noreferrer" : undefined}
                                   onClick={closeMenu}
-                                  className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm"
+                                  className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center text-sm"
                                 >
                                   {item.label}
                                 </a>
                               ) : (
-                                <Link href={item.href} onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center text-sm">
+                                <Link href={item.href} onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center text-sm">
                                   {item.label}
                                 </Link>
                               )}
@@ -336,40 +350,23 @@ export function MainNavigation() {
                 })}
               </ul>
 
-              <div className="mt-5 space-y-2 border-t border-[var(--color-border-green-gray)] pt-4">
-                <Link
-                  href="/offerte"
-                  onClick={closeMenu}
-                  className="inline-flex min-h-12 w-full items-center justify-center rounded-[14px] border border-[var(--color-fresh-green)] bg-[var(--color-fresh-green)] px-4 text-sm font-semibold whitespace-nowrap text-white"
-                >
-                  Offerte anfragen
-                </Link>
-                <a
-                  href={siteConfig.whatsappUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={closeMenu}
-                  className="inline-flex min-h-11 w-full items-center justify-center rounded-[14px] border border-[var(--color-border-green-gray)] bg-white px-4 text-sm font-semibold text-[var(--color-deep-green)]"
-                >
-                  WhatsApp schreiben
-                </a>
-              </div>
-
-              <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--color-border-green-gray)] pt-4">
+              <div className="mt-5 flex items-center justify-between gap-3 border-t border-[var(--color-border-green-gray)] pt-4">
                 <LanguageSwitcher />
                 <div className="flex items-center gap-3 text-sm">
-                  <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
+                  <Link href="/impressum" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center">
                     Impressum
                   </Link>
-                  <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-11 items-center">
+                  <Link href="/datenschutz" onClick={closeMenu} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center">
                     Datenschutz
                   </Link>
                 </div>
               </div>
             </nav>
           </aside>
-        </div>
-      ) : null}
+          </div>,
+          document.body,
+        )
+        : null}
     </header>
   );
 }
