@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { BrandLockup } from "@/components/brand/BrandLockup";
+import { BrandImageLogo } from "@/components/brand/BrandImageLogo";
 import { siteConfig } from "@/content/site";
 
 export function FinalCtaSection() {
   return (
     <section className="mt-14 rounded-[var(--radius-xl)] border border-[var(--color-border-green-gray)] bg-[var(--color-deep-green)] p-6 text-white sm:p-8">
-      <BrandLockup tone="dark" />
+      <BrandImageLogo tone="dark" />
       <h2 className="mt-4 text-balance text-2xl font-semibold leading-tight sm:text-[1.95rem]">Bereit für eine saubere Umsetzung?</h2>
       <p className="mt-3 max-w-3xl text-sm leading-relaxed text-white/85 sm:text-base">
         Saubere Oberflächen, klare Abläufe und verlässliche Umsetzung für Projekte in Zürich und ausgewählten Regionen.
