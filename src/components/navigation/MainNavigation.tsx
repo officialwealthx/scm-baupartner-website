@@ -65,12 +65,7 @@ export function MainNavigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [openDesktopGroup, setOpenDesktopGroup] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
   const searchPanelRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -270,7 +265,7 @@ export function MainNavigation() {
         <MobileNavigation tone={headerDark ? "dark" : "light"} />
       </div>
 
-      {isMenuOpen && isMounted
+      {isMenuOpen && typeof document !== "undefined"
         ? createPortal(
           <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block" role="dialog" aria-modal="true">
           <button

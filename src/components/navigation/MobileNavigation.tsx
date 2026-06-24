@@ -59,12 +59,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
   const isDark = tone === "dark";
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const isQuickLinkActive = (href: string) => {
     if (href === "/portal") return pathname.startsWith("/portal") || pathname.startsWith("/login");
@@ -195,7 +190,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
         </nav>
       </div>
 
-      {isSearchOpen && isMounted
+      {isSearchOpen && typeof document !== "undefined"
         ? createPortal(
           <div className="fixed inset-0 z-[9999] flex items-start justify-center bg-[rgba(6,16,11,0.44)] px-4 pt-24" role="dialog" aria-modal="true">
             <button
@@ -230,7 +225,7 @@ export function MobileNavigation({ tone = "light" }: { tone?: "light" | "dark" }
         )
         : null}
 
-      {isMenuOpen && isMounted
+      {isMenuOpen && typeof document !== "undefined"
         ? createPortal(
           <aside
             id="mobile-navigation-panel"
