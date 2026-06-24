@@ -111,10 +111,9 @@ export function MainNavigation() {
 
   const closeMenu = () => setIsMenuOpen(false);
   const headerDark = !isScrolled && !isMenuOpen;
-  const logoSrc = headerDark ? "/brand/scm-logo-white-transparent.png" : "/brand/scm-logo-green-transparent.png";
 
   const menuPanel = (
-    <div className="fixed inset-0 top-[73px] z-[1000] hidden min-[1200px]:block">
+    <div className="fixed inset-0 z-[9999] hidden min-[1200px]:block">
         <button
           type="button"
           aria-label="Menü schliessen"
@@ -125,7 +124,7 @@ export function MainNavigation() {
         <aside
           id="desktop-menu-panel"
           aria-label="Desktop Menü"
-          className="scm-slide-in-left relative flex h-full w-[min(92vw,470px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]"
+          className="scm-slide-in-left relative flex h-[100dvh] w-[min(92vw,470px)] flex-col border-r border-[var(--color-border-green-gray)] bg-[var(--color-warm-off-white)] shadow-[0_35px_90px_-40px_rgba(18,60,46,0.65)]"
         >
           <div className="flex items-center justify-between gap-3 border-b border-[var(--color-border-green-gray)] bg-white px-5 py-4">
             <Image
@@ -207,15 +206,33 @@ export function MainNavigation() {
             aria-label={`${siteConfig.name} — zur Startseite`}
             className="inline-flex shrink-0 cursor-pointer select-none items-center"
           >
-            <Image
-              src={logoSrc}
-              alt="SCM Baupartner"
-              width={210}
-              height={60}
-              priority
-              draggable={false}
-              className="pointer-events-none h-8 w-auto shrink-0 select-none"
-            />
+            <span className="relative inline-flex h-8 w-[11.2rem] shrink-0 items-center">
+              <Image
+                src="/brand/scm-logo-white-transparent.png"
+                alt="SCM Baupartner"
+                width={210}
+                height={60}
+                priority
+                draggable={false}
+                className={cn(
+                  "pointer-events-none absolute inset-0 h-8 w-full shrink-0 select-none object-contain object-left transition-opacity duration-200",
+                  headerDark ? "opacity-100" : "opacity-0",
+                )}
+              />
+              <Image
+                src="/brand/scm-logo-green-transparent.png"
+                alt=""
+                width={210}
+                height={60}
+                aria-hidden="true"
+                priority
+                draggable={false}
+                className={cn(
+                  "pointer-events-none absolute inset-0 h-8 w-full shrink-0 select-none object-contain object-left transition-opacity duration-200",
+                  headerDark ? "opacity-0" : "opacity-100",
+                )}
+              />
+            </span>
           </Link>
 
           <span aria-hidden="true" className={cn("hidden h-8 w-px min-[1200px]:block", headerDark ? "bg-white/30" : "bg-[var(--color-border-green-gray)]")} />
@@ -259,7 +276,7 @@ export function MainNavigation() {
                         : "border-white/24 text-white/92 hover:bg-white/12"
                       : isActive
                         ? "border-[var(--color-border-green-gray)] bg-[var(--color-mist-green)] text-[var(--color-deep-green)]"
-                        : "border-transparent text-[var(--color-soft-graphite)] hover:border-[var(--color-border-green-gray)] hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]",
+                        : "border-[var(--color-border-green-gray)] text-[var(--color-soft-graphite)] hover:bg-[var(--color-mist-green)] hover:text-[var(--color-deep-green)]",
                   )}
                 >
                   {item.label}
@@ -280,14 +297,14 @@ export function MainNavigation() {
                 setIsMenuOpen(false);
               }}
               className={cn(
-                "inline-flex min-h-11 items-center gap-1.5 rounded-full border px-3.5 text-sm font-medium transition-colors",
+                "inline-flex min-h-11 items-center gap-2 border-b px-2 text-sm font-medium transition-colors",
                 headerDark
-                  ? "border-white/24 text-white hover:bg-white/12"
-                  : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:bg-[var(--color-mist-green)]",
+                  ? "border-white/45 text-white hover:border-white"
+                  : "border-[var(--color-border-green-gray)] text-[var(--color-deep-green)] hover:border-[var(--color-fresh-green)]",
               )}
             >
-              <SearchIcon />
               Suche
+              <SearchIcon />
             </button>
 
             {isSearchOpen ? (
@@ -299,7 +316,7 @@ export function MainNavigation() {
                 <p className="mt-1 text-sm leading-relaxed text-[var(--color-soft-graphite)]">
                   Die Suche wird ausgebaut. Bis dahin finden Sie Themen im Ratgeber.
                 </p>
-                <Link href="/ratgeber" onClick={() => setIsSearchOpen(false)} className="scm-text-link mt-3 inline-flex">
+                <Link href="/ratgeber" onClick={() => setIsSearchOpen(false)} className="scm-text-link scm-text-link-arrow mt-3 inline-flex">
                   Zum Ratgeber
                 </Link>
               </div>
@@ -323,7 +340,7 @@ export function MainNavigation() {
         </div>
 
         <div className="min-[1200px]:hidden">
-          <MobileNavigation />
+          <MobileNavigation tone={headerDark ? "dark" : "light"} />
         </div>
       </div>
 

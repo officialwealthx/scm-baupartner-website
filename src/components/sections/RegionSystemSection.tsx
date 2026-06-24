@@ -13,6 +13,7 @@ const mapPins: ReadonlyArray<{ label: string; top: string; left: string; promine
 export function RegionSystemSection() {
   return (
     <SectionShell
+      id="einsatzgebiete"
       title="Unsere Einsatzgebiete"
       description="SCM Baupartner ist in Zürich und ausgewählten Regionen tätig. Unser Hauptgebiet ist Zürich und Umgebung, weitere Einsätze planen wir je nach Projektumfang in Winterthur, Aargau, Zug, Schwyz und Basel."
       width="wide"

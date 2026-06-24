@@ -1,4 +1,13 @@
-const trustFacts = [
+import type { ReactNode } from "react";
+
+type TrustFact = {
+  value: ReactNode;
+  description: string;
+  icon: ReactNode;
+  valueClassName?: string;
+};
+
+const trustFacts: readonly TrustFact[] = [
   {
     value: "8 Mitarbeitende",
     description: "Ein eingespieltes Team für saubere Innen- und Aussenarbeiten.",
@@ -31,8 +40,15 @@ const trustFacts = [
     ),
   },
   {
-    value: "Handwerkserfahrung seit 1981",
+    value: (
+      <>
+        Handwerkserfahrung
+        <br />
+        seit 1981
+      </>
+    ),
     description: "Familiäre Handwerkswurzeln als verlässliche Grundlage der Ausführung.",
+    valueClassName: "text-[1.05rem] sm:text-[1.16rem]",
     icon: (
       <svg viewBox="0 0 24 24" className="h-[1.2rem] w-[1.2rem]" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
         <path d="M4.5 16.5h15M7.5 16.5v-8M12 16.5V6M16.5 16.5V9.5" />
@@ -40,7 +56,7 @@ const trustFacts = [
       </svg>
     ),
   },
-] as const;
+];
 
 export function TrustBarSection() {
   return (
@@ -71,7 +87,9 @@ export function TrustBarSection() {
                 </span>
               </div>
 
-              <p className="mt-4 text-[1.2rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.28rem]">{fact.value}</p>
+              <p className={`mt-4 text-[1.2rem] font-semibold leading-tight text-[var(--color-deep-green)] sm:text-[1.28rem] ${fact.valueClassName ?? ""}`}>
+                {fact.value}
+              </p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--color-soft-graphite)]">{fact.description}</p>
             </li>
           ))}

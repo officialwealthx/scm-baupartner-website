@@ -16,7 +16,7 @@ export function StoryTeaserSection() {
         </p>
         <Link
           href="/ueber-uns"
-          className="scm-text-link mt-6 inline-flex min-h-11 items-center gap-1.5 text-base font-semibold"
+          className="scm-text-link scm-text-link-arrow mt-6 inline-flex min-h-11 items-center text-base font-semibold"
         >
           Unsere Geschichte
         </Link>

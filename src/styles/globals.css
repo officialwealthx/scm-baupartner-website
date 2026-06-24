@@ -81,6 +81,24 @@ a {
   text-decoration: underline;
 }
 
+.scm-text-link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.scm-text-link-arrow::after {
+  content: "›";
+  font-size: 0.95em;
+  line-height: 1;
+  color: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.scm-text-link-arrow:hover::after {
+  transform: translateX(2px);
+}
+
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible,
