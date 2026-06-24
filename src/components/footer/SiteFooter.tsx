@@ -47,28 +47,18 @@ const footerColumns = [
   },
 ] as const;
 
-function ArrowGlyph() {
-  return (
-    <span aria-hidden="true" className="inline-flex h-4 w-4 items-center justify-center text-[var(--color-fresh-green)]">
-      ▸
-    </span>
-  );
-}
-
 function ArrowLink({ href, label }: { href: string; label: string }) {
   return (
-    <Link href={href} className="scm-text-link inline-flex min-h-10 items-center gap-1.5 py-1 text-sm">
-      <ArrowGlyph />
-      <span>{label}</span>
+    <Link href={href} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center py-1 text-sm">
+      {label}
     </Link>
   );
 }
 
 function ArrowAnchor({ href, label }: { href: string; label: string }) {
   return (
-    <a href={href} className="scm-text-link inline-flex min-h-10 items-center gap-1.5 py-1 text-sm">
-      <ArrowGlyph />
-      <span>{label}</span>
+    <a href={href} className="scm-text-link scm-text-link-arrow inline-flex min-h-10 items-center py-1 text-sm">
+      {label}
     </a>
   );
 }
@@ -78,16 +68,20 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-[var(--color-border-green-gray)] bg-[var(--color-porcelain-surface)] sm:mt-24" data-reveal="fade-up">
       <div className="mx-auto w-full max-w-[1280px] px-4 py-12 sm:px-6 lg:px-8">
         <div className="rounded-[var(--radius-xl)] bg-[linear-gradient(150deg,var(--color-deep-green)_0%,var(--color-mineral-green)_100%)] p-6 text-white sm:p-8">
-          <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:gap-5 sm:text-left">
             <div className="flex w-full justify-center sm:w-auto sm:justify-start">
-              <Image
-                src="/brand/scm-logo-white-transparent.png"
-                alt="SCM Baupartner"
-                width={240}
-                height={72}
-                className="pointer-events-none h-10 w-auto max-w-[min(15rem,100%)] select-none sm:h-11"
-                draggable={false}
-              />
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-white/25 bg-white/10 px-3 py-2">
+                <Image
+                  src="/brand/scm-icon-white-transparent.png"
+                  alt=""
+                  aria-hidden="true"
+                  width={48}
+                  height={48}
+                  className="pointer-events-none h-9 w-9 select-none"
+                  draggable={false}
+                />
+                <span className="text-base font-semibold tracking-[0.01em] text-white sm:text-lg">SCM Baupartner</span>
+              </div>
             </div>
             <Link
               href="/offerte"
